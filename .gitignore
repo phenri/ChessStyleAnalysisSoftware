@@ -1,0 +1,20 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+# IDEA files #
+*.iws
+workspace.xml
+tasks.xml
+
+# Compiling files folders #
+out/*
+target/*
+
+# Temp file #
+*~
+
+# Crash logs #
+*.log
