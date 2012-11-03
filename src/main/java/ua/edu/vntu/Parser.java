@@ -1,11 +1,10 @@
 package ua.edu.vntu;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,10 +15,11 @@ import java.util.StringTokenizer;
  */
 public class Parser  {
     private Map<String,String> white,black;
-    private String event, site, date,round,playerWhite,playerBlack,result;
+    private Map<String,String> tags = new HashMap<String, String>();
     public Parser(){
         readPGN();
     }
+
     private void readPGN(){
         try{
             FileInputStream file = new FileInputStream("tmp\\file.pgn"); //you are must create this file, or write new path to file
@@ -42,12 +42,62 @@ public class Parser  {
                 i++;
             }
             String content = new String(chars);
-            parseString(content,"\n");
+            readTags(content);
 
         }catch (IOException e){}
     }
 
-    private void parseString(String s, String split){
-        String s1[] =  s.split(split);
+    private void readTags(String pgn){
+        pgn = pgn.trim();
+        String strings[] =  pgn.split("\n");
+
+        ArrayList<String> code = new ArrayList<String>();  //this variable used for saving a coding game
+
+        for (String s: strings){
+            if (s.contains("[Event")){
+                tags.put("Event",getTagContent(s));
+            }  else
+            if (s.contains("[Site")){
+                tags.put("Site",getTagContent(s));
+            }  else
+            if (s.contains("[Date")){
+                tags.put("Date",getTagContent(s));
+            }  else
+            if (s.contains("[Round")){
+                tags.put("Round",getTagContent(s));
+            }  else
+            if (s.contains("[White")){
+                tags.put("White",getTagContent(s));
+            }  else
+            if (s.contains("[Black")){
+                tags.put("Black",getTagContent(s));
+            }  else
+            if (s.contains("[Result")){
+                tags.put("Result",getTagContent(s));
+            }  else
+            if (!(s.contains("[") || s.contains("]"))){
+                code.add(s);
+            }
+        }
+    }
+    private String getTagContent(String in){
+        try{
+            String content;
+
+            int begin = in.indexOf('"');
+            int end = in.lastIndexOf('"');
+
+            char body[] = new char[end - begin];
+            in.getChars(begin + 1,end,body,0);
+            content = new String(body);
+
+            return content;
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+    public Map getTags(){
+        return tags;
     }
 }
