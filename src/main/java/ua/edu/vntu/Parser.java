@@ -11,7 +11,6 @@ import java.util.Map;
  * User: slavik
  * Date: 02.11.12
  * Time: 22:42
- * To change this template use File | Settings | File Templates.
  */
 public class Parser  {
     private Map<String,String> white,black;
@@ -80,6 +79,7 @@ public class Parser  {
             }
         }
     }
+
     private String getTagContent(String in){
         try{
             String content;
@@ -97,6 +97,7 @@ public class Parser  {
             return null;
         }
     }
+
     public Map getTags(){
         return tags;
     }
