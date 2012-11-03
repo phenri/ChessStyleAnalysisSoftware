@@ -25,23 +25,29 @@ public class Parser  {
             FileInputStream file = new FileInputStream("tmp\\file.pgn"); //you are must create this file, or write new path to file
             int c, i = 0;
             char[] chars = new char[file.available()];
+
             while(( c = file.read())!= -1){
+                if (c == (int)'{'){                 //this code ignores text comment with is in {...}
+                    while ((c = file.read())!= '}'){
+                        continue;
+                    }
+                    c = file.read();
+                }
+                if (c == (int)';'){                 //this code ignores text comment in ;.......\n
+                    while ((c = file.read())!= '\n'){
+                        continue;
+                    }
+                }
                 chars[i] = (char) c;
                 i++;
             }
             String content = new String(chars);
             parseString(content,"\n");
-//            System.out.println(content);
+
         }catch (IOException e){}
     }
 
     private void parseString(String s, String split){
         String s1[] =  s.split(split);
-
-//        for (int i = 0; i < s1.length; i++){
-            System.out.println(s1[0]);
-
-//        }
-
     }
 }
