@@ -41,6 +41,7 @@ public class Parser  {
                 i++;
             }
             String content = new String(chars);
+            System.out.println(content);
             readTags(content);
 
         }catch (IOException e){}

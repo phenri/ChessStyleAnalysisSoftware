@@ -8,6 +8,7 @@
 *.iws
 workspace.xml
 tasks.xml
+*.iml
 
 # Compiling files folders #
 out/*
