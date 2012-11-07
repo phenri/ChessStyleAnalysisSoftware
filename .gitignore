@@ -12,11 +12,13 @@ tasks.xml
 # Compiling files folders #
 out/*
 target/*
+.idea/*
 
 # Temp file #
 *~
 
 # Crash logs #
 *.log
+
 
 
