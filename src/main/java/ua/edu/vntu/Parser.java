@@ -16,9 +16,6 @@ public class Parser  {
     private ArrayList<String> white,black;
     private Map<String,String> tags = new HashMap<String, String>();
     public Parser(){
-//        String content = ;
-//        System.out.println(content);
-
         ArrayList<String> list = readCodeAndTags(readPGN());
 
         for(String s:list){
@@ -49,8 +46,6 @@ public class Parser  {
                 i++;
             }
             String content = new String(chars);
-//            readCodeAndTags(content);
-            System.out.println(content);
             return content;
 
         }catch (IOException e){
@@ -132,7 +127,7 @@ public class Parser  {
                 if ((endMove == -1)){
                     char[] move = new char[s.length() - beginMove + dec];
                     s.getChars(beginMove-dec, s.length(), move, 0);
-//                    System.out.println(new String(move));
+                    System.out.println(new String(move));
                     result.add(new String(move));
                     count++;
                     continue;
@@ -141,7 +136,7 @@ public class Parser  {
                 s = new String(chars);
                 char[] move = new char[endMove - beginMove];
                 s.getChars(beginMove-dec, endMove - dec, move, 0);
-//                System.out.println(new String(move));
+                System.out.println(new String(move));
                 result.add(new String(move));
                 count++;
             }
