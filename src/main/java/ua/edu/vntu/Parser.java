@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +16,14 @@ public class Parser  {
     private ArrayList<String> white,black;
     private Map<String,String> tags = new HashMap<String, String>();
     public Parser(){
-        parseCode(readTags(readPGN()));
+//        String content = ;
+//        System.out.println(content);
+
+        ArrayList<String> list = readCodeAndTags(readPGN());
+
+        for(String s:list){
+            System.out.println(s);
+        }
 
     }
 
@@ -43,16 +49,17 @@ public class Parser  {
                 i++;
             }
             String content = new String(chars);
-//            readTags(content);
+//            readCodeAndTags(content);
+            System.out.println(content);
             return content;
 
-        }catch (IOException e){}
-        finally {
+        }catch (IOException e){
+            e.printStackTrace();
             return null;
         }
     }
 
-    private ArrayList<String> readTags(String pgn){
+    private ArrayList<String> readCodeAndTags(String pgn){
         pgn = pgn.trim();
         String strings[] =  pgn.split("\n");
 
@@ -145,4 +152,5 @@ public class Parser  {
     public Map getTags(){
         return tags;
     }
+
 }
