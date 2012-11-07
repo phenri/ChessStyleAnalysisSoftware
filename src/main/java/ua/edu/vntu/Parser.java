@@ -17,10 +17,11 @@ public class Parser  {
     private ArrayList<String> white,black;
     private Map<String,String> tags = new HashMap<String, String>();
     public Parser(){
-        readPGN();
+        parseCode(readTags(readPGN()));
+
     }
 
-    private void readPGN(){
+    private String readPGN(){
         try{
             FileInputStream file = new FileInputStream("tmp\\file.pgn"); //you are must create this file, or write new path to file
             int c, i = 0;
@@ -42,12 +43,16 @@ public class Parser  {
                 i++;
             }
             String content = new String(chars);
-            readTags(content);
+//            readTags(content);
+            return content;
 
         }catch (IOException e){}
+        finally {
+            return null;
+        }
     }
 
-    private void readTags(String pgn){
+    private ArrayList<String> readTags(String pgn){
         pgn = pgn.trim();
         String strings[] =  pgn.split("\n");
 
@@ -79,10 +84,10 @@ public class Parser  {
                 code.add(s);
             }
         }
-        getMotion(code);
+        return code;
     }
 
-    private String getTagContent(String in){
+    private String getTagContent(String in){    //зчитування зм1сту тега, те що записано в кавичках
         try{
             String content;
 
@@ -100,8 +105,9 @@ public class Parser  {
         }
     }
 
-    private Map<String,Map> getMotion(ArrayList<String> code){     //метод для сортування ходiв
+    private ArrayList<String> parseCode(ArrayList<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
         int count = 0;
+        ArrayList<String> result = new ArrayList<String>();
         for(String s:code){
             if(s.indexOf('.')==-1){
                 continue;
@@ -109,60 +115,31 @@ public class Parser  {
             }
             int dec = 1;
             while (s.indexOf('.') != -1){
-
-                System.out.println(count);
-                switch (count){
-                    case 10 : {dec = 2;
-                        break; }
-                    case 20 : {dec = 3;
-                        break; }
-                    case 30 : {dec = 4;
-                        break; }
-
-                }
-
-
+                if (count > 10)
+                    dec = 2;
                 char [] chars = s.toCharArray();
-
                 int beginMove = s.indexOf('.');
-
-                chars[beginMove] = '~';
+                chars[beginMove] = ' ';
                 s = new String(chars);
                 int endMove = s.indexOf('.');
-
-                if ((endMove == -dec)){
-
+                if ((endMove == -1)){
                     char[] move = new char[s.length() - beginMove + dec];
-
                     s.getChars(beginMove-dec, s.length(), move, 0);
-
-//                    s = new String(move);
-//                    move = new char[s.length()+1];
-//                    s.getChars(0, s.lastIndexOf(' '),move,0);
-//
-                    System.out.println(new String(move));
-
+//                    System.out.println(new String(move));
+                    result.add(new String(move));
+                    count++;
                     continue;
 
                 }
-
-//                System.out.println("end = " + endMove);
                 s = new String(chars);
-
                 char[] move = new char[endMove - beginMove];
-
                 s.getChars(beginMove-dec, endMove - dec, move, 0);
-
-                System.out.println(new String(move));
-
-
+//                System.out.println(new String(move));
+                result.add(new String(move));
+                count++;
             }
-
-            count++;
         }
-
-
-        return null;
+        return result;
     }
 
     public Map getTags(){
