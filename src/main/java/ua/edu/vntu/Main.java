@@ -5,7 +5,7 @@ import ua.edu.vntu.readparty.Parser;
 
 public class Main{
     public static void main( String[] args ){
-        new Parser("tmp\\file.pgn");
+//        new Parser("tmp\\file.pgn");
         new Form();
     }
 }
