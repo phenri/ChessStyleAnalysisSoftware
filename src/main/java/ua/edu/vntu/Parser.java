@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,7 @@ import java.util.Map;
  * Time: 22:42
  */
 public class Parser  {
-    private Map<String,String> white,black;
+    private ArrayList<String> white,black;
     private Map<String,String> tags = new HashMap<String, String>();
     public Parser(){
         readPGN();
@@ -51,7 +52,7 @@ public class Parser  {
         String strings[] =  pgn.split("\n");
 
         ArrayList<String> code = new ArrayList<String>();  //this variable used for saving a coding game
-
+        int i = 0;
         for (String s: strings){
             if (s.contains("[Event")){
                 tags.put("Event",getTagContent(s));
@@ -78,6 +79,7 @@ public class Parser  {
                 code.add(s);
             }
         }
+        getMotion(code);
     }
 
     private String getTagContent(String in){
@@ -96,6 +98,71 @@ public class Parser  {
             System.err.println(e.getMessage());
             return null;
         }
+    }
+
+    private Map<String,Map> getMotion(ArrayList<String> code){     //метод для сортування ходiв
+        int count = 0;
+        for(String s:code){
+            if(s.indexOf('.')==-1){
+                continue;
+
+            }
+            int dec = 1;
+            while (s.indexOf('.') != -1){
+
+                System.out.println(count);
+                switch (count){
+                    case 10 : {dec = 2;
+                        break; }
+                    case 20 : {dec = 3;
+                        break; }
+                    case 30 : {dec = 4;
+                        break; }
+
+                }
+
+
+                char [] chars = s.toCharArray();
+
+                int beginMove = s.indexOf('.');
+
+                chars[beginMove] = '~';
+                s = new String(chars);
+                int endMove = s.indexOf('.');
+
+                if ((endMove == -dec)){
+
+                    char[] move = new char[s.length() - beginMove + dec];
+
+                    s.getChars(beginMove-dec, s.length(), move, 0);
+
+//                    s = new String(move);
+//                    move = new char[s.length()+1];
+//                    s.getChars(0, s.lastIndexOf(' '),move,0);
+//
+                    System.out.println(new String(move));
+
+                    continue;
+
+                }
+
+//                System.out.println("end = " + endMove);
+                s = new String(chars);
+
+                char[] move = new char[endMove - beginMove];
+
+                s.getChars(beginMove-dec, endMove - dec, move, 0);
+
+                System.out.println(new String(move));
+
+
+            }
+
+            count++;
+        }
+
+
+        return null;
     }
 
     public Map getTags(){
