@@ -1,10 +1,11 @@
-package ua.edu.vntu;
+package ua.edu.vntu.readparty;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,20 +14,28 @@ import java.util.Map;
  * Time: 22:42
  */
 public class Parser  {
-    private ArrayList<String> white,black;
-    private Map<String,String> tags = new HashMap<String, String>();
-    public Parser(){
-        ArrayList<String> list = readCodeAndTags(readPGN());
 
-        for(String s:list){
-            System.out.println(s);
+    private Map<String,String> tags = new TreeMap<String, String>();
+
+    private String[] partyCode;
+
+    public Parser(String filename){
+        ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(filename)));
+        partyCode = new String[codeList.size()];
+        int i = 0;
+
+        for(String s:codeList){
+            partyCode[i] = s;
+            System.out.println(partyCode[i]);
+            i++;
         }
-
     }
 
-    private String readPGN(){
+
+
+    private String readPGN(String filename){
         try{
-            FileInputStream file = new FileInputStream("tmp\\file.pgn"); //you are must create this file, or write new path to file
+            FileInputStream file = new FileInputStream(filename); //you are must create this file, or write new path to file
             int c, i = 0;
             char[] chars = new char[file.available()];
 
@@ -127,7 +136,6 @@ public class Parser  {
                 if ((endMove == -1)){
                     char[] move = new char[s.length() - beginMove + dec];
                     s.getChars(beginMove-dec, s.length(), move, 0);
-                    System.out.println(new String(move));
                     result.add(new String(move));
                     count++;
                     continue;
@@ -136,7 +144,6 @@ public class Parser  {
                 s = new String(chars);
                 char[] move = new char[endMove - beginMove];
                 s.getChars(beginMove-dec, endMove - dec, move, 0);
-                System.out.println(new String(move));
                 result.add(new String(move));
                 count++;
             }
@@ -146,6 +153,9 @@ public class Parser  {
 
     public Map getTags(){
         return tags;
+    }
+    public String[] getPartyCode(){
+        return partyCode;
     }
 
 }
