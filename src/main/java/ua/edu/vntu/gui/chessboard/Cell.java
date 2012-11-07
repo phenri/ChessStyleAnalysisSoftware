@@ -29,4 +29,7 @@ public class Cell extends JPanel implements FormConstants {
     public boolean isEmpty(){
         return true;
     }
+    public int getCellSize(){
+        return CELL_SIZE;
+    }
 }
