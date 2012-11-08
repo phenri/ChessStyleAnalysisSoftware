@@ -14,31 +14,18 @@ import java.awt.event.MouseMotionListener;
  * Date: 04.11.12
  * Time: 12:40
  */
-public class MainField extends JPanel implements FormConstants, MouseMotionListener{
+public class MainField extends JPanel implements FormConstants{
     Figure f;
     public MainField(){
         super(true);
         setLayout(null);
 
 
-        f = new Figure();
 
-        add(f);
 
         add(new Chessboard());
         setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-        addMouseMotionListener(this);
 
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        Point p = f.getLocation();
-        f.setLocation(e.getX(), e.getY());
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }

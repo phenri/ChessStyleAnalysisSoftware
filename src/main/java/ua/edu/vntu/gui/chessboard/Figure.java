@@ -11,24 +11,43 @@ import java.awt.event.MouseMotionListener;
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Figure extends JPanel implements FormConstants,MouseMotionListener{
-    public Figure(){
+public class Figure extends JPanel implements FormConstants,MouseListener{
+    Chessboard board;
+    public Figure(Chessboard board){
         super();
         setLayout(null);
         setDoubleBuffered(true);
-
+        this.board = board;
         setBackground(Color.RED);
         setOpaque(true);
-        setBounds(50,50,CELL_SIZE,CELL_SIZE);
+        setBounds(0,0,CELL_SIZE,CELL_SIZE);
+        addMouseListener(this);
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        setLocation(e.getX(), e.getY());
+    public void mouseExited(MouseEvent e) {
+
+
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Click on figure");
+        board.Listener(this);
     }
 }
