@@ -67,19 +67,25 @@ public class Chessboard extends JPanel implements FormConstants{
 //            x += CELL_SIZE;
 //        }
 
-//        image = getToolkit().getImage("res\\board.gif");
+        image = getToolkit().getImage("res\\board.gif");
+//        System.out.println(getGraphics());
+//        this.getGraphics().drawImage(image,10,10,this);
 //        im = getToolkit().getImage("WhiteIcons\\wq.gif");
 //        getToolkit().
 //        System.out.println(image);
-
-        setBounds(30, 30, 540, 540);
+//        add(new Figure());
+        setBounds(30, 30, 600, 600);
+        setOpaque(true);
 
     }
     public void paint(Graphics g){
-        drawBoard(g);
-//        g.drawImage(image,10,10,this);
-//        g.drawImage(im,10,10,this);
+//        this.setBackground(new Color(0,0,0));
+//        drawBoard(g);
 
+        g.drawImage(image,10,10,this);
+//        add(new Figure());
+//        g.drawImage(im,10,10,this);
+//
     }
     private void drawBoard(Graphics g){
         int start = 30;

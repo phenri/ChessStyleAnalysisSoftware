@@ -14,6 +14,8 @@ public class Form extends JFrame implements FormConstants{
     public Form(){
         super("ChessStyleAnalysisSoftware");
 
+        this.setJMenuBar(new MyMenu());
+
         getContentPane().add(new MainField());
         setLayout(null);
         setBounds(200,50,FRAME_WIDTH,FRAME_HEIGHT);

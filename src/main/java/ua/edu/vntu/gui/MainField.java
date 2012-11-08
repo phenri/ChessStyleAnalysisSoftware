@@ -1,6 +1,7 @@
 package ua.edu.vntu.gui;
 
 import ua.edu.vntu.gui.chessboard.Chessboard;
+import ua.edu.vntu.gui.chessboard.Figure;
 
 import javax.swing.*;
 
@@ -15,6 +16,11 @@ public class MainField extends JPanel implements FormConstants{
         super(true);
         setLayout(null);
         add(new Chessboard());
+
+        JPanel p = new JPanel();
+//        p.setOpaque(true);
+        p.add(new Figure());
+        add(p);
         setBounds(0,0,FRAME_WIDTH,FRAME_HEIGHT);
 
     }
