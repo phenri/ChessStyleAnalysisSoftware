@@ -3,11 +3,8 @@ package ua.edu.vntu.gui.chessboard;
 import ua.edu.vntu.gui.FormConstants;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.security.PublicKey;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +12,7 @@ import java.security.PublicKey;
  * Date: 04.11.12
  * Time: 13:29
  */
-public class Cell extends JPanel implements FormConstants,MouseListener{
+public class Cell extends JPanel implements FormConstants,MouseListener,Runnable{
     private char letter;
     private byte number;
 
@@ -28,7 +25,7 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
         setLayout(null);
         addMouseListener(this);
         this.board = board;
-
+        new Thread(this).start();
 
     }
     public Cell(char letter, byte number){
@@ -41,16 +38,26 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
         return empty;
     }
 
+    public void reset(){
+        empty = true;
+    }
+
     public boolean addFigure(Figure figure){
-        System.out.println("Add figure");
         if (empty){
             add(figure);
+            figure.setParent(this);
             this.figure = figure;
             empty = false;
             return true;
         }
         repaint();
         return false;
+    }
+
+
+    @Override
+    public void run() {
+
     }
 
     public Figure getFigure(){
@@ -65,14 +72,12 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Click on cell empty " + empty);
-        if(empty){
-            board.Mover(this);
 
+        if(empty){
+            System.out.println("Click on cell empty " + Thread.currentThread());
+            board.Mover(this);
         }
         repaint();
-
-
     }
 
     @Override

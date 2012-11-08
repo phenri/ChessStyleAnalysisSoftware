@@ -11,17 +11,26 @@ import java.awt.event.MouseMotionListener;
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Figure extends JPanel implements FormConstants,MouseListener{
+public class Figure extends JPanel implements FormConstants,MouseListener,Runnable{
+    Cell parent;
     Chessboard board;
+//    protected Figure(){
+//
+//    }
     public Figure(Chessboard board){
         super();
         setLayout(null);
         setDoubleBuffered(true);
         this.board = board;
         setBackground(Color.RED);
-        setOpaque(true);
+//        setOpaque(true);
         setBounds(0,0,CELL_SIZE,CELL_SIZE);
         addMouseListener(this);
+    }
+
+    @Override
+    public void run() {
+
     }
 
     @Override
@@ -47,7 +56,12 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Click on figure");
+        System.out.println("Click on figure " + Thread.currentThread());
         board.Listener(this);
+        parent.reset();
+    }
+
+    void setParent(Cell cell){
+        parent = cell;
     }
 }

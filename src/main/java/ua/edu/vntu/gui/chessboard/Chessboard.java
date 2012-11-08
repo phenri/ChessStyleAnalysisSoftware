@@ -1,6 +1,7 @@
 package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.FormConstants;
+import ua.edu.vntu.gui.chessboard.figurs.Rook;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,26 +17,30 @@ public class Chessboard extends JPanel implements FormConstants{
     private Cell[][] cells = new Cell[8][8];
 
     private Figure buffer;
-
+    Image image;
     private boolean pressed = false;
 
     public Chessboard(){
         super(true);
         setLayout(null);
         setBackground(new Color(255,255, 255));
-        initBoard();
-        Cells c = new Cells(this);
-        cells = c.getCells();
+//        initBoard();
+//        Cells c = new Cells(this);
+//        cells = c.getCells();
 
-        initFigures();
+//        initFigures();
 
+        image = getToolkit().getImage("res\\I_Rook.png");
+        System.out.println(image.getWidth(this));
 
-
-        add(c);
+//        add(c);
         setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
 
     }
 
+    public void paint (Graphics g){
+        g.drawImage(image,0,0,this);
+    }
 
     private void initBoard(){
         int start = 30;
@@ -64,28 +69,25 @@ public class Chessboard extends JPanel implements FormConstants{
     }
 
     private void initFigures(){
-        Figure figure = new  Figure(this);
-        System.out.println("Add figure "+cells[7][0].addFigure(figure));
+        Figure figure = new Rook(this);
+//        new Thread(figure).start();
+        cells[7][0].addFigure(figure);
 
     }
 
     public void Listener(Figure figure){
         if (!pressed){
             pressed = true;
-//            System.out.println("pressed " +pressed);
             buffer = figure;
         }
-        else pressed = false;
-        repaint();
     }
     public void Mover(Cell cell){
-        if(pressed && buffer!=null){
-            pressed = false;
-            cell.addFigure(buffer);
+        if(pressed){
+            if(cell.addFigure(buffer)){
+                pressed = false;
+            }
         }
-        else pressed = true;
         repaint();
-//        else System.out.println("not pressed ");
     }
 
 
