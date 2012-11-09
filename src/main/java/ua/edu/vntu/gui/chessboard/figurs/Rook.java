@@ -12,8 +12,6 @@ import java.awt.*;
  * Time: 19:26
  */
 public class Rook extends Figure {
-    Image image;
-    Chessboard board;
 
     /**
      *

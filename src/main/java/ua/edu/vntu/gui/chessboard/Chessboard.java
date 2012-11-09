@@ -1,7 +1,7 @@
 package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.FormConstants;
-import ua.edu.vntu.gui.chessboard.figurs.Rook;
+import ua.edu.vntu.gui.chessboard.figurs.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,11 +39,14 @@ public class Chessboard extends JPanel implements FormConstants{
 
 
     private void initBoard(){
-        int start = 30;
+        int x = 30,
+            y = x + 15,
+            x2 = 50;
 
-        int x = start, y = start + 15, c = 0;
+        int i = 8;
+        char c = 'A';
 
-        for(int i = 1; i <= 8; i++){
+        while (i > 0){
             JLabel leftVertical = new JLabel(i+"");
             JLabel rightVertical = new JLabel(i+"");
             leftVertical.setBounds(10, y, 20, 20);
@@ -51,22 +54,26 @@ public class Chessboard extends JPanel implements FormConstants{
             add(leftVertical);
             add(rightVertical);
             y += CELL_SIZE;
-        }
-        x = 50;
-        for(int i = 'A'; i <= 'H'; i++){
-            JLabel leftVertical = new JLabel((char)i+"");
-            JLabel rightVertical = new JLabel((char)i+"");
-            leftVertical.setBounds(x, 10, 20, 20);
-            rightVertical.setBounds(x, 510, 20, 20);
-            add(leftVertical);
-            add(rightVertical);
-            x += CELL_SIZE;
+
+            JLabel downLetter = new JLabel(c+"");
+            JLabel upLetter = new JLabel(c+"");
+            upLetter.setBounds(x2, 10, 20, 20);
+            downLetter.setBounds(x2, 510, 20, 20);
+            add(upLetter);
+            add(downLetter);
+            x2 += CELL_SIZE;
+
+            c++;
+            i--;
         }
     }
 
     private void initFigures(){
-        Figure figure = new Rook(this,true);
-        cells[7][0].addFigure(figure);
+        cells[7][0].addFigure(new Rook(this,true));
+        cells[7][1].addFigure(new Knight(this,true));
+        cells[7][2].addFigure(new Bishop(this,true));
+        cells[7][3].addFigure(new Queen(this,true));
+        cells[7][4].addFigure(new King(this,true));
 
     }
 

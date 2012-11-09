@@ -13,7 +13,8 @@ import java.awt.event.MouseMotionListener;
  */
 public class Figure extends JPanel implements FormConstants,MouseListener,Runnable{
     Cell parent;
-    Chessboard board;
+    protected Chessboard board;
+    protected Image image;
 //    protected Figure(){
 //
 //    }
