@@ -14,27 +14,19 @@ import java.awt.*;
  */
 public class Chessboard extends JPanel implements FormConstants{
 
-    private Cell[][] cells = new Cell[8][8];
-
-    private Figure buffer;
-
-    private boolean pressed = false;
-
     public Chessboard(){
         super(true);
         setLayout(null);
         setBackground(new Color(255,255, 255));
         initBoard();
-        Cells c = new Cells(this);
-        cells = c.getCells();
+        add(new Cells());
 
-        initFigures();
-
-
-
-        add(c);
         setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
 
+    }
+
+    public void setCells(Cells cells){
+        add(cells);
     }
 
 
@@ -67,30 +59,5 @@ public class Chessboard extends JPanel implements FormConstants{
             i--;
         }
     }
-
-    private void initFigures(){
-        cells[7][0].addFigure(new Rook(this,true));
-        cells[7][1].addFigure(new Knight(this,true));
-        cells[7][2].addFigure(new Bishop(this,true));
-        cells[7][3].addFigure(new Queen(this,true));
-        cells[7][4].addFigure(new King(this,true));
-
-    }
-
-    public void Listener(Figure figure){
-        if (!pressed){
-            pressed = true;
-            buffer = figure;
-        }
-    }
-    public void Mover(Cell cell){
-        if(pressed){
-            if(cell.addFigure(buffer)){
-                pressed = false;
-            }
-        }
-        repaint();
-    }
-
 
 }

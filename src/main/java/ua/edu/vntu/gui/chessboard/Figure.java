@@ -6,19 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Figure extends JPanel implements FormConstants,MouseListener,Runnable{
-    Cell parent;
-    protected Chessboard board;
+public class Figure extends JPanel implements FormConstants,MouseListener{
+    protected Cell parent;
+    protected Cells board;
     protected Image image;
+    protected boolean isWhite;
 //    protected Figure(){
 //
 //    }
-    public Figure(Chessboard board){
+    public Figure(Cells board){
         super();
         setLayout(null);
         setDoubleBuffered(true);
@@ -28,10 +28,10 @@ public class Figure extends JPanel implements FormConstants,MouseListener,Runnab
         addMouseListener(this);
     }
 
-    @Override
-    public void run() {
-
+    protected boolean isWhite(){
+        return isWhite;
     }
+
 
     @Override
     public void mouseExited(MouseEvent e) {
@@ -56,12 +56,20 @@ public class Figure extends JPanel implements FormConstants,MouseListener,Runnab
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Click on figure " + Thread.currentThread());
-        board.Listener(this);
+        System.out.println(this);
+        board.moveMy(this);
+        if (!parent.isEmpty()){
+            board.replace(this);
+
+        }
+
         parent.reset();
     }
 
     void setParent(Cell cell){
         parent = cell;
+    }
+    public Cell getParent(){
+        return parent;
     }
 }

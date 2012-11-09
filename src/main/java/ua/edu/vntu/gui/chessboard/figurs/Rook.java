@@ -1,5 +1,6 @@
 package ua.edu.vntu.gui.chessboard.figurs;
 
+import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Chessboard;
 import ua.edu.vntu.gui.chessboard.Figure;
 
@@ -19,9 +20,10 @@ public class Rook extends Figure {
      * @param isWhite    if true figure white else figure black
      *
      */
-    public Rook(Chessboard chessboard, boolean isWhite){
+    public Rook(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
+        this.isWhite = isWhite;
         this.board = chessboard;
         if (isWhite){
             image = getToolkit().getImage("res\\white\\rook.png");
@@ -32,6 +34,10 @@ public class Rook extends Figure {
     }
     public void paint(Graphics g){
         g.drawImage(image,5,5,this);
+    }
+    @Override
+    public String toString(){
+        return "Rook: " + parent.getAddress();
     }
 
 }

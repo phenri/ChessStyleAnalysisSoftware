@@ -12,24 +12,25 @@ import java.awt.event.MouseListener;
  * Date: 04.11.12
  * Time: 13:29
  */
-public class Cell extends JPanel implements FormConstants,MouseListener,Runnable{
+public class Cell extends JPanel implements FormConstants,MouseListener{
     private char letter;
     private byte number;
 
     boolean empty = true;
     private Figure figure;
-    Chessboard board;
+    Cells cells;
 
-    public Cell(Chessboard board){
-        super();
+    public Cell(Cells cells){
+        super(true);
         setLayout(null);
         addMouseListener(this);
-        this.board = board;
-//        new Thread(this).start();
-
+        this.cells = cells;
     }
-    public Cell(char letter, byte number){
+    public Cell(Cells cells, char letter, byte number){
         super(true);
+        setLayout(null);
+        addMouseListener(this);
+        this.cells = cells;
         this.letter = letter;
         this.number = number;
 
@@ -42,23 +43,18 @@ public class Cell extends JPanel implements FormConstants,MouseListener,Runnable
         empty = true;
     }
 
-    public boolean addFigure(Figure figure){
-        if (empty){
-            add(figure);
-            figure.setParent(this);
-            this.figure = figure;
-            empty = false;
-            return true;
-        }
+    public String getAddress(){
+        return  "" + letter+ ""+number;
+    }
+
+    public void addFigure(Figure figure){
+        add(figure);
+        figure.setParent(this);
+        this.figure = figure;
+        empty = false;
         repaint();
-        return false;
     }
 
-
-    @Override
-    public void run() {
-
-    }
 
     public Figure getFigure(){
         if(!empty){
@@ -74,9 +70,10 @@ public class Cell extends JPanel implements FormConstants,MouseListener,Runnable
     public void mouseClicked(MouseEvent e) {
 
         if(empty){
-            System.out.println("Click on cell empty " + Thread.currentThread());
-            board.Mover(this);
+            System.out.println(this);
+            cells.putFigure(this);
         }
+//
         repaint();
     }
 
@@ -100,5 +97,9 @@ public class Cell extends JPanel implements FormConstants,MouseListener,Runnable
 
     }
 
+    @Override
+    public String toString(){
+        return "Cell: " + getAddress();
+    }
 
 }
