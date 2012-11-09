@@ -25,7 +25,7 @@ public class Cell extends JPanel implements FormConstants,MouseListener,Runnable
         setLayout(null);
         addMouseListener(this);
         this.board = board;
-        new Thread(this).start();
+//        new Thread(this).start();
 
     }
     public Cell(char letter, byte number){

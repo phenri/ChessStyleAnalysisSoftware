@@ -14,16 +14,26 @@ import java.awt.*;
 public class Rook extends Figure {
     Image image;
     Chessboard board;
-    public Rook(Chessboard chessboard){
+
+    /**
+     *
+     * @param chessboard reference on chessboard
+     * @param isWhite    if true figure white else figure black
+     *
+     */
+    public Rook(Chessboard chessboard, boolean isWhite){
         super(chessboard);
+        setLayout(null);
         this.board = chessboard;
-        image = getToolkit().getImage("res\\I_Rook.gif");
-        System.out.println(image);
-//        setSize(200,200);
+        if (isWhite){
+            image = getToolkit().getImage("res\\white\\rook.png");
+        }
+        else{
+            image = getToolkit().getImage("res\\black\\rook.png");
+        }
     }
     public void paint(Graphics g){
-        g.drawImage(image,10,10,this);
-
+        g.drawImage(image,5,5,this);
     }
 
 }

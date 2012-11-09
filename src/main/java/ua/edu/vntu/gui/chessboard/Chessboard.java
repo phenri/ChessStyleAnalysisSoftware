@@ -17,30 +17,26 @@ public class Chessboard extends JPanel implements FormConstants{
     private Cell[][] cells = new Cell[8][8];
 
     private Figure buffer;
-    Image image;
+
     private boolean pressed = false;
 
     public Chessboard(){
         super(true);
         setLayout(null);
         setBackground(new Color(255,255, 255));
-//        initBoard();
-//        Cells c = new Cells(this);
-//        cells = c.getCells();
+        initBoard();
+        Cells c = new Cells(this);
+        cells = c.getCells();
 
-//        initFigures();
+        initFigures();
 
-        image = getToolkit().getImage("res\\I_Rook.png");
-        System.out.println(image.getWidth(this));
 
-//        add(c);
+
+        add(c);
         setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
 
     }
 
-    public void paint (Graphics g){
-        g.drawImage(image,0,0,this);
-    }
 
     private void initBoard(){
         int start = 30;
@@ -69,8 +65,7 @@ public class Chessboard extends JPanel implements FormConstants{
     }
 
     private void initFigures(){
-        Figure figure = new Rook(this);
-//        new Thread(figure).start();
+        Figure figure = new Rook(this,true);
         cells[7][0].addFigure(figure);
 
     }

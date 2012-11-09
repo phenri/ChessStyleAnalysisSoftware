@@ -22,8 +22,7 @@ public class Figure extends JPanel implements FormConstants,MouseListener,Runnab
         setLayout(null);
         setDoubleBuffered(true);
         this.board = board;
-        setBackground(Color.RED);
-//        setOpaque(true);
+        setOpaque(false);
         setBounds(0,0,CELL_SIZE,CELL_SIZE);
         addMouseListener(this);
     }

@@ -13,6 +13,7 @@ tasks.xml
 out/*
 target/*
 .idea/*
+ignore/*
 
 # Temp file #
 *~
