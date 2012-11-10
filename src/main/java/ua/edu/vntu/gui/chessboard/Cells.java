@@ -54,6 +54,7 @@ public class Cells extends JPanel implements FormConstants {
 
         }
 
+        new Mover(this);
         initFigures();
         setBounds(30,30,CELL_SIZE*8,CELL_SIZE*8);
 
@@ -105,9 +106,11 @@ public class Cells extends JPanel implements FormConstants {
     public boolean isPressed(){
         return pressed;
     }
+
     public void resetPressed(){
         pressed = false;
     }
+
     public Figure getBuffer(){
         return buffer;
     }
@@ -119,6 +122,10 @@ public class Cells extends JPanel implements FormConstants {
 
         }
         repaint();
+    }
+
+    public Cell[][] getCells(){
+        return cells;
     }
 
 }
