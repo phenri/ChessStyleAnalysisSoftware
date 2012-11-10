@@ -13,20 +13,18 @@ import java.awt.event.MouseListener;
  * Time: 13:29
  */
 public class Cell extends JPanel implements FormConstants,MouseListener{
-    private char letter;
-    private byte number;
+    private Position position;
 
     private boolean empty = true;
     private Figure figure;
     private Cells cells;
 
-    public Cell(Cells cells, char letter, byte number){
+    public Cell(Cells cells, Position position){
         super(true);
         setLayout(null);
         addMouseListener(this);
         this.cells = cells;
-        this.letter = letter;
-        this.number = number;
+        this.position = position;
 
     }
 
@@ -34,14 +32,24 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
         empty = true;
     }
 
-    public String getAddress(){
-        return  "" + letter+ ""+number;
+    public Position getPosition(){
+        return position;
+    }
+
+    public Figure getFigure(){
+        return figure;
+    }
+
+    public boolean isEmpty(){
+        return empty;
     }
 
     public void addFigure(Figure figure){
-        if(!empty) remove(this.figure);
+        if(!empty)
+            remove(this.figure);
         add(figure);
         figure.setParent(this);
+        figure.setPosition(this.position);
         this.figure = figure;
         empty = false;
         repaint();
@@ -54,7 +62,6 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
             System.out.println(this);
             cells.putFigure(this);
         }
-//
         repaint();
     }
 
@@ -80,7 +87,7 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
 
     @Override
     public String toString(){
-        return "Cell: " + getAddress();
+        return "Cell: " + position.toString();
     }
 
 }

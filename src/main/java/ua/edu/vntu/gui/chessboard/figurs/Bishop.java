@@ -3,6 +3,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Chessboard;
 import ua.edu.vntu.gui.chessboard.Figure;
+import ua.edu.vntu.gui.chessboard.Position;
 
 import java.awt.*;
 
@@ -10,6 +11,7 @@ import java.awt.*;
  * @author: Vyacheslav.Bychkovsk
  */
 public class Bishop extends Figure {
+
     public Bishop(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
@@ -22,11 +24,18 @@ public class Bishop extends Figure {
             image = getToolkit().getImage("res\\black\\bishop.png");
         }
     }
+
     public void paint(Graphics g){
         g.drawImage(image,5,5,this);
     }
+
+    @Override
+    public boolean isAvailablePosition(Position pos) {
+        return super.isAvailablePosition(pos);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
     @Override
     public String toString(){
-        return "Bishop: " + parent.getAddress();
+        return "Bishop: " + parent.getPosition().toString();
     }
 }

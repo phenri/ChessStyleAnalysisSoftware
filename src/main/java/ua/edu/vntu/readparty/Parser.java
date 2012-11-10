@@ -26,7 +26,7 @@ public class Parser  {
 
         for(String s:codeList){
             partyCode[i] = s;
-            System.out.println(partyCode[i]);
+//            System.out.println(partyCode[i]);
             i++;
         }
     }

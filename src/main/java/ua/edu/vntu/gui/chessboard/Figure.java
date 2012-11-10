@@ -15,10 +15,13 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     protected Cells board;
     protected Image image;
     protected boolean isWhite;
+    protected String[] possibleMoves;
+    protected Position position;
 
     protected Figure(Cells board){
         super();
         setLayout(null);
+        this.position = position;
         setDoubleBuffered(true);
         this.board = board;
         setOpaque(false);
@@ -26,8 +29,28 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
         addMouseListener(this);
     }
 
-    protected boolean isWhite(){
+    public boolean isAvailablePosition(Position pos) {
+        System.out.println("in figure");
+        return true;
+    }
+
+    void setParent(Cell cell){
+        parent = cell;
+    }
+    public Cell getParent(){
+        return parent;
+    }
+
+    public boolean isWhite(){
         return isWhite;
+    }
+
+    public void setPosition(Position position){
+        this.position = position;
+    }
+
+    public Position getPosition(){
+        return position;
     }
 
 
@@ -56,8 +79,9 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     public void mouseClicked(MouseEvent e) {
         System.out.println(this);
         if(board.isPressed()){
-            if (board.getBuffer().isWhite() != this.isWhite()){
+            if (board.getBuffer().isWhite() != this.isWhite() && board.getBuffer().isAvailablePosition(position)){
                 parent.addFigure(board.getBuffer());
+                parent.reset();
                 board.resetPressed();
                 board.repaint();
             }
@@ -67,10 +91,5 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
         parent.reset();
     }
 
-    void setParent(Cell cell){
-        parent = cell;
-    }
-    public Cell getParent(){
-        return parent;
-    }
+
 }

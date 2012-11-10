@@ -28,7 +28,7 @@ public class Cells extends JPanel implements FormConstants {
 
         for (int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                cells[i][j] = new Cell(this,cellLetter,cellNumber);
+                cells[i][j] = new Cell(this,new Position(cellLetter,cellNumber));
                 if (c % 2 == 0){
                     cells[i][j].setBackground(LIGHT);
                 }
@@ -116,16 +116,30 @@ public class Cells extends JPanel implements FormConstants {
     }
 
     public void putFigure(Cell cell){
-        if(pressed ){
+        if(buffer != null)
+//            System.out.println(buffer.isAvailablePosition(cell.getPosition()));
+        if(pressed && buffer.isAvailablePosition(cell.getPosition()) ){
             cell.addFigure(buffer);
-            pressed = false;
-
         }
+        pressed = false;
         repaint();
     }
 
     public Cell[][] getCells(){
         return cells;
+    }
+
+    public Cell getCellByPosition(Position p){
+        for(int i = 0;i < 8;i++){
+            for(int j = 0;j < 8;j++){
+                if(cells[i][j].getPosition().equals(p)){
+//                    System.out.println("get cell by position"+cells[i][j]);
+                    return cells[i][j];
+                }
+            }
+
+        }
+        return null;
     }
 
 }
