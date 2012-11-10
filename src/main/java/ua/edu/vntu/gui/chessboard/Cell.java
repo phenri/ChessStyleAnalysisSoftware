@@ -16,16 +16,10 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
     private char letter;
     private byte number;
 
-    boolean empty = true;
+    private boolean empty = true;
     private Figure figure;
-    Cells cells;
+    private Cells cells;
 
-    public Cell(Cells cells){
-        super(true);
-        setLayout(null);
-        addMouseListener(this);
-        this.cells = cells;
-    }
     public Cell(Cells cells, char letter, byte number){
         super(true);
         setLayout(null);
@@ -34,9 +28,6 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
         this.letter = letter;
         this.number = number;
 
-    }
-    public boolean isEmpty(){
-        return empty;
     }
 
     public void reset(){
@@ -48,22 +39,12 @@ public class Cell extends JPanel implements FormConstants,MouseListener{
     }
 
     public void addFigure(Figure figure){
+        if(!empty) remove(this.figure);
         add(figure);
         figure.setParent(this);
         this.figure = figure;
         empty = false;
         repaint();
-    }
-
-
-    public Figure getFigure(){
-        if(!empty){
-            remove(figure);
-            empty = true;
-            return figure;
-        }
-        repaint();
-        return null;
     }
 
     @Override

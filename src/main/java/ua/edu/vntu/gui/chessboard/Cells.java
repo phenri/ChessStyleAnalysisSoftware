@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class Cells extends JPanel implements FormConstants {
 
-    Cell[][] cells = new Cell[8][8];
+    private Cell[][] cells = new Cell[8][8];
 
     private Figure buffer;
 
@@ -101,14 +101,19 @@ public class Cells extends JPanel implements FormConstants {
         }
     }
 
-    public void replace(Figure figure){
-        figure.getParent().addFigure(figure);
 
+    public boolean isPressed(){
+        return pressed;
+    }
+    public void resetPressed(){
+        pressed = false;
+    }
+    public Figure getBuffer(){
+        return buffer;
     }
 
     public void putFigure(Cell cell){
-        System.out.println(pressed && cell.isEmpty());
-        if(pressed && cell.isEmpty()){
+        if(pressed ){
             cell.addFigure(buffer);
             pressed = false;
 

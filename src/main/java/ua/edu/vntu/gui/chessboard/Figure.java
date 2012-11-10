@@ -15,10 +15,8 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     protected Cells board;
     protected Image image;
     protected boolean isWhite;
-//    protected Figure(){
-//
-//    }
-    public Figure(Cells board){
+
+    protected Figure(Cells board){
         super();
         setLayout(null);
         setDoubleBuffered(true);
@@ -57,12 +55,15 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(this);
-        board.moveMy(this);
-        if (!parent.isEmpty()){
-            board.replace(this);
-
+        if(board.isPressed()){
+            if (board.getBuffer().isWhite() != this.isWhite()){
+                parent.addFigure(board.getBuffer());
+                board.resetPressed();
+                board.repaint();
+            }
+            return;
         }
-
+        board.moveMy(this);
         parent.reset();
     }
 

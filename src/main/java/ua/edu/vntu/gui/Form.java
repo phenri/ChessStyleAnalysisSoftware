@@ -1,8 +1,8 @@
 package ua.edu.vntu.gui;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.FileSystemResource;
+//import org.springframework.beans.factory.BeanFactory;
+//import org.springframework.beans.factory.xml.XmlBeanFactory;
+//import org.springframework.core.io.FileSystemResource;
 
 import javax.swing.*;
 import java.awt.*;
