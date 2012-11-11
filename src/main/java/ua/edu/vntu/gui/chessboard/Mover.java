@@ -2,6 +2,8 @@ package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.readparty.Parser;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: slavik
@@ -17,7 +19,7 @@ public class Mover  {
         this.cells = cells;
         Parser parser = new Parser("tmp\\file.pgn");
         way = parser.getPartyCode();
-//        readMoves(way);
+        readMoves(way);
     }
 
 
@@ -33,40 +35,74 @@ public class Mover  {
             i++;
         }
         move(white);
+//        move(black);
 
     }
     private void move(String[] move){
         int i = 0;
+        ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
         for(String s:move){
+
             char[] chars = s.toCharArray();
+
+            String figure = "";
             System.out.print(++i + ".");
             switch (chars[0]){
                 case 'N':
-                    System.out.println("Knight " +chars[1]+chars[2] );
+                    figure = "Knight";
                     break;
                 case 'B':
-                    System.out.println("Bishop " +chars[1]+chars[2]);
+                    figure = "Bishop";
                     break;
                 case 'R':
-                    System.out.println("Rook " +chars[1]+chars[2]);
+                    figure = "Rook";
                     break;
                 case 'Q':
-                    System.out.println("Queen " +chars[1]+chars[2]);
+                    figure = "Queen";
                     break;
                 case 'K':
-                    System.out.println("King " +chars[1]+chars[2]);
+                    figure = "King";
                     break;
                 case 'O':
-                    System.out.println("Rakirovka ");
+                    figure = "Castling";
                     break;
                 case '1':
                     System.out.println("Win white");
+                    figure = "end";
                     break;
                 case '0':
                     System.out.println("Los white");
+                    figure = "end";
+                    break;
+                case 'P':
+                    figure = "Pawn";
                 default:
-                    System.out.println("Pawn "  +chars[0]+chars[1]);
+                    figure = "Pawn";
             }
+
+            int index = chars.length - 1;
+
+            if (s.contains("+")||s.contains("?")||s.contains("!"))
+                index--;
+
+            if (s.contains("O")){
+                boolean b = chars.length == 3 ? false : true;
+                MovingDescription description = new MovingDescription(new Castling(b));
+                System.out.println(description);
+                descriptions.add(description);
+                continue;
+
+            }
+
+            MovingDescription description = new MovingDescription(new Position((char)chars[index-1],chars[index]),figure);
+
+            if (s.contains("x"))
+                    description.setBeat(true);
+
+            System.out.println(description);
+            descriptions.add(description);
+
+
         }
 
     }

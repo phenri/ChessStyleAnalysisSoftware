@@ -1,6 +1,6 @@
 package ua.edu.vntu.gui.chessboard;
 
-import ua.edu.vntu.gui.FormConstants;
+import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.gui.chessboard.figurs.*;
 
 import javax.swing.*;
@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Cells extends JPanel implements FormConstants {
+public class Cells extends JPanel implements Constants {
 
     private Cell[][] cells = new Cell[8][8];
 
@@ -118,7 +118,7 @@ public class Cells extends JPanel implements FormConstants {
     public void putFigure(Cell cell){
         if(buffer != null)
 //            System.out.println(buffer.isAvailablePosition(cell.getPosition()));
-        if(pressed && buffer.isAvailablePosition(cell.getPosition()) ){
+        if(pressed){
             cell.addFigure(buffer);
         }
         pressed = false;

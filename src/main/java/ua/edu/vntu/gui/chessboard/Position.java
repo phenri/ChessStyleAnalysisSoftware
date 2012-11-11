@@ -9,9 +9,30 @@ package ua.edu.vntu.gui.chessboard;
 public class Position {
     private char letter;
     private byte number;
-    public Position(char letter, byte number){
-        this.letter = letter;
-        this.number = number;
+    public Position(char letter, int number){
+        try{
+            if (letter < 'a' || letter > 'h')
+                throw new InvalidPositionException();
+            if (number < 1 || number > 8)
+                throw new InvalidPositionException();
+            this.letter = letter;
+            this.number = (byte)number;
+        }catch (InvalidPositionException e){
+            e.printStackTrace();
+        }
+    }
+    public Position(char letter, char num){
+        int number = Integer.parseInt(Character.toString(num));
+        try{
+            if (letter < 'a' || letter > 'h')
+                throw new InvalidPositionException();
+            if (number < 1 || number > 8)
+                throw new InvalidPositionException();
+            this.letter = letter;
+            this.number = (byte)number;
+        }catch (InvalidPositionException e){
+            e.printStackTrace();
+        }
     }
     public char getX(){
         return letter;
@@ -29,6 +50,8 @@ public class Position {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
+        if (obj.getClass() != this.getClass())
+            return false;
         try{
             Position position = (Position) obj;
 

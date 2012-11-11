@@ -1,6 +1,6 @@
 package ua.edu.vntu.gui.chessboard;
 
-import ua.edu.vntu.gui.FormConstants;
+import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -12,7 +12,7 @@ import java.awt.event.MouseListener;
  * Date: 04.11.12
  * Time: 13:29
  */
-public class Cell extends JPanel implements FormConstants,MouseListener{
+public class Cell extends JPanel implements Constants,MouseListener{
     private Position position;
 
     private boolean empty = true;

@@ -29,24 +29,29 @@ public class Pawn extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        System.out.println(pos);
-        boolean b0 = board.getCellByPosition(pos).isEmpty();
-        System.out.println("is empty " + b0);
+        if (!board.getCellByPosition(pos).isEmpty())
+            return false;
+
+
         if(isWhite()){
             boolean b1;
             if(position.getY() == 2)  {
                 b1 = (pos.getY() - position.getY() == 2) || (pos.getY() - position.getY() == 1);
             }else{
                 b1 = (pos.getY() - position.getY() == 1);
-
             }
             boolean b2 = (pos.getX() - position.getX() == 0);
-            return b0&&b1&&b2;
+            return b1 && b2;
         }
         else {
-            boolean b1 = (pos.getY() - position.getY() == -1);
+            boolean b1;
+            if(position.getY() == 6)  {
+                b1 = (pos.getY() - position.getY() == -2) || (pos.getY() - position.getY() == -1);
+            }else{
+                b1 = (pos.getY() - position.getY() == -1);
+            }
             boolean b2 = (pos.getX() - position.getX() == 0);
-            return b0&&b1&&b2;
+            return b1 && b2;
         }
     }
 

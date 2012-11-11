@@ -1,7 +1,6 @@
 package ua.edu.vntu.gui.chessboard;
 
-import ua.edu.vntu.gui.FormConstants;
-import ua.edu.vntu.gui.chessboard.figurs.*;
+import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.*;
  * Date: 04.11.12
  * Time: 12:45
  */
-public class Chessboard extends JPanel implements FormConstants{
+public class Chessboard extends JPanel implements Constants {
 
     public Chessboard(){
         super(true);

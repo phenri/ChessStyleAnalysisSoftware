@@ -13,7 +13,7 @@ import java.awt.*;
  * Date: 03.11.12
  * Time: 21:58
  */
-public class Form extends JFrame implements FormConstants{
+public class Form extends JFrame implements Constants {
 
     public Form(){
         super("ChessStyleAnalysisSoftware");

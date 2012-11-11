@@ -1,6 +1,6 @@
 package ua.edu.vntu.gui.chessboard;
 
-import ua.edu.vntu.gui.FormConstants;
+import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Figure extends JPanel implements FormConstants,MouseListener{
+public class Figure extends JPanel implements Constants,MouseListener{
     protected Cell parent;
     protected Cells board;
     protected Image image;
@@ -19,10 +19,8 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     protected Position position;
 
     protected Figure(Cells board){
-        super();
+        super(true);
         setLayout(null);
-        this.position = position;
-        setDoubleBuffered(true);
         this.board = board;
         setOpaque(false);
         setBounds(0,0,CELL_SIZE,CELL_SIZE);
@@ -79,12 +77,13 @@ public class Figure extends JPanel implements FormConstants,MouseListener{
     public void mouseClicked(MouseEvent e) {
         System.out.println(this);
         if(board.isPressed()){
-            if (board.getBuffer().isWhite() != this.isWhite() && board.getBuffer().isAvailablePosition(position)){
+            if (board.getBuffer().isWhite() != this.isWhite()){
                 parent.addFigure(board.getBuffer());
                 parent.reset();
                 board.resetPressed();
                 board.repaint();
             }
+            parent.reset();
             return;
         }
         board.moveMy(this);

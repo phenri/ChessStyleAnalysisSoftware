@@ -4,9 +4,6 @@ import ua.edu.vntu.gui.chessboard.Chessboard;
 import ua.edu.vntu.gui.chessboard.Figure;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +11,7 @@ import java.awt.event.MouseMotionListener;
  * Date: 04.11.12
  * Time: 12:40
  */
-public class MainField extends JPanel implements FormConstants{
+public class MainField extends JPanel implements Constants {
     Figure f;
     public MainField(){
         super(true);
