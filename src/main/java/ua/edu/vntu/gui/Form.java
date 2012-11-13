@@ -1,5 +1,7 @@
 package ua.edu.vntu.gui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,9 @@ import java.awt.*;
  * Time: 21:58
  */
 public class Form extends JFrame implements Constants {
+    @Autowired
     private MainField field;
+
     public Form(){
         super("ChessStyleAnalysisSoftware");
 

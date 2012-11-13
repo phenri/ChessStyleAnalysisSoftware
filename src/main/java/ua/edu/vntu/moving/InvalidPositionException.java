@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.moving;
 
 /**
  * Created with IntelliJ IDEA.

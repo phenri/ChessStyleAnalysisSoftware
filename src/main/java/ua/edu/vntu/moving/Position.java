@@ -1,6 +1,4 @@
-package ua.edu.vntu.gui.chessboard.moving;
-
-import ua.edu.vntu.gui.chessboard.InvalidPositionException;
+package ua.edu.vntu.moving;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +28,7 @@ public class Position {
             e.printStackTrace();
         }
     }
+
     public Position(char letter, char num){
         int number = Integer.parseInt(Character.toString(num));
 
@@ -81,4 +80,5 @@ public class Position {
             return false;
         }
     }
+
 }

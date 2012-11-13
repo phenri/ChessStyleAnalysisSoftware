@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui.chessboard.moving;
+package ua.edu.vntu.moving;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.readparty.Parser;

@@ -1,7 +1,7 @@
 package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.Constants;
-import ua.edu.vntu.gui.chessboard.moving.Position;
+import ua.edu.vntu.moving.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,6 @@ public abstract class Figure extends JPanel implements Constants,MouseListener{
     protected Cells board;
     protected Image image;
     protected boolean isWhite;
-    protected String[] possibleMoves;
     protected Position position;
 
     protected Figure(Cells board){
@@ -30,22 +29,22 @@ public abstract class Figure extends JPanel implements Constants,MouseListener{
 
     public abstract boolean isAvailablePosition(Position pos);
 
-    void setParent(Cell cell){
+    protected void setParent(Cell cell){
         parent = cell;
     }
     public Cell getParent(){
         return parent;
     }
 
-    public boolean isWhite(){
+    protected boolean isWhite(){
         return isWhite;
     }
 
-    public void setPosition(Position position){
+    protected void setPosition(Position position){
         this.position = position;
     }
 
-    public Position getPosition(){
+    protected Position getPosition(){
         return position;
     }
 
@@ -84,9 +83,8 @@ public abstract class Figure extends JPanel implements Constants,MouseListener{
             parent.reset();
             return;
         }
-        board.moveMy(this);
+        board.captureFigure(this);
         parent.reset();
     }
-
 
 }

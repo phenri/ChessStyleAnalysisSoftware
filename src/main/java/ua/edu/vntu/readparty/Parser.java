@@ -3,7 +3,6 @@ package ua.edu.vntu.readparty;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,12 +25,9 @@ public class Parser  {
 
         for(String s:codeList){
             partyCode[i] = s;
-//            System.out.println(partyCode[i]);
             i++;
         }
     }
-
-
 
     private String readPGN(String filename){
         try{
@@ -107,11 +103,10 @@ public class Parser  {
 
             char body[] = new char[end - begin];
             in.getChars(begin + 1,end,body,0);
-            content = new String(body);
+            return new String(body);
 
-            return content;
         }catch (Exception e){
-            System.err.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }

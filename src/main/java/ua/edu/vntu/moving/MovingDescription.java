@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui.chessboard.moving;
+package ua.edu.vntu.moving;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,8 +15,6 @@ public class MovingDescription {
     private boolean isBeat;
 
     private Castling castling;
-
-    private int code; //для описання додаткової інформації про хід
 
     public MovingDescription(Castling castling){
         this.castling = castling;

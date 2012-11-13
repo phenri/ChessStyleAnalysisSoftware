@@ -2,7 +2,7 @@ package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.gui.chessboard.figurs.*;
-import ua.edu.vntu.gui.chessboard.moving.Position;
+import ua.edu.vntu.moving.Position;
 
 import javax.swing.*;
 
@@ -95,7 +95,7 @@ public class Cells extends JPanel implements Constants {
 
     }
 
-    public void moveMy(Figure figure){
+    public void captureFigure(Figure figure){
         if (!pressed){
             pressed = true;
             buffer = figure;

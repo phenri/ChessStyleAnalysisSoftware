@@ -1,5 +1,6 @@
 package ua.edu.vntu.gui.chessboard;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
@@ -12,7 +13,10 @@ import java.awt.*;
  * Time: 12:45
  */
 public class Chessboard extends JPanel implements Constants {
+
+    @Autowired
     private Cells cells;
+
     public Chessboard(){
         super(true);
         setLayout(null);

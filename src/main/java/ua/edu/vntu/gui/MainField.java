@@ -1,7 +1,7 @@
 package ua.edu.vntu.gui;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.chessboard.Chessboard;
-import ua.edu.vntu.gui.chessboard.Figure;
 
 import javax.swing.*;
 
@@ -12,7 +12,7 @@ import javax.swing.*;
  * Time: 12:40
  */
 public class MainField extends JPanel implements Constants {
-    private Figure f;
+    @Autowired
     private Chessboard chessboard;
 
 

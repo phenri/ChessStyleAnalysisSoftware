@@ -2,7 +2,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.moving.Position;
+import ua.edu.vntu.moving.Position;
 
 import java.awt.*;
 

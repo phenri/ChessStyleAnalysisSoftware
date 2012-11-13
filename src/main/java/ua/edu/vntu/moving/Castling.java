@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui.chessboard.moving;
+package ua.edu.vntu.moving;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +7,9 @@ package ua.edu.vntu.gui.chessboard.moving;
  * Time: 18:06
  */
 public class Castling {
+
     private boolean isLong = false;
+
     public Castling(boolean isLong){
         this.isLong = isLong;
 
