@@ -12,20 +12,21 @@ import java.awt.*;
  * Time: 12:45
  */
 public class Chessboard extends JPanel implements Constants {
-
+    private Cells cells;
     public Chessboard(){
         super(true);
         setLayout(null);
         setBackground(new Color(255,255, 255));
-        initBoard();
-        add(new Cells());
 
         setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
 
     }
 
     public void setCells(Cells cells){
-        add(cells);
+        this.cells = cells;
+        add(this.cells);
+        initBoard();
+        repaint();
     }
 
 

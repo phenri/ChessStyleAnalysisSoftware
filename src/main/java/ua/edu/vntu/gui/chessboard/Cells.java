@@ -2,7 +2,6 @@ package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.gui.chessboard.figurs.*;
-import ua.edu.vntu.gui.chessboard.moving.Mover;
 import ua.edu.vntu.gui.chessboard.moving.Position;
 
 import javax.swing.*;
@@ -56,7 +55,6 @@ public class Cells extends JPanel implements Constants {
 
         }
 
-        new Mover(this);
         initFigures();
         setBounds(30,30,CELL_SIZE*8,CELL_SIZE*8);
 
@@ -119,7 +117,6 @@ public class Cells extends JPanel implements Constants {
 
     public void putFigure(Cell cell){
         if(buffer != null)
-//            System.out.println(buffer.isAvailablePosition(cell.getPosition()));
         if(pressed){
             cell.addFigure(buffer);
         }
@@ -135,7 +132,6 @@ public class Cells extends JPanel implements Constants {
         for(int i = 0;i < 8;i++){
             for(int j = 0;j < 8;j++){
                 if(cells[i][j].getPosition().equals(p)){
-//                    System.out.println("get cell by position"+cells[i][j]);
                     return cells[i][j];
                 }
             }

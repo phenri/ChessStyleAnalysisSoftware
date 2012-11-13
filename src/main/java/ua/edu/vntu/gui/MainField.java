@@ -12,17 +12,19 @@ import javax.swing.*;
  * Time: 12:40
  */
 public class MainField extends JPanel implements Constants {
-    Figure f;
+    private Figure f;
+    private Chessboard chessboard;
+
+
     public MainField(){
         super(true);
         setLayout(null);
-
-
-
-
-        add(new Chessboard());
         setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 
+    }
+    public void setChessboard(Chessboard chessboard){
+        this.chessboard = chessboard;
+        add(this.chessboard);
     }
 
 }
