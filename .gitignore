@@ -8,6 +8,8 @@
 *.iws
 workspace.xml
 tasks.xml
+*.iml
+ChessStyleAnalysisSoftware.iml
 
 # Compiling files folders #
 out/*
