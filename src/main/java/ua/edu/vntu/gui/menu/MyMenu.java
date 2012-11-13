@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui;
+package ua.edu.vntu.gui.menu;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class MyMenu extends JMenuBar {
         super();
 
         JMenu file = new JMenu("File");
-        JMenuItem open = new JMenuItem("Open file");
+        JMenuItem open = new OpenFile();
         JMenuItem exit = new JMenuItem("Exit");
 
         JMenu about = new JMenu("About");

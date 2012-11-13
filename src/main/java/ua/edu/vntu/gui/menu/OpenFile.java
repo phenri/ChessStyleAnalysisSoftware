@@ -1,7 +1,13 @@
 package ua.edu.vntu.gui.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.edu.vntu.Main;
+import ua.edu.vntu.gui.Form;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +21,6 @@ import java.io.FileDescriptor;
  * Time: 20:14
  */
 public class OpenFile extends JMenuItem implements ActionListener{
-    @Autowired
     private JFrame form;
 
     public OpenFile(){
@@ -32,6 +37,9 @@ public class OpenFile extends JMenuItem implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Hello");
-        FileDialog fd = new FileDialog(form);
+
+        form = (Form) Main.context.getBean("form");
+
+        System.out.println(form);
     }
 }

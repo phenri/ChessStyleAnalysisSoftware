@@ -1,6 +1,8 @@
 package ua.edu.vntu.gui;
 
 
+import ua.edu.vntu.gui.menu.MyMenu;
+
 import javax.swing.*;
 import java.awt.*;
 
