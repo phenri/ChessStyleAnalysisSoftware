@@ -1,6 +1,4 @@
-package ua.edu.vntu.gui.chessboard;
-
-import ua.edu.vntu.gui.Constants;
+package ua.edu.vntu.gui.chessboard.moving;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +20,6 @@ public class MovingDescription {
 
     public MovingDescription(Castling castling){
         this.castling = castling;
-
     }
 
     public boolean isCastling(){
@@ -30,9 +27,9 @@ public class MovingDescription {
     }
 
     public MovingDescription(Position position, String figure){
+
         this.position = position;
         this.figure = figure;
-
     }
 
 

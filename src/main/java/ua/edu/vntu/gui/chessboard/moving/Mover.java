@@ -1,5 +1,6 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.gui.chessboard.moving;
 
+import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.readparty.Parser;
 
 import java.util.ArrayList;
@@ -86,9 +87,9 @@ public class Mover  {
                 index--;
 
             if (s.contains("O")){
-                boolean b = chars.length == 3 ? false : true;
+                boolean b = chars.length != 3;
                 MovingDescription description = new MovingDescription(new Castling(b));
-                System.out.println(description);
+//                System.out.println(description);
                 descriptions.add(description);
                 continue;
 

@@ -1,9 +1,8 @@
 package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
-import ua.edu.vntu.gui.chessboard.Chessboard;
 import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.Position;
+import ua.edu.vntu.gui.chessboard.moving.Position;
 
 import java.awt.*;
 
@@ -30,7 +29,7 @@ public class Queen extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        return super.isAvailablePosition(pos);    //To change body of overridden methods use File | Settings | File Templates.
+        return true;
     }
 
     @Override

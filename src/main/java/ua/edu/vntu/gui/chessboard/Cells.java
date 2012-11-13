@@ -2,6 +2,8 @@ package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.gui.chessboard.figurs.*;
+import ua.edu.vntu.gui.chessboard.moving.Mover;
+import ua.edu.vntu.gui.chessboard.moving.Position;
 
 import javax.swing.*;
 

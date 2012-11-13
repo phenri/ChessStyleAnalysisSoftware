@@ -1,6 +1,7 @@
 package ua.edu.vntu.gui.chessboard;
 
 import ua.edu.vntu.gui.Constants;
+import ua.edu.vntu.gui.chessboard.moving.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.MouseListener;
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public class Figure extends JPanel implements Constants,MouseListener{
+public abstract class Figure extends JPanel implements Constants,MouseListener{
     protected Cell parent;
     protected Cells board;
     protected Image image;
@@ -27,10 +28,7 @@ public class Figure extends JPanel implements Constants,MouseListener{
         addMouseListener(this);
     }
 
-    public boolean isAvailablePosition(Position pos) {
-        System.out.println("in figure");
-        return true;
-    }
+    public abstract boolean isAvailablePosition(Position pos);
 
     void setParent(Cell cell){
         parent = cell;

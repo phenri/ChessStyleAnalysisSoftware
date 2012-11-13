@@ -1,4 +1,6 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.gui.chessboard.moving;
+
+import ua.edu.vntu.gui.chessboard.InvalidPositionException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,36 +9,49 @@ package ua.edu.vntu.gui.chessboard;
  * Time: 19:33
  */
 public class Position {
+
     private char letter;
+
     private byte number;
+
     public Position(char letter, int number){
+
         try{
             if (letter < 'a' || letter > 'h')
                 throw new InvalidPositionException();
+
             if (number < 1 || number > 8)
                 throw new InvalidPositionException();
+
             this.letter = letter;
             this.number = (byte)number;
+
         }catch (InvalidPositionException e){
             e.printStackTrace();
         }
     }
     public Position(char letter, char num){
         int number = Integer.parseInt(Character.toString(num));
+
         try{
             if (letter < 'a' || letter > 'h')
                 throw new InvalidPositionException();
+
             if (number < 1 || number > 8)
                 throw new InvalidPositionException();
+
             this.letter = letter;
             this.number = (byte)number;
+
         }catch (InvalidPositionException e){
             e.printStackTrace();
         }
     }
+
     public char getX(){
         return letter;
     }
+
     public byte getY(){
         return number;
     }
