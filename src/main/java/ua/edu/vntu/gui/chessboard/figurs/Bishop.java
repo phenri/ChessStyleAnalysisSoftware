@@ -2,6 +2,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Figure;
+import ua.edu.vntu.gui.chessboard.Figures;
 import ua.edu.vntu.moving.Position;
 
 import java.awt.*;
@@ -10,17 +11,19 @@ import java.awt.*;
  * @author: Vyacheslav.Bychkovsk
  */
 public class Bishop extends Figure {
-
     public Bishop(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
+
         this.isWhite = isWhite;
         this.board = chessboard;
+        name = Figures.BISHOP;
+
         if (isWhite){
-            image = getToolkit().getImage("res\\white\\bishop.png");
+            image = getToolkit().getImage("icons\\white\\bishop.png");
         }
         else{
-            image = getToolkit().getImage("res\\black\\bishop.png");
+            image = getToolkit().getImage("icons\\black\\bishop.png");
         }
     }
 

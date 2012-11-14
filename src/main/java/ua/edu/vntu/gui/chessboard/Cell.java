@@ -4,8 +4,6 @@ import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.moving.Position;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +11,7 @@ import java.awt.event.MouseListener;
  * Date: 04.11.12
  * Time: 13:29
  */
-public class Cell extends JPanel implements Constants,MouseListener{
+public class Cell extends JPanel implements Constants{
     private Position position;
 
     private boolean empty = true;
@@ -23,7 +21,6 @@ public class Cell extends JPanel implements Constants,MouseListener{
     public Cell(Cells cells, Position position){
         super(true);
         setLayout(null);
-        addMouseListener(this);
         this.cells = cells;
         this.position = position;
 
@@ -56,35 +53,6 @@ public class Cell extends JPanel implements Constants,MouseListener{
         repaint();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-        if(empty){
-            System.out.println(this);
-            cells.putFigure(this);
-        }
-        repaint();
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 
     @Override
     public String toString(){

@@ -5,18 +5,17 @@ import ua.edu.vntu.moving.Position;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * @author: Vyacheslav.Bychkovsk
  */
-public abstract class Figure extends JPanel implements Constants,MouseListener{
+public abstract class Figure extends JPanel implements Constants{
     protected Cell parent;
     protected Cells board;
     protected Image image;
     protected boolean isWhite;
     protected Position position;
+    protected Figures name;
 
     protected Figure(Cells board){
         super(true);
@@ -24,7 +23,6 @@ public abstract class Figure extends JPanel implements Constants,MouseListener{
         this.board = board;
         setOpaque(false);
         setBounds(0,0,CELL_SIZE,CELL_SIZE);
-        addMouseListener(this);
     }
 
     public abstract boolean isAvailablePosition(Position pos);
@@ -48,43 +46,8 @@ public abstract class Figure extends JPanel implements Constants,MouseListener{
         return position;
     }
 
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println(this);
-        if(board.isPressed()){
-            if (board.getBuffer().isWhite() != this.isWhite()){
-                parent.addFigure(board.getBuffer());
-                parent.reset();
-                board.resetPressed();
-                board.repaint();
-            }
-            parent.reset();
-            return;
-        }
-        board.captureFigure(this);
-        parent.reset();
+    protected Figures getFigureName(){
+        return name;
     }
 
 }

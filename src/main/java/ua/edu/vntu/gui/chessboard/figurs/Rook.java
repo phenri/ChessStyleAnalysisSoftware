@@ -2,6 +2,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Figure;
+import ua.edu.vntu.gui.chessboard.Figures;
 import ua.edu.vntu.moving.Position;
 
 import java.awt.*;
@@ -23,13 +24,16 @@ public class Rook extends Figure {
     public Rook(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
+
         this.isWhite = isWhite;
         this.board = chessboard;
+        name = Figures.ROOK;
+
         if (isWhite){
-            image = getToolkit().getImage("res\\white\\rook.png");
+            image = getToolkit().getImage("icons\\white\\rook.png");
         }
         else{
-            image = getToolkit().getImage("res\\black\\rook.png");
+            image = getToolkit().getImage("icons\\black\\rook.png");
         }
     }
     public void paint(Graphics g){

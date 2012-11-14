@@ -1,18 +1,11 @@
 package ua.edu.vntu.gui.menu;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.edu.vntu.Main;
 import ua.edu.vntu.gui.Form;
 
-import javax.annotation.PostConstruct;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileDescriptor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,6 +32,8 @@ public class OpenFile extends JMenuItem implements ActionListener{
         System.out.println("Hello");
 
         form = (Form) Main.context.getBean("form");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(form);
 
         System.out.println(form);
     }

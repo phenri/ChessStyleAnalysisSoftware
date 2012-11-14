@@ -2,6 +2,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Figure;
+import ua.edu.vntu.gui.chessboard.Figures;
 import ua.edu.vntu.moving.Position;
 
 import java.awt.*;
@@ -13,13 +14,16 @@ public class Pawn extends Figure {
     public Pawn(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
+
         this.isWhite = isWhite;
         this.board = chessboard;
+        name = Figures.PAWN;
+
         if (isWhite){
-            image = getToolkit().getImage("res\\white\\pawn.png");
+            image = getToolkit().getImage("icons\\white\\pawn.png");
         }
         else{
-            image = getToolkit().getImage("res\\black\\pawn.png");
+            image = getToolkit().getImage("icons\\black\\pawn.png");
         }
     }
     public void paint(Graphics g){

@@ -2,6 +2,7 @@ package ua.edu.vntu.gui.chessboard.figurs;
 
 import ua.edu.vntu.gui.chessboard.Cells;
 import ua.edu.vntu.gui.chessboard.Figure;
+import ua.edu.vntu.gui.chessboard.Figures;
 import ua.edu.vntu.moving.Position;
 
 import java.awt.*;
@@ -13,13 +14,17 @@ public class Queen extends Figure {
     public Queen(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
+
         this.isWhite = isWhite;
         this.board = chessboard;
+
+        name = Figures.QUEEN;
+
         if (isWhite){
-            image = getToolkit().getImage("res\\white\\queen.png");
+            image = getToolkit().getImage("icons\\white\\queen.png");
         }
         else{
-            image = getToolkit().getImage("res\\black\\queen.png");
+            image = getToolkit().getImage("icons\\black\\queen.png");
         }
     }
 

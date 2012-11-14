@@ -1,6 +1,8 @@
 package ua.edu.vntu.gui.menu;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author: Vyacheslav.Bychkovsk
@@ -20,5 +22,12 @@ public class MyMenu extends JMenuBar {
         file.add(exit);
         add(file);
         add(about);
+
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 }

@@ -1,5 +1,10 @@
 package ua.edu.vntu.readparty;
 
+import ua.edu.vntu.gui.chessboard.Figures;
+import ua.edu.vntu.moving.Castling;
+import ua.edu.vntu.moving.MovingDescription;
+import ua.edu.vntu.moving.Position;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,17 +21,21 @@ public class Parser  {
 
     private Map<String,String> tags = new TreeMap<String, String>();
 
-    private String[] partyCode;
+    public ArrayList<MovingDescription> getWhiteMoves() {
+        return whiteMoves;
+    }
+
+    public ArrayList<MovingDescription> getBlackMoves() {
+        return blackMoves;
+    }
+
+    ArrayList<MovingDescription> whiteMoves, blackMoves;
 
     public Parser(String filename){
         ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(filename)));
-        partyCode = new String[codeList.size()];
-        int i = 0;
 
-        for(String s:codeList){
-            partyCode[i] = s;
-            i++;
-        }
+        readMoves(codeList);
+
     }
 
     private String readPGN(String filename){
@@ -149,8 +158,90 @@ public class Parser  {
     public Map getTags(){
         return tags;
     }
-    public String[] getPartyCode(){
-        return partyCode;
+
+    private void readMoves(ArrayList<String> strings){
+        String[] white = new String[strings.size()],
+                black = new String[strings.size()];
+        int i = 0;
+        for(String s:strings){
+            String[] words = s.split(" ");
+            white[i] = words[1];
+
+            black[i] = words[2];
+            i++;
+        }
+        whiteMoves = parseToMovingDescription(white);
+        blackMoves = parseToMovingDescription(black);
+
+    }
+
+    private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
+        int i = 0;
+        ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
+        for(String s:move){
+
+            char[] chars = s.toCharArray();
+
+            Figures figure;
+            System.out.print(++i + ".");
+            switch (chars[0]){
+                case 'N':
+                    figure = Figures.KNIGHT;
+                    break;
+                case 'B':
+                    figure = Figures.BISHOP;
+                    break;
+                case 'R':
+                    figure = Figures.ROOK;
+                    break;
+                case 'Q':
+                    figure = Figures.QUEEN;
+                    break;
+                case 'K':
+                    figure = Figures.KING;
+                    break;
+                case 'O':
+                    figure = null;
+                    break;
+                case '1':
+                    System.out.println("Win white");
+                    figure = null;
+                    break;
+                case '0':
+                    System.out.println("Los white");
+                    figure = null;
+                    break;
+                case 'P':
+                    figure = Figures.PAWN;
+                default:
+                    figure = Figures.PAWN;
+            }
+
+            int index = chars.length - 1;
+
+            if (s.contains("+")||s.contains("?")||s.contains("!"))
+                index--;
+
+            if (s.contains("O")){
+                boolean b = chars.length != 3;
+                MovingDescription description = new MovingDescription(new Castling(b));
+                descriptions.add(description);
+                continue;
+
+            }
+
+            MovingDescription description = new MovingDescription(new Position((char)chars[index-1],chars[index]),figure);
+
+            if (s.contains("x"))
+                description.setBeat(true);
+
+            System.out.println(description);
+            descriptions.add(description);
+
+
+        }
+        return descriptions;
+
     }
 
 }

@@ -1,5 +1,7 @@
 package ua.edu.vntu.moving;
 
+import ua.edu.vntu.gui.chessboard.Figures;
+
 /**
  * Created with IntelliJ IDEA.
  * User: slavik
@@ -10,7 +12,7 @@ public class MovingDescription {
 
     private Position position;
 
-    private String figure;
+    private Figures figure;
 
     private boolean isBeat;
 
@@ -24,7 +26,7 @@ public class MovingDescription {
         return castling != null;
     }
 
-    public MovingDescription(Position position, String figure){
+    public MovingDescription(Position position, Figures figure){
 
         this.position = position;
         this.figure = figure;
@@ -44,7 +46,7 @@ public class MovingDescription {
         return position;
     }
 
-    public String getFigureName(){
+    public Figures getFigureName(){
         return figure;
     }
 
