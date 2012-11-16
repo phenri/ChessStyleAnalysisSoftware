@@ -16,12 +16,10 @@ public class Cell extends JPanel implements Constants{
 
     private boolean empty = true;
     private Figure figure;
-    private Cells cells;
 
-    public Cell(Cells cells, Position position){
+    public Cell(Position position){
         super(true);
         setLayout(null);
-        this.cells = cells;
         this.position = position;
 
     }

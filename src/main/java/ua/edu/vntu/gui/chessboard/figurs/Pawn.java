@@ -20,10 +20,10 @@ public class Pawn extends Figure {
         name = Figures.PAWN;
 
         if (isWhite){
-            image = getToolkit().getImage("icons\\white\\pawn.png");
+            image = getToolkit().getImage("res\\icons\\white\\pawn.png");
         }
         else{
-            image = getToolkit().getImage("icons\\black\\pawn.png");
+            image = getToolkit().getImage("res\\icons\\black\\pawn.png");
         }
     }
     public void paint(Graphics g){
