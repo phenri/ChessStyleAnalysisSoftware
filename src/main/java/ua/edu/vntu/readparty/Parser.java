@@ -21,14 +21,6 @@ public class Parser  {
 
     private Map<String,String> tags = new TreeMap<String, String>();
 
-    public ArrayList<MovingDescription> getWhiteMoves() {
-        return whiteMoves;
-    }
-
-    public ArrayList<MovingDescription> getBlackMoves() {
-        return blackMoves;
-    }
-
     ArrayList<MovingDescription> whiteMoves, blackMoves;
 
     public Parser(String filename){

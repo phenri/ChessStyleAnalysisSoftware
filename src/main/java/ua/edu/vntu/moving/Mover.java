@@ -18,4 +18,8 @@ public class Mover  {
 
     }
 
+    public void setCells(Cells cells) {
+        this.cells = cells;
+    }
+
 }

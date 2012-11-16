@@ -20,10 +20,10 @@ public class Bishop extends Figure {
         name = Figures.BISHOP;
 
         if (isWhite){
-            image = getToolkit().getImage("icons\\white\\bishop.png");
+            image = getToolkit().getImage("res\\icons\\white\\bishop.png");
         }
         else{
-            image = getToolkit().getImage("icons\\black\\bishop.png");
+            image = getToolkit().getImage("res\\icons\\black\\bishop.png");
         }
     }
 

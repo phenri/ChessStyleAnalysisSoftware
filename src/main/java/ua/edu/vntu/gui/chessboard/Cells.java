@@ -5,6 +5,8 @@ import ua.edu.vntu.gui.chessboard.figurs.*;
 import ua.edu.vntu.moving.Position;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: Vyacheslav.Bychkovsk
@@ -13,9 +15,18 @@ public class Cells extends JPanel implements Constants {
 
     private Cell[][] cells = new Cell[8][8];
 
-    private Figure buffer;
+    public Map<Figures, Figure> getWhiteFigures() {
+        return whiteFigures;
+    }
 
-    private boolean pressed = false;
+    public Map<Figures, Figure> getBlackFigures() {
+        return blackFigures;
+    }
+
+    private Map<Figures, Figure> blackFigures = new HashMap<Figures, Figure>(),
+                                whiteFigures = new HashMap<Figures, Figure>();
+
+//    private boolean pressed = false;
 
     public Cells(){
         super();
@@ -29,7 +40,7 @@ public class Cells extends JPanel implements Constants {
 
         for (int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                cells[i][j] = new Cell(this,new Position(cellLetter,cellNumber));
+                cells[i][j] = new Cell(new Position(cellLetter,cellNumber));
                 if (c % 2 == 0){
                     cells[i][j].setBackground(LIGHT);
                 }
@@ -61,68 +72,91 @@ public class Cells extends JPanel implements Constants {
     }
 
     private void initFigures(){
+        Figure f;
+        /**
+         * black figures
+         */
+        f = new Rook(this, false);
+        cells[0][0].addFigure(f);
+        blackFigures.put(Figures.ROOK,f);
+
+        f = new Rook(this, false);
+        cells[0][7].addFigure(f);
+        blackFigures.put(Figures.ROOK,f);
+
+        f = new Knight(this,false);
+        cells[0][1].addFigure(f);
+        blackFigures.put(Figures.KNIGHT, f);
+
+        f = new Knight(this,false);
+        cells[0][6].addFigure(f);
+        blackFigures.put(Figures.KNIGHT,f);
+
+        f = new Bishop(this,false);
+        cells[0][2].addFigure(f);
+        blackFigures.put(Figures.BISHOP, f);
+
+        f = new Bishop(this,false);
+        cells[0][5].addFigure(f);
+        blackFigures.put(Figures.BISHOP,f);
+
+        f = new Queen(this,false);
+        cells[0][3].addFigure(f);
+        blackFigures.put(Figures.QUEEN,f);
+
+        f = new King(this,false);
+        cells[0][4].addFigure(f);
+        blackFigures.put(Figures.KING,f);
+
+        /**
+         * white figures
+         */
+
+        f = new Rook(this, true);
+        cells[7][0].addFigure(f);
+        whiteFigures.put(Figures.ROOK,f);
+
+        f = new Rook(this, true);
+        cells[7][7].addFigure(f);
+        whiteFigures.put(Figures.BISHOP,f);
+
+        f = new Knight(this,true);
+        cells[7][1].addFigure(f);
+        whiteFigures.put(Figures.KNIGHT,f);
+
+        f = new Knight(this,true);
+        cells[7][6].addFigure(f);
+        whiteFigures.put(Figures.KNIGHT,f);
+
+        f = new Bishop(this,true);
+        cells[7][2].addFigure(f);
+        whiteFigures.put(Figures.BISHOP,f);
+
+        f = new Bishop(this,true);
+        cells[7][5].addFigure(f);
+        whiteFigures.put(Figures.BISHOP,f);
+
+        f = new Queen(this,true);
+        cells[7][3].addFigure(f);
+        whiteFigures.put(Figures.QUEEN,f);
+
+        f = new King(this,true);
+        cells[7][4].addFigure(f);
+        whiteFigures.put(Figures.KING,f);
+
 
         for(int i = 0; i < 8; i++){
-            cells[6][i].addFigure(new Pawn(this,true));
-            cells[1][i].addFigure(new Pawn(this, false));
-            switch (i){
-                case 0:
-                    cells[0][i].addFigure(new Rook(this, false));
-                    cells[7][i].addFigure(new Rook(this, true));
-                    cells[0][i+7].addFigure(new Rook(this, false));
-                    cells[7][i+7].addFigure(new Rook(this, true));
-                    break;
-                case 1:
-                    cells[0][i].addFigure(new Knight(this,false));
-                    cells[7][i].addFigure(new Knight(this,true));
-                    cells[0][i+5].addFigure(new Knight(this,false));
-                    cells[7][i+5].addFigure(new Knight(this,true));
-                    break;
-                case 2:
-                    cells[0][i].addFigure(new Bishop(this,false));
-                    cells[7][i].addFigure(new Bishop(this,true));
-                    cells[0][i+3].addFigure(new Bishop(this,false));
-                    cells[7][i+3].addFigure(new Bishop(this,true));
-                    break;
-                case 3:
-                    cells[0][i].addFigure(new Queen(this,false));
-                    cells[0][i+1].addFigure(new King(this,false));
-                    cells[7][i].addFigure(new Queen(this,true));
-                    cells[7][i+1].addFigure(new King(this,true));
-                    break;
-            }
+            f = new Pawn(this,true);
+            cells[6][i].addFigure(f);
+            whiteFigures.put(Figures.PAWN,f);
+
+            f = new Pawn(this, false);
+            cells[1][i].addFigure(f);
+            blackFigures.put(Figures.PAWN,f);
         }
 
     }
 
-    public void captureFigure(Figure figure){
-        if (!pressed){
-            pressed = true;
-            buffer = figure;
-        }
-    }
-
-
-    public boolean isPressed(){
-        return pressed;
-    }
-
-    public void resetPressed(){
-        pressed = false;
-    }
-
-    public Figure getBuffer(){
-        return buffer;
-    }
-
-    public void putFigure(Cell cell){
-        if(buffer != null)
-        if(pressed){
-            cell.addFigure(buffer);
-        }
-        pressed = false;
-        repaint();
-    }
 
     public Cell[][] getCells(){
         return cells;

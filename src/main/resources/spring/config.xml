@@ -16,7 +16,9 @@
     <bean id="field" class="ua.edu.vntu.gui.MainField">
         <property name="chessboard" ref="board"/>
     </bean>
-
+    <bean class="ua.edu.vntu.moving.Mover" id="mover">
+        <property name="cells" ref="cells"/>
+    </bean>
 
 
 </beans>
