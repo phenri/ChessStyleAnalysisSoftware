@@ -11,12 +11,17 @@ import ua.edu.vntu.gui.chessboard.Figures;
 public class MovingDescription {
 
     private Position position;
-
     private Figures figure;
-
     private boolean isBeat;
-
     private Castling castling;
+
+    private char from;
+
+    public MovingDescription(Position position, Figures figure){
+
+        this.position = position;
+        this.figure = figure;
+    }
 
     public MovingDescription(Castling castling){
         this.castling = castling;
@@ -26,10 +31,8 @@ public class MovingDescription {
         return castling != null;
     }
 
-    public MovingDescription(Position position, Figures figure){
-
-        this.position = position;
-        this.figure = figure;
+    public void setFrom(char from) {
+        this.from = from;
     }
 
 
@@ -53,7 +56,7 @@ public class MovingDescription {
     @Override
     public String toString(){
         String res = isBeat ? " x:" : "";
-        String result = isCastling() ? "Castling" : "Moving figure: " + figure + ":" + res + position;
+        String result = isCastling() ? "Рокіровка" : "Переміщення фігури: " + figure + ":" + res + position;
         return result;
     }
 

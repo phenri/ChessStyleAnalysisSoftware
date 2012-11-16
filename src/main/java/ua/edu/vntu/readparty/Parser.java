@@ -217,6 +217,8 @@ public class Parser  {
                     figure = Figures.PAWN;
             }
 
+
+
             int index = chars.length - 1;
 
             if (s.contains("+")||s.contains("?")||s.contains("!"))
@@ -225,12 +227,22 @@ public class Parser  {
             if (s.contains("O")){
                 boolean b = chars.length != 3;
                 MovingDescription description = new MovingDescription(new Castling(b));
+                System.out.println(new Castling(b));
                 descriptions.add(description);
                 continue;
 
             }
+            if (figure == null)
+                continue;
 
-            MovingDescription description = new MovingDescription(new Position((char)chars[index-1],chars[index]),figure);
+            int num = 0;
+
+            if(!Character.isDigit(chars[index]))
+                --index;
+
+            Position p = new Position(chars[index-1],chars[index]);
+
+            MovingDescription description = new MovingDescription(p,figure);
 
             if (s.contains("x"))
                 description.setBeat(true);
@@ -240,6 +252,7 @@ public class Parser  {
 
 
         }
+        System.out.println();
         return descriptions;
 
     }

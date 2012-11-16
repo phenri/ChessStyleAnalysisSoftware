@@ -8,11 +8,11 @@ package ua.edu.vntu.moving;
  */
 public class InvalidPositionException extends Exception {
     public InvalidPositionException(){
-        super("Specified coordinates leave field boundary");
+        super("Координати не повинні покидати межі поля");
     }
 
     @Override
     public String getMessage() {
-        return "Specified coordinates leave field boundary";
+        return "Координати не повинні покидати межі поля";
     }
 }

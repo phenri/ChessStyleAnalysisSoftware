@@ -18,4 +18,9 @@ public class Castling {
     public boolean isLong(){
         return isLong;
     }
+
+    @Override
+    public String toString() {
+        return "Рокіровка " + (isLong ? "через велику сторону.": "через малу сторону.");
+    }
 }
