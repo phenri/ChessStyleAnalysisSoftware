@@ -20,10 +20,10 @@ public class King extends Figure {
         name = Figures.KING;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\king.png");
+            image = getToolkit().getImage("icons\\white\\king.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\king.png");
+            image = getToolkit().getImage("icons\\black\\king.png");
         }
     }
 

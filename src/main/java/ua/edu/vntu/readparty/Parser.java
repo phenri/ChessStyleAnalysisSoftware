@@ -23,6 +23,14 @@ public class Parser  {
 
     ArrayList<MovingDescription> whiteMoves, blackMoves;
 
+    public ArrayList<MovingDescription> getBlackMoves() {
+        return blackMoves;
+    }
+
+    public ArrayList<MovingDescription> getWhiteMoves() {
+        return whiteMoves;
+    }
+
     public Parser(String filename){
         ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(filename)));
 

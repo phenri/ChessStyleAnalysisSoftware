@@ -21,10 +21,10 @@ public class Queen extends Figure {
         name = Figures.QUEEN;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\queen.png");
+            image = getToolkit().getImage("icons\\white\\queen.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\queen.png");
+            image = getToolkit().getImage("icons\\black\\queen.png");
         }
     }
 

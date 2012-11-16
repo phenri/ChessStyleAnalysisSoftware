@@ -20,10 +20,10 @@ public class Knight extends Figure {
         name = Figures.KNIGHT;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\knight.png");
+            image = getToolkit().getImage("icons\\white\\knight.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\knight.png");
+            image = getToolkit().getImage("icons\\black\\knight.png");
         }
     }
 

@@ -30,10 +30,10 @@ public class Rook extends Figure {
         name = Figures.ROOK;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\rook.png");
+            image = getToolkit().getImage("icons\\white\\rook.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\rook.png");
+            image = getToolkit().getImage("icons\\black\\rook.png");
         }
     }
     public void paint(Graphics g){
