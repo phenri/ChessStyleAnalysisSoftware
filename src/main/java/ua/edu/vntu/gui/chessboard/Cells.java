@@ -139,5 +139,22 @@ public class Cells extends JPanel implements Constants {
         }
         return null;
     }
+    public Figure getFigureByName(Figures name, boolean isWhite){
+        Figure figure = null;
+        for(int i = 0;i < 8;i++){
+            for(int j = 0;j < 8;j++){
+                Figure f = cells[i][j].getFigure();
+                System.out.println(f.isWhite() == isWhite);
+                if (f.isWhite() != isWhite)
+                    continue;
+                if(f.getFigureName() == name ){
+                    figure = f;
+                    return figure;
+                }
+            }
+        }
+
+        return null;
+    }
 
 }
