@@ -1,9 +1,9 @@
 package ua.edu.vntu.readparty;
 
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Castling;
-import ua.edu.vntu.moving.MovingDescription;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Castling;
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Position;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -182,23 +182,23 @@ public class Parser  {
 
             char[] chars = s.toCharArray();
 
-            Figures figure;
+            FigureName figure;
             System.out.print(++i + ".");
             switch (chars[0]){
                 case 'N':
-                    figure = Figures.KNIGHT;
+                    figure = FigureName.KNIGHT;
                     break;
                 case 'B':
-                    figure = Figures.BISHOP;
+                    figure = FigureName.BISHOP;
                     break;
                 case 'R':
-                    figure = Figures.ROOK;
+                    figure = FigureName.ROOK;
                     break;
                 case 'Q':
-                    figure = Figures.QUEEN;
+                    figure = FigureName.QUEEN;
                     break;
                 case 'K':
-                    figure = Figures.KING;
+                    figure = FigureName.KING;
                     break;
                 case 'O':
                     figure = null;
@@ -212,9 +212,9 @@ public class Parser  {
                     figure = null;
                     break;
                 case 'P':
-                    figure = Figures.PAWN;
+                    figure = FigureName.PAWN;
                 default:
-                    figure = Figures.PAWN;
+                    figure = FigureName.PAWN;
             }
 
 

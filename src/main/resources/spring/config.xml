@@ -8,10 +8,14 @@
         <property name="mover" ref="mover"/>
     </bean>
 
+    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure"/>
 
-    <bean id="cells" class="ua.edu.vntu.gui.chessboard.Cells"/>
 
-    <bean id="board" class="ua.edu.vntu.gui.chessboard.Chessboard">
+    <bean id="cells" class="ua.edu.vntu.chessboard.Cells">
+        <property name="containerFigures" ref="figures"/>
+    </bean>
+
+    <bean id="board" class="ua.edu.vntu.chessboard.Chessboard">
         <property name="cells" ref="cells"/>
     </bean>
 

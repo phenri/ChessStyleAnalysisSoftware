@@ -7,12 +7,6 @@ import ua.edu.vntu.moving.Mover;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 03.11.12
- * Time: 21:58
- */
 public class Form extends JFrame implements Constants {
     private MainField field;
 

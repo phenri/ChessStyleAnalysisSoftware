@@ -1,15 +1,12 @@
-package ua.edu.vntu.gui.chessboard.figurs;
+package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.gui.chessboard.Cells;
-import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.Cells;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Position;
 
 import java.awt.*;
 
-/**
- * @author: Vyacheslav.Bychkovsk
- */
 public class King extends Figure {
     public King(Cells chessboard, boolean isWhite){
         super(chessboard);
@@ -17,7 +14,7 @@ public class King extends Figure {
 
         this.isWhite = isWhite;
         this.board = chessboard;
-        name = Figures.KING;
+        name = FigureName.KING;
 
         if (isWhite){
             image = getToolkit().getImage("icons\\white\\king.png");

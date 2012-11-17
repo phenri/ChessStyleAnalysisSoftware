@@ -1,23 +1,17 @@
-package ua.edu.vntu.moving;
+package ua.edu.vntu.descriptions;
 
-import ua.edu.vntu.gui.chessboard.Figures;
+import ua.edu.vntu.chessboard.FigureName;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 11.11.12
- * Time: 17:32
- */
 public class MovingDescription {
 
     private Position position;
-    private Figures figure;
+    private FigureName figure;
     private boolean isBeat;
     private Castling castling;
 
     private char from;
 
-    public MovingDescription(Position position, Figures figure){
+    public MovingDescription(Position position, FigureName figure){
 
         this.position = position;
         this.figure = figure;
@@ -49,7 +43,7 @@ public class MovingDescription {
         return position;
     }
 
-    public Figures getFigureName(){
+    public FigureName getFigureName(){
         return figure;
     }
 

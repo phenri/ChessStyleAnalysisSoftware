@@ -1,21 +1,19 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.chessboard;
 
 import ua.edu.vntu.gui.Constants;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.descriptions.Position;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @author: Vyacheslav.Bychkovsk
- */
+
 public abstract class Figure extends JPanel implements Constants{
     protected Cell parent;
     protected Cells board;
     protected Image image;
     protected boolean isWhite;
     protected Position position;
-    protected Figures name;
+    protected FigureName name;
 
     protected Figure(Cells board){
         super(true);
@@ -46,7 +44,7 @@ public abstract class Figure extends JPanel implements Constants{
         return position;
     }
 
-    protected Figures getFigureName(){
+    public FigureName getFigureName(){
         return name;
     }
 

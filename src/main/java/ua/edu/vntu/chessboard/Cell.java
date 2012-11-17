@@ -1,16 +1,10 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.chessboard;
 
 import ua.edu.vntu.gui.Constants;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.descriptions.Position;
 
 import javax.swing.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 04.11.12
- * Time: 13:29
- */
 public class Cell extends JPanel implements Constants{
     private Position position;
 

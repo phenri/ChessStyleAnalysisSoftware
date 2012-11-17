@@ -1,4 +1,4 @@
-package ua.edu.vntu.gui.chessboard;
+package ua.edu.vntu.chessboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.Constants;
@@ -6,12 +6,7 @@ import ua.edu.vntu.gui.Constants;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 04.11.12
- * Time: 12:45
- */
+
 public class Chessboard extends JPanel implements Constants {
 
     @Autowired

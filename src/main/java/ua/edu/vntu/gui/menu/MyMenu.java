@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * @author: Vyacheslav.Bychkovsk
- */
 public class MyMenu extends JMenuBar {
     public MyMenu(){
         super();

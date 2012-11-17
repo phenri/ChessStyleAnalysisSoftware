@@ -1,18 +1,12 @@
-package ua.edu.vntu.gui.chessboard.figurs;
+package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.gui.chessboard.Cells;
-import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.Cells;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Position;
 
 import java.awt.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 08.11.12
- * Time: 19:26
- */
 public class Rook extends Figure {
 
     /**
@@ -27,7 +21,7 @@ public class Rook extends Figure {
 
         this.isWhite = isWhite;
         this.board = chessboard;
-        name = Figures.ROOK;
+        name = FigureName.ROOK;
 
         if (isWhite){
             image = getToolkit().getImage("icons\\white\\rook.png");
