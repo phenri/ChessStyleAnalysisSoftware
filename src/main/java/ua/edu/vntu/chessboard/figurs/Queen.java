@@ -31,7 +31,21 @@ public class Queen extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        return true;
+
+        int k = Math.abs(position.getX() -(int)pos.getX());
+        int n = Math.abs(position.getY() - pos.getY());
+
+        if (k == n){
+            return true;
+        }
+        else
+            if(this.position.getX() == pos.getX() && position.getY() != pos.getY()){
+                return true;
+            } else
+            if(this.position.getX() != pos.getX() && position.getY() == pos.getY()){
+                return true;
+            }
+        return false;
     }
 
     @Override

@@ -9,12 +9,6 @@ import java.awt.*;
 
 public class Rook extends Figure {
 
-    /**
-     *
-     * @param chessboard reference on chessboard
-     * @param isWhite    if true figure white else figure black
-     *
-     */
     public Rook(Cells chessboard, boolean isWhite){
         super(chessboard);
         setLayout(null);
@@ -36,7 +30,13 @@ public class Rook extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        return true;
+        if(this.position.getX() == pos.getX() && position.getY() != pos.getY()){
+            return true;
+        } else
+        if(this.position.getX() != pos.getX() && position.getY() == pos.getY()){
+            return true;
+        }
+        return false;
     }
 
     @Override

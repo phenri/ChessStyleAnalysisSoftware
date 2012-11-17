@@ -30,7 +30,12 @@ public class Bishop extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        return true;
+        int k = Math.abs(position.getX() -(int)pos.getX());
+        int n = Math.abs(position.getY() - pos.getY());
+        if (k == n){
+            return true;
+        }
+        return false;
     }
 
     @Override
