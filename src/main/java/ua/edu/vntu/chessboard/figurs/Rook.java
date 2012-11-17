@@ -9,12 +9,11 @@ import java.awt.*;
 
 public class Rook extends Figure {
 
-    public Rook(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public Rook(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
         name = FigureName.ROOK;
 
         if (isWhite){

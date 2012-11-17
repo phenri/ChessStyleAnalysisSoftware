@@ -8,12 +8,11 @@ import ua.edu.vntu.descriptions.Position;
 import java.awt.*;
 
 public class King extends Figure {
-    public King(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public King(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
         name = FigureName.KING;
 
         if (isWhite){

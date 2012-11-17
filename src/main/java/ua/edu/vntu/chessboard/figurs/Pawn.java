@@ -8,12 +8,11 @@ import ua.edu.vntu.descriptions.Position;
 import java.awt.*;
 
 public class Pawn extends Figure {
-    public Pawn(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public Pawn(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
         name = FigureName.PAWN;
 
         if (isWhite){
@@ -29,9 +28,6 @@ public class Pawn extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        if (!board.getCellByPosition(pos).isEmpty())
-            return false;
-
 
         if(isWhite()){
             boolean b1;

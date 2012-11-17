@@ -8,12 +8,11 @@ import ua.edu.vntu.descriptions.Position;
 import java.awt.*;
 
 public class Bishop extends Figure {
-    public Bishop(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public Bishop(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
         name = FigureName.BISHOP;
 
         if (isWhite){

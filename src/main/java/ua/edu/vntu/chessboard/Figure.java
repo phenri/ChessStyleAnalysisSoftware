@@ -9,16 +9,14 @@ import java.awt.*;
 
 public abstract class Figure extends JPanel implements Constants{
     protected Cell parent;
-    protected Cells board;
     protected Image image;
     protected boolean isWhite;
     protected Position position;
     protected FigureName name;
 
-    protected Figure(Cells board){
+    protected Figure(){
         super(true);
         setLayout(null);
-        this.board = board;
         setOpaque(false);
         setBounds(0,0,CELL_SIZE,CELL_SIZE);
     }
