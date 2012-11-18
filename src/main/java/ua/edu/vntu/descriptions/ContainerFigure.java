@@ -3,6 +3,8 @@ package ua.edu.vntu.descriptions;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.chessboard.FigureName;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ContainerFigure{
@@ -19,19 +21,28 @@ public class ContainerFigure{
         this.black = black;
     }
 
-//    public HashMap<FigureName, Figure> getBlack() {
-//        return black;
-//    }
-//
-//    public HashMap<FigureName, Figure> getWhite() {
-//        return white;
-//    }
-
-    public Figure getWhiteFigureForMove(FigureName name, Position position){
-        return null;
+    public Figure getWhiteFigureForMove(FigureName name, MovingDescription description){
+        return getFigureForMove(white,name,description);
     }
 
-    public Figure getBlackFigureForMove(FigureName name, Position position){
+    public Figure getBlackFigureForMove(FigureName name,  MovingDescription description){
+        return getFigureForMove(black,name,description);
+    }
+
+    private Figure getFigureForMove(Map<FigureName,Figure> figures,FigureName name, MovingDescription description){
+        for (Figure f : figures.values()) {
+            if (f.getFigureName() == name && name == FigureName.PAWN && f.isAvailablePosition(description.getPosition(), description.isBeat())) {
+                System.out.println("фігура для ходу " +f);
+                return f;
+            }
+
+            if (f.getFigureName() == name && f.isAvailablePosition(description.getPosition())) {
+                System.out.println(" фігура для ходу " +f);
+                return f;
+            }
+        }
+        System.out.println("фігура для ходу null" );
+
         return null;
     }
 }

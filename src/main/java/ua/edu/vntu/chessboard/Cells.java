@@ -64,8 +64,19 @@ public class Cells extends JPanel implements Constants {
 
         }
 
+
         initFigures();
-        setBounds(30,30,CELL_SIZE*8,CELL_SIZE*8);
+
+        /**
+         * for test figures
+         */
+
+//        Figure f = new Knight(false);
+//        cells[1][1].addFigure(f);
+//        Position p = new Position('d',8);
+//        System.out.println("Доступний хід " + p+ ":" + f.isAvailablePosition(p,false));
+
+        setBounds(30, 30, CELL_SIZE * 8, CELL_SIZE * 8);
 
     }
 
@@ -74,35 +85,35 @@ public class Cells extends JPanel implements Constants {
         /**
          * black figures
          */
-        f = new Rook(this, false);
+        f = new Rook(false);
         cells[0][0].addFigure(f);
         blackFigures.put(FigureName.ROOK,f);
 
-        f = new Rook(this, false);
+        f = new Rook(false);
         cells[0][7].addFigure(f);
         blackFigures.put(FigureName.ROOK,f);
 
-        f = new Knight(this,false);
+        f = new Knight(false);
         cells[0][1].addFigure(f);
         blackFigures.put(FigureName.KNIGHT, f);
 
-        f = new Knight(this,false);
+        f = new Knight(false);
         cells[0][6].addFigure(f);
         blackFigures.put(FigureName.KNIGHT,f);
 
-        f = new Bishop(this,false);
+        f = new Bishop(false);
         cells[0][2].addFigure(f);
         blackFigures.put(FigureName.BISHOP, f);
 
-        f = new Bishop(this,false);
+        f = new Bishop(false);
         cells[0][5].addFigure(f);
         blackFigures.put(FigureName.BISHOP,f);
 
-        f = new Queen(this,false);
+        f = new Queen(false);
         cells[0][3].addFigure(f);
         blackFigures.put(FigureName.QUEEN,f);
 
-        f = new King(this,false);
+        f = new King(false);
         cells[0][4].addFigure(f);
         blackFigures.put(FigureName.KING,f);
 
@@ -110,45 +121,45 @@ public class Cells extends JPanel implements Constants {
          * white figures
          */
 
-        f = new Rook(this, true);
+        f = new Rook(true);
         cells[7][0].addFigure(f);
         whiteFigures.put(FigureName.ROOK,f);
 
-        f = new Rook(this, true);
+        f = new Rook(true);
         cells[7][7].addFigure(f);
         whiteFigures.put(FigureName.BISHOP,f);
 
-        f = new Knight(this,true);
+        f = new Knight(true);
         cells[7][1].addFigure(f);
         whiteFigures.put(FigureName.KNIGHT,f);
 
-        f = new Knight(this,true);
+        f = new Knight(true);
         cells[7][6].addFigure(f);
         whiteFigures.put(FigureName.KNIGHT,f);
 
-        f = new Bishop(this,true);
+        f = new Bishop(true);
         cells[7][2].addFigure(f);
         whiteFigures.put(FigureName.BISHOP,f);
 
-        f = new Bishop(this,true);
+        f = new Bishop(true);
         cells[7][5].addFigure(f);
         whiteFigures.put(FigureName.BISHOP,f);
 
-        f = new Queen(this,true);
+        f = new Queen(true);
         cells[7][3].addFigure(f);
         whiteFigures.put(FigureName.QUEEN,f);
 
-        f = new King(this,true);
+        f = new King(true);
         cells[7][4].addFigure(f);
         whiteFigures.put(FigureName.KING,f);
 
 
         for(int i = 0; i < 8; i++){
-            f = new Pawn(this,true);
+            f = new Pawn(true);
             cells[6][i].addFigure(f);
             whiteFigures.put(FigureName.PAWN,f);
 
-            f = new Pawn(this, false);
+            f = new Pawn(false);
             cells[1][i].addFigure(f);
             blackFigures.put(FigureName.PAWN,f);
         }
@@ -192,7 +203,7 @@ public class Cells extends JPanel implements Constants {
 
     public void setContainerFigures(ContainerFigure figures) {
         this.figures = figures;
-        figures.setBlack(blackFigures);
-        figures.setWhite(whiteFigures);
+        this.figures.setBlack(blackFigures);
+        this.figures.setWhite(whiteFigures);
     }
 }

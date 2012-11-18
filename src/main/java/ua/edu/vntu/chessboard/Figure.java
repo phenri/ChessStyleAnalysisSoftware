@@ -23,6 +23,10 @@ public abstract class Figure extends JPanel implements Constants{
 
     public abstract boolean isAvailablePosition(Position pos);
 
+    public boolean isAvailablePosition(Position pos,boolean isBeat){
+        return true;
+    }
+
     protected void setParent(Cell cell){
         parent = cell;
     }

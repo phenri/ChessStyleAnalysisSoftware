@@ -1,6 +1,7 @@
 package ua.edu.vntu.moving;
 
 import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.ContainerFigure;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
@@ -14,9 +15,11 @@ public class Mover implements Runnable {
 
     private Cells cells;
 
+    private MoveFigure moving;
+
     private ArrayList<MovingDescription> blackMoves, whiteMoves;
 
-    private Map<FigureName,Figure> whiteFigures,blackFigures;
+    private ContainerFigure containerFigure;
 
     public Mover(){
         Parser parser = new Parser("tmp\\file.pgn");
@@ -39,18 +42,12 @@ public class Mover implements Runnable {
         try{
             for (int i = 0; i < (blackMoves.size() < whiteMoves.size()?blackMoves.size():whiteMoves.size() );i++){
                 Thread.sleep(1000);
-                System.out.println("hello");
                 md = whiteMoves.get(i);
-                if (md.isCastling() || md.getFigureName() == null){
-                    continue;
-                }
+                System.out.println(md);
+                figure = containerFigure.getWhiteFigureForMove(md.getFigureName(),md);
+                if(figure != null)
+                    moving.move(figure,md);
 
-                figureName = md.getFigureName();
-
-                figure = whiteFigures.get(figureName);
-                cell = cells.getCellByPosition(md.getPosition());
-                figure.getParent().reset();
-                cell.addFigure(figure);
                 cells.repaint();
 
                 Thread.sleep(1000);
@@ -58,17 +55,12 @@ public class Mover implements Runnable {
                 /**
                  * Переміщення чорних фігур
                  */
+
                 md = blackMoves.get(i);
-                if (md.isCastling() || md.getFigureName() == null){
-                    continue;
-                }
-
-                figureName = md.getFigureName();
-
-                figure = blackFigures.get(figureName);
-                cell = cells.getCellByPosition(md.getPosition());
-                figure.getParent().reset();
-                cell.addFigure(figure);
+                System.out.println(md);
+                figure = containerFigure.getBlackFigureForMove(md.getFigureName(), md);
+                if(figure != null)
+                    moving.move(figure,md);
                 cells.repaint();
 
 
@@ -83,7 +75,13 @@ public class Mover implements Runnable {
 
     public void setCells(Cells cells) {
         this.cells = cells;
-        whiteFigures = cells.getWhiteFigures();
-        blackFigures = cells.getBlackFigures();
+    }
+
+    public void setMovingInterface(MoveFigure movingInterface) {
+        this.moving = movingInterface;
+    }
+
+    public void setFigures(ContainerFigure figures) {
+        this.containerFigure = figures;
     }
 }
