@@ -1,6 +1,5 @@
 package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.descriptions.Position;
@@ -28,8 +27,22 @@ public class Knight extends Figure {
     }
 
     @Override
+    public boolean isAvailablePosition(Position pos, boolean isBeat) {
+        return this.isAvailablePosition(pos);
+    }
+
+    @Override
     public boolean isAvailablePosition(Position pos) {
-        return true;
+        int x = Math.abs(position.getX() - pos.getX());
+        int y = Math.abs(position.getY() - pos.getY());
+
+        if (x > y){
+            return  (x == 2) && (y == 1);
+        }
+        else {
+            return  (x == 1) && (y == 2);
+        }
+
     }
 
     @Override
