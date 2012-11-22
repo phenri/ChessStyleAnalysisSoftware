@@ -1,29 +1,24 @@
-package ua.edu.vntu.gui.chessboard.figurs;
+package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.gui.chessboard.Cells;
-import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Position;
 
 import java.awt.*;
 
-/**
- * @author: Vyacheslav.Bychkovsk
- */
 public class Pawn extends Figure {
-    public Pawn(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public Pawn(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
-        name = Figures.PAWN;
+        name = FigureName.PAWN;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\pawn.png");
+            image = getToolkit().getImage("icons\\white\\pawn.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\pawn.png");
+            image = getToolkit().getImage("icons\\black\\pawn.png");
         }
     }
     public void paint(Graphics g){
@@ -31,10 +26,27 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public boolean isAvailablePosition(Position pos) {
-        if (!board.getCellByPosition(pos).isEmpty())
-            return false;
+    public boolean isAvailablePosition(Position pos, boolean isBeat) {
+        if (!isBeat){
+            System.out.println("afdasfsdf");
+            return isAvailablePosition(pos);
+        }
 
+        int x = Math.abs(pos.getX() - position.getX());
+        int y = pos.getY() - position.getY();
+
+        System.out.println("x =" +x+"\ny = "+y);
+
+        if(isWhite){
+            return (x == 1) && (y == 1);
+        }
+        else {
+            return (x == 1) && (y == -1);
+        }
+    }
+
+    @Override
+    public boolean isAvailablePosition(Position pos) {
 
         if(isWhite()){
             boolean b1;
@@ -48,7 +60,7 @@ public class Pawn extends Figure {
         }
         else {
             boolean b1;
-            if(position.getY() == 6)  {
+            if(position.getY() == 7)  {
                 b1 = (pos.getY() - position.getY() == -2) || (pos.getY() - position.getY() == -1);
             }else{
                 b1 = (pos.getY() - position.getY() == -1);

@@ -1,22 +1,21 @@
-package ua.edu.vntu.moving;
+package ua.edu.vntu.descriptions;
 
-import ua.edu.vntu.gui.chessboard.Figures;
+import ua.edu.vntu.chessboard.FigureName;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 11.11.12
- * Time: 17:32
- */
 public class MovingDescription {
 
     private Position position;
-
-    private Figures figure;
-
+    private FigureName figure;
     private boolean isBeat;
-
     private Castling castling;
+
+    private char from;
+
+    public MovingDescription(Position position, FigureName figure){
+
+        this.position = position;
+        this.figure = figure;
+    }
 
     public MovingDescription(Castling castling){
         this.castling = castling;
@@ -26,10 +25,8 @@ public class MovingDescription {
         return castling != null;
     }
 
-    public MovingDescription(Position position, Figures figure){
-
-        this.position = position;
-        this.figure = figure;
+    public void setFrom(char from) {
+        this.from = from;
     }
 
 
@@ -46,14 +43,14 @@ public class MovingDescription {
         return position;
     }
 
-    public Figures getFigureName(){
+    public FigureName getFigureName(){
         return figure;
     }
 
     @Override
     public String toString(){
         String res = isBeat ? " x:" : "";
-        String result = isCastling() ? "Castling" : "Moving figure: " + figure + ":" + res + position;
+        String result = isCastling() ? "Рокіровка" : "Переміщення фігури: " + figure + ":" + res + position;
         return result;
     }
 

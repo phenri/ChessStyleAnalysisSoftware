@@ -1,11 +1,7 @@
-package ua.edu.vntu.moving;
+package ua.edu.vntu.descriptions;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 10.11.12
- * Time: 19:33
- */
+import ua.edu.vntu.exceptions.InvalidPositionException;
+
 public class Position {
 
     private char letter;

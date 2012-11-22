@@ -1,9 +1,9 @@
 package ua.edu.vntu.readparty;
 
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Castling;
-import ua.edu.vntu.moving.MovingDescription;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Castling;
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Position;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,6 +22,14 @@ public class Parser  {
     private Map<String,String> tags = new TreeMap<String, String>();
 
     ArrayList<MovingDescription> whiteMoves, blackMoves;
+
+    public ArrayList<MovingDescription> getBlackMoves() {
+        return blackMoves;
+    }
+
+    public ArrayList<MovingDescription> getWhiteMoves() {
+        return whiteMoves;
+    }
 
     public Parser(String filename){
         ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(filename)));
@@ -174,23 +182,23 @@ public class Parser  {
 
             char[] chars = s.toCharArray();
 
-            Figures figure;
+            FigureName figure;
             System.out.print(++i + ".");
             switch (chars[0]){
                 case 'N':
-                    figure = Figures.KNIGHT;
+                    figure = FigureName.KNIGHT;
                     break;
                 case 'B':
-                    figure = Figures.BISHOP;
+                    figure = FigureName.BISHOP;
                     break;
                 case 'R':
-                    figure = Figures.ROOK;
+                    figure = FigureName.ROOK;
                     break;
                 case 'Q':
-                    figure = Figures.QUEEN;
+                    figure = FigureName.QUEEN;
                     break;
                 case 'K':
-                    figure = Figures.KING;
+                    figure = FigureName.KING;
                     break;
                 case 'O':
                     figure = null;
@@ -204,10 +212,12 @@ public class Parser  {
                     figure = null;
                     break;
                 case 'P':
-                    figure = Figures.PAWN;
+                    figure = FigureName.PAWN;
                 default:
-                    figure = Figures.PAWN;
+                    figure = FigureName.PAWN;
             }
+
+
 
             int index = chars.length - 1;
 
@@ -217,12 +227,22 @@ public class Parser  {
             if (s.contains("O")){
                 boolean b = chars.length != 3;
                 MovingDescription description = new MovingDescription(new Castling(b));
+                System.out.println(new Castling(b));
                 descriptions.add(description);
                 continue;
 
             }
+            if (figure == null)
+                continue;
 
-            MovingDescription description = new MovingDescription(new Position((char)chars[index-1],chars[index]),figure);
+            int num = 0;
+
+            if(!Character.isDigit(chars[index]))
+                --index;
+
+            Position p = new Position(chars[index-1],chars[index]);
+
+            MovingDescription description = new MovingDescription(p,figure);
 
             if (s.contains("x"))
                 description.setBeat(true);
@@ -232,6 +252,7 @@ public class Parser  {
 
 
         }
+        System.out.println();
         return descriptions;
 
     }

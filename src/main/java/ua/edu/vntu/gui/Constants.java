@@ -2,13 +2,6 @@ package ua.edu.vntu.gui;
 
 import java.awt.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 04.11.12
- * Time: 12:53
- * To change this template use File | Settings | File Templates.
- */
 public interface Constants {
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;

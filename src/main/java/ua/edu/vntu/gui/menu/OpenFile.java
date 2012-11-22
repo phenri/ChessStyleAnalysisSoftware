@@ -7,12 +7,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 13.11.12
- * Time: 20:14
- */
 public class OpenFile extends JMenuItem implements ActionListener{
     private JFrame form;
 

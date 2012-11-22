@@ -1,34 +1,34 @@
-package ua.edu.vntu.gui.chessboard.figurs;
+package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.gui.chessboard.Cells;
-import ua.edu.vntu.gui.chessboard.Figure;
-import ua.edu.vntu.gui.chessboard.Figures;
-import ua.edu.vntu.moving.Position;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.Position;
 
 import java.awt.*;
 
-/**
- * @author: Vyacheslav.Bychkovsk
- */
 public class King extends Figure {
-    public King(Cells chessboard, boolean isWhite){
-        super(chessboard);
+    public King(boolean isWhite){
+        super();
         setLayout(null);
 
         this.isWhite = isWhite;
-        this.board = chessboard;
-        name = Figures.KING;
+        name = FigureName.KING;
 
         if (isWhite){
-            image = getToolkit().getImage("res\\icons\\white\\king.png");
+            image = getToolkit().getImage("icons\\white\\king.png");
         }
         else{
-            image = getToolkit().getImage("res\\icons\\black\\king.png");
+            image = getToolkit().getImage("icons\\black\\king.png");
         }
     }
 
     public void paint(Graphics g){
         g.drawImage(image,5,5,this);
+    }
+
+    @Override
+    public boolean isAvailablePosition(Position pos, boolean isBeat) {
+        return this.isAvailablePosition(pos);
     }
 
     @Override

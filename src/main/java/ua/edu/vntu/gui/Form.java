@@ -2,18 +2,19 @@ package ua.edu.vntu.gui;
 
 
 import ua.edu.vntu.gui.menu.MyMenu;
+import ua.edu.vntu.moving.Mover;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 03.11.12
- * Time: 21:58
- */
 public class Form extends JFrame implements Constants {
     private MainField field;
+
+    public void setMover(Mover mover) {
+        this.mover = mover;
+    }
+
+    private Mover mover;
 
     public Form(){
         super("ChessStyleAnalysisSoftware");
