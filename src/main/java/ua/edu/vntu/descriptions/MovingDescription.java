@@ -7,6 +7,11 @@ public class MovingDescription {
     private Position position;
     private FigureName figure;
     private boolean isBeat;
+
+    public Castling getCastling() {
+        return castling;
+    }
+
     private Castling castling;
 
     private char from;
