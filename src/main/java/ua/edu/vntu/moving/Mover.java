@@ -1,15 +1,14 @@
 package ua.edu.vntu.moving;
 
-import ua.edu.vntu.chessboard.FigureName;
-import ua.edu.vntu.descriptions.ContainerFigure;
-import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.descriptions.ContainerFigure;
+import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.readparty.Parser;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Mover implements Runnable {
 
@@ -42,28 +41,40 @@ public class Mover implements Runnable {
         try{
             for (int i = 0; i < (blackMoves.size() < whiteMoves.size()?blackMoves.size():whiteMoves.size() );i++){
                 Thread.sleep(1000);
+                System.out.println("\nПочаток ходу " + (i+1));
                 md = whiteMoves.get(i);
+
+                if(md.isCastling()){
+                    moving.doCastling(md.getCastling(),true);
+                    continue;
+                }
+
                 System.out.println(md);
-                figure = containerFigure.getWhiteFigureForMove(md.getFigureName(),md);
+
+                figure = containerFigure.getWhiteFigureForMove(md);
+
+                System.out.println("In mover figure: "+ figure);
                 if(figure != null)
                     moving.move(figure,md);
 
+                System.out.println("Кінець ходу " + (i+1));
+
                 cells.repaint();
 
-                Thread.sleep(1000);
+//                Thread.sleep(1000);
 
                 /**
                  * Переміщення чорних фігур
                  */
 
-                md = blackMoves.get(i);
-                System.out.println(md);
-                figure = containerFigure.getBlackFigureForMove(md.getFigureName(), md);
-                if(figure != null)
-                    moving.move(figure,md);
-                cells.repaint();
-
-
+//                md = blackMoves.get(i);
+//                System.out.println(md);
+//                figure = containerFigure.getBlackFigureForMove(md);
+//                if(figure != null)
+//                    moving.move(figure,md);
+//                cells.repaint();
+//
+//
             }
 
         }   catch (InterruptedException e){

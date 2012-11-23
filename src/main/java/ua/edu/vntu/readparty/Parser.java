@@ -204,11 +204,11 @@ public class Parser  {
                     figure = null;
                     break;
                 case '1':
-                    System.out.println("Win white");
+//                    System.out.println("Win white");
                     figure = null;
                     break;
                 case '0':
-                    System.out.println("Los white");
+//                    System.out.println("Los? white");
                     figure = null;
                     break;
                 case 'P':
@@ -227,7 +227,7 @@ public class Parser  {
             if (s.contains("O")){
                 boolean b = chars.length != 3;
                 MovingDescription description = new MovingDescription(new Castling(b));
-                System.out.println(new Castling(b));
+//                System.out.println(new Castling(b));
                 descriptions.add(description);
                 continue;
 
@@ -247,12 +247,12 @@ public class Parser  {
             if (s.contains("x"))
                 description.setBeat(true);
 
-            System.out.println(description);
+//            System.out.println(description);
             descriptions.add(description);
 
 
         }
-        System.out.println();
+//        System.out.println();
         return descriptions;
 
     }
