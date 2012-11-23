@@ -34,15 +34,15 @@ public abstract class Figure extends JPanel implements Constants{
         return parent;
     }
 
-    protected boolean isWhite(){
+    public boolean isWhite(){
         return isWhite;
     }
 
-    protected void setPosition(Position position){
+    public void setPosition(Position position){
         this.position = position;
     }
 
-    protected Position getPosition(){
+    public Position getPosition(){
         return position;
     }
 
