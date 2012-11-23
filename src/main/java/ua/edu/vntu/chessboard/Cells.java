@@ -1,13 +1,12 @@
 package ua.edu.vntu.chessboard;
 
-import ua.edu.vntu.descriptions.ContainerFigure;
-import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.chessboard.figurs.*;
+import ua.edu.vntu.descriptions.ContainerFigure;
 import ua.edu.vntu.descriptions.Position;
+import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Cells extends JPanel implements Constants {
 
@@ -15,16 +14,16 @@ public class Cells extends JPanel implements Constants {
 
     private ContainerFigure figures;
 
-    public Map<FigureName, Figure> getWhiteFigures() {
+    public ArrayList<Figure> getWhiteFigures() {
         return whiteFigures;
     }
 
-    public Map<FigureName, Figure> getBlackFigures() {
+    public ArrayList<Figure> getBlackFigures() {
         return blackFigures;
     }
 
-    private Map<FigureName, Figure> blackFigures = new HashMap<FigureName, Figure>(),
-                                whiteFigures = new HashMap<FigureName, Figure>();
+    private ArrayList<Figure> blackFigures = new ArrayList<Figure>(),
+                                whiteFigures = new ArrayList<Figure>();
 
     public Cells(){
         super();
@@ -87,35 +86,35 @@ public class Cells extends JPanel implements Constants {
          */
         f = new Rook(false);
         cells[0][0].addFigure(f);
-        blackFigures.put(FigureName.ROOK,f);
+        blackFigures.add(f);
 
         f = new Rook(false);
         cells[0][7].addFigure(f);
-        blackFigures.put(FigureName.ROOK,f);
+        blackFigures.add(f);
 
         f = new Knight(false);
         cells[0][1].addFigure(f);
-        blackFigures.put(FigureName.KNIGHT, f);
+        blackFigures.add(f);
 
         f = new Knight(false);
         cells[0][6].addFigure(f);
-        blackFigures.put(FigureName.KNIGHT,f);
+        blackFigures.add(f);
 
         f = new Bishop(false);
         cells[0][2].addFigure(f);
-        blackFigures.put(FigureName.BISHOP, f);
+        blackFigures.add(f);
 
         f = new Bishop(false);
         cells[0][5].addFigure(f);
-        blackFigures.put(FigureName.BISHOP,f);
+        blackFigures.add(f);
 
         f = new Queen(false);
         cells[0][3].addFigure(f);
-        blackFigures.put(FigureName.QUEEN,f);
+        blackFigures.add(f);
 
         f = new King(false);
         cells[0][4].addFigure(f);
-        blackFigures.put(FigureName.KING,f);
+        blackFigures.add(f);
 
         /**
          * white figures
@@ -123,52 +122,47 @@ public class Cells extends JPanel implements Constants {
 
         f = new Rook(true);
         cells[7][0].addFigure(f);
-        whiteFigures.put(FigureName.ROOK,f);
+        whiteFigures.add(f);
 
         f = new Rook(true);
         cells[7][7].addFigure(f);
-        whiteFigures.put(FigureName.BISHOP,f);
+        whiteFigures.add(f);
 
         f = new Knight(true);
         cells[7][1].addFigure(f);
-        whiteFigures.put(FigureName.KNIGHT,f);
+        whiteFigures.add(f);
 
         f = new Knight(true);
         cells[7][6].addFigure(f);
-        whiteFigures.put(FigureName.KNIGHT,f);
+        whiteFigures.add(f);
 
         f = new Bishop(true);
         cells[7][2].addFigure(f);
-        whiteFigures.put(FigureName.BISHOP,f);
+        whiteFigures.add(f);
 
         f = new Bishop(true);
         cells[7][5].addFigure(f);
-        whiteFigures.put(FigureName.BISHOP,f);
+        whiteFigures.add(f);
 
         f = new Queen(true);
         cells[7][3].addFigure(f);
-        whiteFigures.put(FigureName.QUEEN,f);
+        whiteFigures.add(f);
 
         f = new King(true);
         cells[7][4].addFigure(f);
-        whiteFigures.put(FigureName.KING,f);
+        whiteFigures.add(f);
 
 
         for(int i = 0; i < 8; i++){
             f = new Pawn(true);
             cells[6][i].addFigure(f);
-            whiteFigures.put(FigureName.PAWN,f);
+            whiteFigures.add(f);
 
             f = new Pawn(false);
             cells[1][i].addFigure(f);
-            blackFigures.put(FigureName.PAWN,f);
+            blackFigures.add(f);
         }
 
-    }
-
-
-    public Cell[][] getCells(){
-        return cells;
     }
 
     public Cell getCellByPosition(Position p){
@@ -180,24 +174,6 @@ public class Cells extends JPanel implements Constants {
             }
 
         }
-        return null;
-    }
-
-    public Figure getFigureByName(FigureName name, boolean isWhite){
-        Figure figure = null;
-        for(int i = 0;i < 8;i++){
-            for(int j = 0;j < 8;j++){
-                Figure f = cells[i][j].getFigure();
-//                System.out.println(f.isWhite() == isWhite);
-//                if (f.isWhite() != isWhite)
-//                    continue;
-                if(f.getFigureName() == name ){
-                    figure = f;
-                    return figure;
-                }
-            }
-        }
-
         return null;
     }
 
