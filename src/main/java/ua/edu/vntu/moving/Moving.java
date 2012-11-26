@@ -84,6 +84,7 @@ public class Moving implements MoveFigure{
         }
 
     }
+
     private void replacement(Position pos[]){
 
         Figure king, rook;

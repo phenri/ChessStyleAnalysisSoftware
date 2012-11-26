@@ -183,7 +183,7 @@ public class Parser  {
             char[] chars = s.toCharArray();
 
             FigureName figure;
-            System.out.print(++i + ".");
+//            System.out.print(++i + ".");
             switch (chars[0]){
                 case 'N':
                     figure = FigureName.KNIGHT;
@@ -220,9 +220,12 @@ public class Parser  {
 
 
             int index = chars.length - 1;
+            int length = chars.length;
 
-            if (s.contains("+")||s.contains("?")||s.contains("!"))
+            if (s.contains("+")||s.contains("?")||s.contains("!")){
                 index--;
+                length--;
+            }
 
             if (s.contains("O")){
                 boolean b = chars.length != 3;
@@ -237,19 +240,39 @@ public class Parser  {
 
             int num = 0;
 
-            if(!Character.isDigit(chars[index]))
+            if(!Character.isDigit(chars[index])){
                 --index;
+                length--;
+            }
 
             Position p = new Position(chars[index-1],chars[index]);
 
             MovingDescription description = new MovingDescription(p,figure);
 
-            if (s.contains("x"))
+            if (s.contains("x")) {
                 description.setBeat(true);
+            }
 
+            if (figure == FigureName.PAWN && description.isBeat()) {
+                description.setFromVertical(chars[0]);
+            }
+
+            if (!s.contains("x") && length == 4 && figure != FigureName.PAWN){
+                if (Character.isDigit(chars[1])){
+                    description.setFromHorizontal(Integer.parseInt(Character.toString(chars[1])));
+                    System.out.println("Хід №"+(i+1)+" setFromHorizontal: "+chars[1]);
+                }
+                else {
+                    description.setFromVertical(chars[1]);
+                    System.out.println("Хід №"+(i+1)+" setFromVertical: "+chars[1]);
+                }
+
+
+            }
 //            System.out.println(description);
             descriptions.add(description);
 
+            i++;
 
         }
 //        System.out.println();

@@ -28,7 +28,6 @@ public class Pawn extends Figure {
     @Override
     public boolean isAvailablePosition(Position pos, boolean isBeat) {
         if (!isBeat){
-            System.out.println("afdasfsdf");
             return isAvailablePosition(pos);
         }
 
