@@ -14,7 +14,17 @@ public class MovingDescription {
 
     private Castling castling;
 
-    private char from;
+    private char fromVertical = '0';
+
+    public int getFromHorizontal() {
+        return fromHorizontal;
+    }
+
+    public void setFromHorizontal(int fromHorizontal) {
+        this.fromHorizontal = fromHorizontal;
+    }
+
+    private int fromHorizontal = 0;
 
     public MovingDescription(Position position, FigureName figure){
 
@@ -30,8 +40,12 @@ public class MovingDescription {
         return castling != null;
     }
 
-    public void setFrom(char from) {
-        this.from = from;
+    public char getFromVertical() {
+        return fromVertical;
+    }
+
+    public void setFromVertical(char fromVertical) {
+        this.fromVertical = fromVertical;
     }
 
 
