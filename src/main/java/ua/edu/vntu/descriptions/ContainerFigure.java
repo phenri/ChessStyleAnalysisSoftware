@@ -42,25 +42,51 @@ public class ContainerFigure{
 
     private Figure getFigureForMove(ArrayList<Figure> figures, MovingDescription description){
 
+        System.out.println("Хід фігурою "+ description.getFigureName()+" на позицію " + description.getPosition());
+
         if (description.getFigureName() == FigureName.PAWN){
             for (Figure f : figures) {
-                if(f.getFigureName() != FigureName.PAWN)
+                if(f.getFigureName() != FigureName.PAWN) {
                     continue;
+                }
+                System.out.println("Фігура в контейнері " + f);
 
-                boolean state1 = !description.isBeat();
+                boolean state1 = description.isBeat();
                 boolean state2 = description.getPosition().getX() == f.getPosition().getX();
 
-                if(state1 && state2)
+                if(!state1 && state2) {
+                    System.out.println("Контейнер повертає " +f);
                     return f;
+                }
+                else {
+                    if (f.getPosition().getX() == description.getFromVertical()) {
+                        System.out.println("Контейнер повертає " +f);
+                        return f;
+                    }
+                }
             }
 
         }
 
-        System.out.println("Хід фігурою "+ description.getFigureName()+" на позицію " + description.getPosition());
 
         for (Figure f : figures) {
+
+            if (f.getFigureName() != description.getFigureName())
+                continue;
+
             System.out.println("Фігура в контейнері " + f);
-            if (f.getFigureName() == description.getFigureName() && f.isAvailablePosition(description.getPosition())) {
+
+            if (description.getFromHorizontal() != 0 && description.getFromHorizontal() == f.getY()){
+                    System.out.println("fromHorizontal != 0 return " +f);
+                    return f;
+            }
+
+            if (description.getFromVertical() != '0' && description.getFromVertical() == f.getX()){
+                    System.out.println("fromVertical != 0 return  " +f);
+                    return f;
+            }
+
+            if (f.isAvailablePosition(description.getPosition())) {
                 System.out.println("Контейнер повертає " +f);
                 return f;
             }
@@ -113,4 +139,5 @@ public class ContainerFigure{
         }
 
     }
+
 }
