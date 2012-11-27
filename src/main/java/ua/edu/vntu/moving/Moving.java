@@ -25,6 +25,8 @@ public class Moving implements MoveFigure{
 
         Cell cell = cells.getCellByPosition(pos);
 
+        System.out.println("\tПозиція "+pos+ " пуста: " + cell.isEmpty() );
+
         if (figure.getFigureName() == FigureName.PAWN){
             if(figure.isAvailablePosition(pos,description.isBeat())){
                 figure.getParent().reset();

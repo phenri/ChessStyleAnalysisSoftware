@@ -8,7 +8,9 @@
         <property name="mover" ref="mover"/>
     </bean>
 
-    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure"/>
+    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure">
+        <property name="cells" ref="cells"/>
+    </bean>
 
 
     <bean id="cells" class="ua.edu.vntu.chessboard.Cells">
