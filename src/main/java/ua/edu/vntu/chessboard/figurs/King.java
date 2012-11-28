@@ -40,8 +40,5 @@ public class King extends Figure {
 
         return x && y;
     }
-    @Override
-    public String toString(){
-        return "King: " + parent.getPosition().toString();
-    }
+
 }

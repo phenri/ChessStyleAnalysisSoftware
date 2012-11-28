@@ -69,8 +69,4 @@ public class Pawn extends Figure {
         }
     }
 
-    @Override
-    public String toString(){
-        return "Pawn: " + parent.getPosition().toString();
-    }
 }

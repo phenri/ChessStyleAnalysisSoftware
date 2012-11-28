@@ -45,8 +45,4 @@ public class Knight extends Figure {
 
     }
 
-    @Override
-    public String toString(){
-        return "Knight: " + parent.getPosition().toString();
-    }
 }

@@ -1,6 +1,5 @@
 package ua.edu.vntu.chessboard.figurs;
 
-import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.descriptions.Position;
@@ -40,10 +39,5 @@ public class Bishop extends Figure {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String toString(){
-        return "Bishop: " + parent.getPosition().toString();
     }
 }

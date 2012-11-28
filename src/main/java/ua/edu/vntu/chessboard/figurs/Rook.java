@@ -43,9 +43,4 @@ public class Rook extends Figure {
         return false;
     }
 
-    @Override
-    public String toString(){
-        return "Rook: " + parent.getPosition().toString();
-    }
-
 }

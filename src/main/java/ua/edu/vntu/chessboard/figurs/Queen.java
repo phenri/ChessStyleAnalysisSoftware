@@ -51,8 +51,4 @@ public class Queen extends Figure {
         return false;
     }
 
-    @Override
-    public String toString(){
-        return "Queen: " + parent.getPosition().toString();
-    }
 }
