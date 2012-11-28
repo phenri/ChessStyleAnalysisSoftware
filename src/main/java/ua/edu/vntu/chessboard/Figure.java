@@ -53,8 +53,7 @@ public abstract class Figure extends JPanel implements Constants{
     @Override
     public String toString(){
         String color = isWhite ? "White": "Black";
-        String result = color +" "+ name +":" + position;
-        return result;
+        return color +" "+ name +":" + position;
     }
 
 }

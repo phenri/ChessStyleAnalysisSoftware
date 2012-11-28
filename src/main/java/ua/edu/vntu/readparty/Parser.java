@@ -59,8 +59,7 @@ public class Parser  {
                 chars[i] = (char) c;
                 i++;
             }
-            String content = new String(chars);
-            return content;
+            return new String(chars);
 
         }catch (IOException e){
             e.printStackTrace();
@@ -183,7 +182,6 @@ public class Parser  {
             char[] chars = s.toCharArray();
 
             FigureName figure;
-//            System.out.print(++i + ".");
             switch (chars[0]){
                 case 'N':
                     figure = FigureName.KNIGHT;
@@ -204,11 +202,9 @@ public class Parser  {
                     figure = null;
                     break;
                 case '1':
-//                    System.out.println("Win white");
                     figure = null;
                     break;
                 case '0':
-//                    System.out.println("Los? white");
                     figure = null;
                     break;
                 case 'P':
@@ -230,7 +226,6 @@ public class Parser  {
             if (s.contains("O")){
                 boolean b = chars.length != 3;
                 MovingDescription description = new MovingDescription(new Castling(b));
-//                System.out.println(new Castling(b));
                 descriptions.add(description);
                 continue;
 
@@ -260,22 +255,18 @@ public class Parser  {
             if (!s.contains("x") && length == 4 && figure != FigureName.PAWN){
                 if (Character.isDigit(chars[1])){
                     description.setFromHorizontal(Integer.parseInt(Character.toString(chars[1])));
-                    System.out.println("Хід №"+(i+1)+" setFromHorizontal: "+chars[1]);
                 }
                 else {
                     description.setFromVertical(chars[1]);
-                    System.out.println("Хід №"+(i+1)+" setFromVertical: "+chars[1]);
                 }
 
 
             }
-//            System.out.println(description);
             descriptions.add(description);
 
             i++;
 
         }
-//        System.out.println();
         return descriptions;
 
     }
