@@ -50,24 +50,26 @@ public class Mover implements Runnable {
 
                 if(md.isCastling()){
                     moving.doCastling(md.getCastling(),true);
-                    continue;
                 }
-
-                System.out.println(md);
-
-                figure = containerFigure.getWhiteFigureForMove(md);
-
-                System.out.println("Біла фігура для ходу: "+ figure);
-                if(figure != null)
-                    System.out.println("Хід: "+moving.move(figure,md));
                 else {
-                    System.err.println("\tФігура null ");
-//                    Thread.sleep(1000*60);
+
+                    System.out.println(md);
+
+                    figure = containerFigure.getWhiteFigureForMove(md);
+
+                    if (md.isBeat()){
+                        containerFigure.removeBlackFigure(md.getPosition());
+                    }
+                    System.out.println("\tБіла фігура для ходу: "+ figure);
+
+                    if(figure != null)
+                        moving.move(figure,md);
+
+                    System.out.println("Кінець ходу білих " + (i+1));
+
+                    cells.repaint();
                 }
 
-                System.out.println("Кінець ходу білих " + (i+1));
-
-                cells.repaint();
 
                 Thread.sleep(TIMEOUT);
 
@@ -76,22 +78,25 @@ public class Mover implements Runnable {
                  * Переміщення чорних фігур
                  */
                 System.out.println("\nХід чорних");
-
-                md = blackMoves.get(i);
-                System.out.println(md);
-                figure = containerFigure.getBlackFigureForMove(md);
-
-                System.out.println("Чорна фігура для ходу " +figure);
-                if(figure != null)
-                    System.out.println("Хід: "+moving.move(figure,md));
+                if(md.isCastling()){
+                    moving.doCastling(md.getCastling(),true);
+                }
                 else {
-                    System.err.println("\tФігура null ");
-//                    Thread.sleep(1000*60);
+                    md = blackMoves.get(i);
+                    System.out.println(md);
+                    figure = containerFigure.getBlackFigureForMove(md);
+
+                    if (md.isBeat()){
+                        containerFigure.removeWhiteFigure(md.getPosition());
+                    }
+
+                    System.out.println("\tЧорна фігура для ходу " +figure);
+                    if(figure != null)
+                        moving.move(figure,md);
                 }
 
                 cells.repaint();
                 System.out.println("Кінець ходу чорних\nКінець ходу.");
-//
 //
             }
 

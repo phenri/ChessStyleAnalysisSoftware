@@ -3,7 +3,6 @@ package ua.edu.vntu.moving;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.descriptions.Castling;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Position;
@@ -25,23 +24,12 @@ public class Moving implements MoveFigure{
 
         Cell cell = cells.getCellByPosition(pos);
 
-        System.out.println("\tПозиція "+pos+ " пуста: " + cell.isEmpty() );
+//        System.out.println("\tПозиція "+pos+ " пуста: " + cell.isEmpty() );
 
-        if (figure.getFigureName() == FigureName.PAWN){
-            if(figure.isAvailablePosition(pos,description.isBeat())){
-                figure.getParent().reset();
-                cell.addFigure(figure);
-                return true;
-            }
-        }
-        else {
-            figure.getParent().reset();
-            cell.addFigure(figure);
-            return true;
+        figure.getParent().reset();
+        cell.addFigure(figure);
+        return true;
 
-        }
-
-        return false;
     }
 
     public void setCells(Cells cells){
