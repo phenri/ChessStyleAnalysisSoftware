@@ -3,6 +3,7 @@ package ua.edu.vntu.moving;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.ContainerFigure;
+import ua.edu.vntu.descriptions.EndParty;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.readparty.Parser;
 
@@ -52,7 +53,7 @@ public class Mover implements Runnable {
 
                 if (md.isEndParty()){
                     String res;
-                    if (md.getEndParty().isWhiteWin())
+                    if (md.getEndParty() == EndParty.WHITE_WIN)
                         res = "Виграли білі";
                     else
                         res = "Виграли  чорні";
@@ -69,9 +70,6 @@ public class Mover implements Runnable {
 
                     figure = containerFigure.getWhiteFigureForMove(md);
 
-                    if (md.isBeat()){
-                        containerFigure.removeBlackFigure(md.getPosition());
-                    }
                     System.out.println("\tБіла фігура для ходу: "+ figure);
 
                     if(figure != null)
@@ -96,7 +94,7 @@ public class Mover implements Runnable {
 
                 if (md.isEndParty()){
                     String res;
-                    if (md.getEndParty().isWhiteWin())
+                    if (md.getEndParty() == EndParty.WHITE_WIN)
                         res = "Виграли білі";
                     else
                         res = "Виграли  чорні";
@@ -110,10 +108,6 @@ public class Mover implements Runnable {
                 else {
                     System.out.println(md);
                     figure = containerFigure.getBlackFigureForMove(md);
-
-                    if (md.isBeat()){
-                        containerFigure.removeWhiteFigure(md.getPosition());
-                    }
 
                     System.out.println("\tЧорна фігура для ходу " +figure);
                     if(figure != null)

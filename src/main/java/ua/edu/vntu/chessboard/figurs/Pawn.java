@@ -34,8 +34,6 @@ public class Pawn extends Figure {
         int x = Math.abs(pos.getX() - getPosition().getX());
         int y = pos.getY() - getPosition().getY();
 
-        System.out.println("x =" +x+"\ny = "+y);
-
         if(isWhite){
             return (x == 1) && (y == 1);
         }

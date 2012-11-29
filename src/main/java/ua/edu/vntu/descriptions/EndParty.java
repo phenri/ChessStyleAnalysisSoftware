@@ -1,13 +1,7 @@
 package ua.edu.vntu.descriptions;
 
-public class EndParty {
-    private boolean whiteWin;
-
-    public EndParty(boolean whiteWin) {
-        this.whiteWin = whiteWin;
-    }
-
-    public boolean isWhiteWin() {
-        return whiteWin;
-    }
+public enum EndParty {
+    WHITE_WIN,
+    BLACK_WIN,
+    NOBODY
 }

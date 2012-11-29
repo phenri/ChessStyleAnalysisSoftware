@@ -206,20 +206,19 @@ public class Parser  {
                     break;
                 case '1':
                     if (chars[0] == '1')
-                        description = new MovingDescription(new EndParty(true));
+                        description = new MovingDescription(EndParty.WHITE_WIN);
                     else {
-                        description = new MovingDescription(new EndParty(false));
+                        description = new MovingDescription(EndParty.BLACK_WIN);
                     }
                     descriptions.add(description);
                     figure = null;
                     break;
                 case 'P':
                     figure = FigureName.PAWN;
+                    break;
                 default:
                     figure = FigureName.PAWN;
             }
-
-
 
             int index = chars.length - 1;
             int length = chars.length;
@@ -239,15 +238,12 @@ public class Parser  {
             if (figure == null)
                 continue;
 
-            int num = 0;
-
             if(!Character.isDigit(chars[index])){
                 --index;
                 length--;
             }
 
             Position p = new Position(chars[index-1],chars[index]);
-
             description = new MovingDescription(p,figure);
 
             if (s.contains("x")) {
@@ -265,11 +261,8 @@ public class Parser  {
                 else {
                     description.setFromVertical(chars[1]);
                 }
-
-
             }
             descriptions.add(description);
-
             i++;
 
         }
