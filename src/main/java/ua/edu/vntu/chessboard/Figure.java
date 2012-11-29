@@ -11,7 +11,6 @@ public abstract class Figure extends JPanel implements Constants{
     protected Cell parent;
     protected Image image;
     protected boolean isWhite;
-    protected Position position;
     protected FigureName name;
 
     protected Figure(){
@@ -38,12 +37,8 @@ public abstract class Figure extends JPanel implements Constants{
         return isWhite;
     }
 
-    public void setPosition(Position position){
-        this.position = position;
-    }
-
     public Position getPosition(){
-        return position;
+        return parent.getPosition();
     }
 
     public FigureName getFigureName(){
@@ -53,7 +48,7 @@ public abstract class Figure extends JPanel implements Constants{
     @Override
     public String toString(){
         String color = isWhite ? "White": "Black";
-        return color +" "+ name +":" + position;
+        return color +" "+ name +":" + getPosition();
     }
 
 }

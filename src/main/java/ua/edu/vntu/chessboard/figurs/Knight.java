@@ -33,8 +33,8 @@ public class Knight extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        int x = Math.abs(position.getX() - pos.getX());
-        int y = Math.abs(position.getY() - pos.getY());
+        int x = Math.abs(getPosition().getX() - pos.getX());
+        int y = Math.abs(getPosition().getY() - pos.getY());
 
         if (x > y){
             return  (x == 2) && (y == 1);

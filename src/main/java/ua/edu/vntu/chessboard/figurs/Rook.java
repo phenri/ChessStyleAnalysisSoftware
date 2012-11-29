@@ -34,10 +34,10 @@ public class Rook extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        if(this.position.getX() == pos.getX() && position.getY() != pos.getY()){
+        if(this.getPosition().getX() == pos.getX() && getPosition().getY() != pos.getY()){
             return true;
         } else
-        if(this.position.getX() != pos.getX() && position.getY() == pos.getY()){
+        if(this.getPosition().getX() != pos.getX() && getPosition().getY() == pos.getY()){
             return true;
         }
         return false;

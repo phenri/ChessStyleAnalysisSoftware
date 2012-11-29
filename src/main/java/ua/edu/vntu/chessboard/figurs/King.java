@@ -33,9 +33,9 @@ public class King extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos){
-        int i = (int)pos.getX() - position.getX();
+        int i = (int)pos.getX() - getPosition().getX();
         boolean x = ((i == 1)||(i == -1)||(i == 0));
-        int j = (int)pos.getY() - position.getY();
+        int j = (int)pos.getY() - getPosition().getY();
         boolean y = ((j == 1)||(j == -1)||(j == 0));
 
         return x && y;

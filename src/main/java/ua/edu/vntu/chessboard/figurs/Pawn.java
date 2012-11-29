@@ -31,8 +31,8 @@ public class Pawn extends Figure {
             return isAvailablePosition(pos);
         }
 
-        int x = Math.abs(pos.getX() - position.getX());
-        int y = pos.getY() - position.getY();
+        int x = Math.abs(pos.getX() - getPosition().getX());
+        int y = pos.getY() - getPosition().getY();
 
         System.out.println("x =" +x+"\ny = "+y);
 
@@ -49,22 +49,22 @@ public class Pawn extends Figure {
 
         if(isWhite()){
             boolean b1;
-            if(position.getY() == 2)  {
-                b1 = (pos.getY() - position.getY() == 2) || (pos.getY() - position.getY() == 1);
+            if(getPosition().getY() == 2)  {
+                b1 = (pos.getY() - getPosition().getY() == 2) || (pos.getY() - getPosition().getY() == 1);
             }else{
-                b1 = (pos.getY() - position.getY() == 1);
+                b1 = (pos.getY() - getPosition().getY() == 1);
             }
-            boolean b2 = (pos.getX() - position.getX() == 0);
+            boolean b2 = (pos.getX() - getPosition().getX() == 0);
             return b1 && b2;
         }
         else {
             boolean b1;
-            if(position.getY() == 7)  {
-                b1 = (pos.getY() - position.getY() == -2) || (pos.getY() - position.getY() == -1);
+            if(getPosition().getY() == 7)  {
+                b1 = (pos.getY() - getPosition().getY() == -2) || (pos.getY() - getPosition().getY() == -1);
             }else{
-                b1 = (pos.getY() - position.getY() == -1);
+                b1 = (pos.getY() - getPosition().getY() == -1);
             }
-            boolean b2 = (pos.getX() - position.getX() == 0);
+            boolean b2 = (pos.getX() - getPosition().getX() == 0);
             return b1 && b2;
         }
     }

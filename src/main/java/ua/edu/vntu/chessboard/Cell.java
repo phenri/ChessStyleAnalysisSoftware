@@ -41,7 +41,6 @@ public class Cell extends JPanel implements Constants{
             remove(this.figure);
         add(figure);
         figure.setParent(this);
-        figure.setPosition(this.position);
         this.figure = figure;
         empty = false;
         repaint();
