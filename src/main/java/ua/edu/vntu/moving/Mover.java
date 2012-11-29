@@ -1,14 +1,13 @@
 package ua.edu.vntu.moving;
 
-import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.descriptions.ContainerFigure;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.readparty.Parser;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class Mover implements Runnable {
@@ -17,14 +16,19 @@ public class Mover implements Runnable {
 
     private MoveFigure moving;
 
-    public static final long TIMEOUT = 1000;
+    public static final long TIMEOUT = 100;
 
     private ArrayList<MovingDescription> blackMoves, whiteMoves;
 
     private ContainerFigure containerFigure;
 
     public Mover(){
-        Parser parser = new Parser("tmp\\file.pgn");
+
+    }
+
+    public void startParty(File f) {
+        cells.restart();
+        Parser parser = new Parser(f);
         blackMoves = parser.getBlackMoves();
         whiteMoves = parser.getWhiteMoves();
         new Thread(this).start();
@@ -32,17 +36,14 @@ public class Mover implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("start");
         exec();
     }
 
     public void exec(){
         MovingDescription md;
-        FigureName figureName;
         Figure figure;
-        Cell cell;
         try{
-            for (int i = 0; i < whiteMoves.size();i++){
+            for (int i = 0; true;i++){
                 Thread.sleep(TIMEOUT);
                 System.out.println("\nПочаток ходу " + (i+1));
 
@@ -90,7 +91,7 @@ public class Mover implements Runnable {
                 /**
                  * Переміщення чорних фігур
                  */
-                System.out.println("\nХід чорних");
+                System.out.println("\nХід чорних" + (i+1));
                 md = blackMoves.get(i);
 
                 if (md.isEndParty()){
@@ -104,7 +105,7 @@ public class Mover implements Runnable {
                 }
 
                 if(md.isCastling()){
-                    moving.doCastling(md.getCastling(),true);
+                    moving.doCastling(md.getCastling(),false);
                 }
                 else {
                     System.out.println(md);
@@ -121,8 +122,7 @@ public class Mover implements Runnable {
                 }
 
                 cells.repaint();
-                System.out.println("Кінець ходу чорних\nКінець ходу.");
-//
+                System.out.println("Кінець ходу чорних\nКінець ходу "+ (i+1));
             }
 
         }   catch (InterruptedException e){

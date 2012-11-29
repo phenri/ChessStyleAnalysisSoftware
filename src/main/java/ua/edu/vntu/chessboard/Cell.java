@@ -20,7 +20,8 @@ public class Cell extends JPanel implements Constants{
 
     public void reset(){
         empty = true;
-        this.remove(figure);
+        if (figure != null)
+            this.remove(figure);
     }
 
     public Position getPosition(){

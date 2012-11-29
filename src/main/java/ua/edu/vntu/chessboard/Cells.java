@@ -28,6 +28,13 @@ public class Cells extends JPanel implements Constants {
     public Cells(){
         super();
         setLayout(null);
+        initCells();
+        initFigures();
+        setBounds(30, 30, CELL_SIZE * 8, CELL_SIZE * 8);
+
+    }
+
+    private void initCells(){
 
         int start = 0;
 
@@ -63,24 +70,20 @@ public class Cells extends JPanel implements Constants {
 
         }
 
+    }
 
+    public void restart(){
+        for (Cell[] c: cells)
+            for (Cell c1: c){
+                c1.reset();
+            }
         initFigures();
-
-        /**
-         * for test figures
-         */
-
-//        Figure f = new Knight(false);
-//        cells[1][1].addFigure(f);
-//        Position p = new Position('d',8);
-//        System.out.println("Доступний хід " + p+ ":" + f.isAvailablePosition(p,false));
-
-        setBounds(30, 30, CELL_SIZE * 8, CELL_SIZE * 8);
-
     }
 
     private void initFigures(){
         Figure f;
+        blackFigures.removeAll(blackFigures);
+        whiteFigures.removeAll(whiteFigures);
         /**
          * black figures
          */

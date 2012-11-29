@@ -2,10 +2,12 @@ package ua.edu.vntu.gui.menu;
 
 import ua.edu.vntu.Main;
 import ua.edu.vntu.gui.Form;
+import ua.edu.vntu.moving.Mover;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class OpenFile extends JMenuItem implements ActionListener{
     private JFrame form;
@@ -29,6 +31,9 @@ public class OpenFile extends JMenuItem implements ActionListener{
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(form);
 
-        System.out.println(form);
+        File f =  fileChooser.getSelectedFile();
+
+        Mover mover = (Mover) Main.context.getBean("mover");
+        mover.startParty(f);
     }
 }

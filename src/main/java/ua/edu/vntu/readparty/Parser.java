@@ -6,6 +6,7 @@ import ua.edu.vntu.descriptions.EndParty;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Position;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,16 +33,16 @@ public class Parser  {
         return whiteMoves;
     }
 
-    public Parser(String filename){
-        ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(filename)));
+    public Parser(File file){
+        ArrayList<String> codeList = parseCode(readCodeAndTags(readPGN(file)));
 
         readMoves(codeList);
 
     }
 
-    private String readPGN(String filename){
+    private String readPGN(File f){
         try{
-            FileInputStream file = new FileInputStream(filename); //you are must create this file, or write new path to file
+            FileInputStream file = new FileInputStream(f); //you are must create this file, or write new path to file
             int c, i = 0;
             char[] chars = new char[file.available()];
 
