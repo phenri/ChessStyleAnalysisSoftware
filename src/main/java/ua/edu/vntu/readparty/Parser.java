@@ -2,6 +2,7 @@ package ua.edu.vntu.readparty;
 
 import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.descriptions.Castling;
+import ua.edu.vntu.descriptions.EndParty;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Position;
 
@@ -177,6 +178,7 @@ public class Parser  {
     private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
         int i = 0;
         ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
+        MovingDescription description;
         for(String s:move){
 
             char[] chars = s.toCharArray();
@@ -202,9 +204,12 @@ public class Parser  {
                     figure = null;
                     break;
                 case '1':
-                    figure = null;
-                    break;
-                case '0':
+                    if (chars[0] == '1')
+                        description = new MovingDescription(new EndParty(true));
+                    else {
+                        description = new MovingDescription(new EndParty(false));
+                    }
+                    descriptions.add(description);
                     figure = null;
                     break;
                 case 'P':
@@ -225,7 +230,7 @@ public class Parser  {
 
             if (s.contains("O")){
                 boolean b = chars.length != 3;
-                MovingDescription description = new MovingDescription(new Castling(b));
+                description = new MovingDescription(new Castling(b));
                 descriptions.add(description);
                 continue;
 
@@ -242,7 +247,7 @@ public class Parser  {
 
             Position p = new Position(chars[index-1],chars[index]);
 
-            MovingDescription description = new MovingDescription(p,figure);
+            description = new MovingDescription(p,figure);
 
             if (s.contains("x")) {
                 description.setBeat(true);

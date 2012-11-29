@@ -8,6 +8,21 @@ public class MovingDescription {
     private FigureName figure;
     private boolean isBeat;
 
+    public MovingDescription(EndParty endParty) {
+        this.endParty = endParty;
+    }
+
+    public EndParty getEndParty() {
+        return endParty;
+    }
+
+    public boolean isEndParty(){
+        return endParty != null;
+    }
+
+    private EndParty endParty;
+
+
     public Castling getCastling() {
         return castling;
     }

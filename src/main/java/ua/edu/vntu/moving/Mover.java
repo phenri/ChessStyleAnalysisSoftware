@@ -8,6 +8,7 @@ import ua.edu.vntu.descriptions.ContainerFigure;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.readparty.Parser;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Mover implements Runnable {
@@ -48,6 +49,16 @@ public class Mover implements Runnable {
                 System.out.println("Хід білих");
                 md = whiteMoves.get(i);
 
+                if (md.isEndParty()){
+                    String res;
+                    if (md.getEndParty().isWhiteWin())
+                        res = "Виграли білі";
+                    else
+                        res = "Виграли  чорні";
+                    JOptionPane.showMessageDialog(null,res,"Кінець партії",JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
+
                 if(md.isCastling()){
                     moving.doCastling(md.getCastling(),true);
                 }
@@ -81,6 +92,17 @@ public class Mover implements Runnable {
                  */
                 System.out.println("\nХід чорних");
                 md = blackMoves.get(i);
+
+                if (md.isEndParty()){
+                    String res;
+                    if (md.getEndParty().isWhiteWin())
+                        res = "Виграли білі";
+                    else
+                        res = "Виграли  чорні";
+                    JOptionPane.showMessageDialog(null,res,"Кінець партії",JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
+
                 if(md.isCastling()){
                     moving.doCastling(md.getCastling(),true);
                 }
