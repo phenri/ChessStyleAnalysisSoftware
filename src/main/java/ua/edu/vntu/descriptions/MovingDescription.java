@@ -21,7 +21,6 @@ public class MovingDescription {
     }
 
     public void setFromHorizontal(int fromHorizontal) {
-//        System.out.println("Set fromHorizontal: " + fromHorizontal + " " + this);
         this.fromHorizontal = fromHorizontal;
     }
 
@@ -47,7 +46,6 @@ public class MovingDescription {
 
     public void setFromVertical(char fromVertical) {
         this.fromVertical = fromVertical;
-//        System.out.println("Set fromVertical: " + fromVertical+ " " + this);
     }
 
 

@@ -43,6 +43,7 @@ public class ContainerFigure{
     private void removeFigure(Position pos, ArrayList<Figure> fromList){
         Cell c = board.getCellByPosition(pos);
         Figure f = c.getFigure();
+        c.reset();
         System.err.println("\tRemoved " + f);
         fromList.remove(f);
     }
@@ -109,7 +110,7 @@ public class ContainerFigure{
         return null;
     }
 
-    public boolean isEmptyPath(Rook rook, Position to){
+    private boolean isEmptyPath(Rook rook, Position to){
         if (!rook.isAvailablePosition(to)){
             return false;
         }
@@ -127,7 +128,8 @@ public class ContainerFigure{
             for(int i = begin; i <= end; i++){
                 Position p = new Position(to.getX(),i);
                 Cell c = board.getCellByPosition(p);
-                if (!c.isEmpty()){
+                if (!c.isEmpty() && rook.isWhite() == board.getCellByPosition(p).getFigure().isWhite()){
+                    System.err.println("\tcell not empty"+c);
                     return false;
                 }
             }
@@ -146,7 +148,9 @@ public class ContainerFigure{
 
                 for(char i = begin; i <= end; i++){
                     Position p = new Position(i,to.getY());
-                    if (!board.getCellByPosition(p).isEmpty()){
+                    Cell c = board.getCellByPosition(p);
+                    if (!c.isEmpty() && rook.isWhite() == board.getCellByPosition(p).getFigure().isWhite()){
+                        System.err.println("\tcell not empty"+c);
                         return false;
                     }
                 }

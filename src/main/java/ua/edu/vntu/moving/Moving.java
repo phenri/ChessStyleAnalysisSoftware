@@ -18,13 +18,7 @@ public class Moving implements MoveFigure{
     public boolean move(Figure figure, MovingDescription description) {
 
         Position pos = description.getPosition();
-
-        if(description.isCastling())
-            System.out.println("Рокірока");
-
         Cell cell = cells.getCellByPosition(pos);
-
-//        System.out.println("\tПозиція "+pos+ " пуста: " + cell.isEmpty() );
 
         figure.getParent().reset();
         cell.addFigure(figure);

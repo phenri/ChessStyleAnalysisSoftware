@@ -65,6 +65,8 @@ public class Mover implements Runnable {
                     if(figure != null)
                         moving.move(figure,md);
 
+                    System.out.println("\tФігура після ходу:" + figure);
+
                     System.out.println("Кінець ходу білих " + (i+1));
 
                     cells.repaint();
@@ -78,11 +80,11 @@ public class Mover implements Runnable {
                  * Переміщення чорних фігур
                  */
                 System.out.println("\nХід чорних");
+                md = blackMoves.get(i);
                 if(md.isCastling()){
                     moving.doCastling(md.getCastling(),true);
                 }
                 else {
-                    md = blackMoves.get(i);
                     System.out.println(md);
                     figure = containerFigure.getBlackFigureForMove(md);
 
@@ -93,6 +95,7 @@ public class Mover implements Runnable {
                     System.out.println("\tЧорна фігура для ходу " +figure);
                     if(figure != null)
                         moving.move(figure,md);
+                    System.out.println("\tФігура після ходу:" + figure);
                 }
 
                 cells.repaint();
