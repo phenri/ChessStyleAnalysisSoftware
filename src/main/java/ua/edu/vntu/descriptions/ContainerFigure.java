@@ -70,9 +70,21 @@ public class ContainerFigure{
             }
 
             if (name == FigureName.ROOK && f.getFigureName() == FigureName.ROOK){
-                if (f.isAvailablePosition(description.getPosition()) && isEmptyPath((Rook)f,description.getPosition())){
-                    return f;
+                boolean nullVertical = description.getFromVertical() == '0';
+                boolean nullHorizontal = description.getFromHorizontal() == 0;
+
+                if (f.isAvailablePosition(description.getPosition()) && !(nullHorizontal && nullVertical)){
+                    if (nullVertical && f.getPosition().getY() == description.getFromHorizontal())
+                        return f;
+                    else
+                        if (nullHorizontal && f.getPosition().getX() == description.getFromVertical()){
+                            return f;
+                        }
                 }
+                else
+                    if(f.isAvailablePosition(description.getPosition()) && isEmptyPath((Rook)f,description.getPosition())){
+                        return f;
+                    }
             }
 
             if (name == FigureName.QUEEN && f.getFigureName() == FigureName.QUEEN)
@@ -115,7 +127,6 @@ public class ContainerFigure{
             return false;
         }
 
-
         if(rook.getPosition().getX() == to.getX()){
             int begin = rook.getPosition().getY() < to.getY() ? rook.getPosition().getY() : to.getY();
             int end = rook.getPosition().getY() > to.getY() ? rook.getPosition().getY() : to.getY();
@@ -128,7 +139,14 @@ public class ContainerFigure{
             for(int i = begin; i <= end; i++){
                 Position p = new Position(to.getX(),i);
                 Cell c = board.getCellByPosition(p);
-                if (!c.isEmpty() && rook.isWhite() == board.getCellByPosition(p).getFigure().isWhite()){
+                if (!c.isEmpty()){
+                    if (c == board.getCellByPosition(to)){
+                        if(rook.isWhite() == c.getFigure().isWhite()){
+                            return false;
+                        }
+                        else continue;
+
+                    }
                     System.err.println("\tcell not empty"+c);
                     return false;
                 }
@@ -149,7 +167,14 @@ public class ContainerFigure{
                 for(char i = begin; i <= end; i++){
                     Position p = new Position(i,to.getY());
                     Cell c = board.getCellByPosition(p);
-                    if (!c.isEmpty() && rook.isWhite() == board.getCellByPosition(p).getFigure().isWhite()){
+                    if (!c.isEmpty()){
+                        if (c == board.getCellByPosition(to)){
+                            if(rook.isWhite() == c.getFigure().isWhite()){
+                                return false;
+                            }
+                            else continue;
+
+                        }
                         System.err.println("\tcell not empty"+c);
                         return false;
                     }
