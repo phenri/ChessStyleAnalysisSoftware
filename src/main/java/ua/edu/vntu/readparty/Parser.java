@@ -13,12 +13,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slavik
- * Date: 02.11.12
- * Time: 22:42
- */
 public class Parser  {
 
     private Map<String,String> tags = new TreeMap<String, String>();
@@ -49,13 +43,11 @@ public class Parser  {
             while(( c = file.read())!= -1){
                 if (c == (int)'{'){                 //this code ignores text comment with is in {...}
                     while ((c = file.read())!= '}'){
-                        continue;
                     }
                     c = file.read();
                 }
                 if (c == (int)';'){                 //this code ignores text comment in ;.......\n
                     while ((c = file.read())!= '\n'){
-                        continue;
                     }
                 }
                 chars[i] = (char) c;
@@ -106,8 +98,6 @@ public class Parser  {
 
     private String getTagContent(String in){    //зчитування зм1сту тега, те що записано в кавичках
         try{
-            String content;
-
             int begin = in.indexOf('"');
             int end = in.lastIndexOf('"');
 
@@ -164,15 +154,32 @@ public class Parser  {
         String[] white = new String[strings.size()],
                 black = new String[strings.size()];
         int i = 0;
+        EndParty end = EndParty.NOT_HAVE_END;
         for(String s:strings){
             String[] words = s.split(" ");
             white[i] = words[1];
 
             black[i] = words[2];
             i++;
+            for (String st:words){
+                if(st.contains("1-0")){
+                    end = EndParty.WHITE_WIN;
+                }else
+                if (st.contains("0-1")){
+                    end = EndParty.BLACK_WIN;
+                }
+                else
+                if(st.contains("1/2-1/2")){
+                    end = EndParty.NOBODY;
+                }
+            }
         }
+        MovingDescription endParty = new MovingDescription(end);
+
         whiteMoves = parseToMovingDescription(white);
+        whiteMoves.add(endParty);
         blackMoves = parseToMovingDescription(black);
+        blackMoves.add(endParty);
 
     }
 
@@ -205,14 +212,10 @@ public class Parser  {
                     figure = null;
                     break;
                 case '1':
-                    if (chars[0] == '1')
-                        description = new MovingDescription(EndParty.WHITE_WIN);
-                    else {
-                        description = new MovingDescription(EndParty.BLACK_WIN);
-                    }
-                    descriptions.add(description);
                     figure = null;
                     break;
+                case ' ':
+                    continue;
                 case 'P':
                     figure = FigureName.PAWN;
                     break;
