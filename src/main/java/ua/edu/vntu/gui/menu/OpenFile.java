@@ -29,11 +29,15 @@ public class OpenFile extends JMenuItem implements ActionListener{
 
         form = (Form) Main.context.getBean("form");
         JFileChooser fileChooser = new JFileChooser();
+        File file = new File("F:\\work\\Git Hub\\ChessStyleAnalysisSoftware\\tmp");
+        fileChooser.setCurrentDirectory(file);
         fileChooser.showOpenDialog(form);
 
         File f =  fileChooser.getSelectedFile();
 
-        Mover mover = (Mover) Main.context.getBean("mover");
-        mover.startParty(f);
+        if (f != null){
+            Mover mover = (Mover) Main.context.getBean("mover");
+            mover.startParty(f);
+        }
     }
 }

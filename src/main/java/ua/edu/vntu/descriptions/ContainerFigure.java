@@ -118,7 +118,6 @@ public class ContainerFigure{
             }
 
         }
-        System.err.println("Немає фігури для ходу." );
         return null;
     }
 
@@ -147,7 +146,6 @@ public class ContainerFigure{
                         else continue;
 
                     }
-                    System.err.println("\tcell not empty"+c);
                     return false;
                 }
             }
@@ -175,7 +173,6 @@ public class ContainerFigure{
                             else continue;
 
                         }
-                        System.err.println("\tcell not empty"+c);
                         return false;
                     }
                 }
