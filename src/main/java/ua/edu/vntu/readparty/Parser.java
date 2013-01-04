@@ -36,7 +36,7 @@ public class Parser  {
 
     private String readPGN(File f){
         try{
-            FileInputStream file = new FileInputStream(f); //you are must create this file, or write new path to file
+            FileInputStream file = new FileInputStream(f);
             int c, i = 0;
             char[] chars = new char[file.available()];
 
@@ -65,7 +65,7 @@ public class Parser  {
         pgn = pgn.trim();
         String strings[] =  pgn.split("\n");
 
-        ArrayList<String> code = new ArrayList<String>();  //this variable used for saving a coding game
+        ArrayList<String> code = new ArrayList<String>();
         int i = 0;
         for (String s: strings){
             if (s.contains("[Event")){

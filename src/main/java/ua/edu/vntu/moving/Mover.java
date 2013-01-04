@@ -1,5 +1,6 @@
 package ua.edu.vntu.moving;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.ContainerFigure;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class Mover implements Runnable {
 
+    @Autowired
     private Cells cells;
 
     private MoveFigure moving;

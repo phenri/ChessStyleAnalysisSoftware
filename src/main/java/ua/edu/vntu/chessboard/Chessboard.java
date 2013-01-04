@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Chessboard extends JPanel implements Constants {
 
-    @Autowired
+//    @Autowired
     private Cells cells;
 
     public Chessboard(){

@@ -1,5 +1,6 @@
 package ua.edu.vntu.descriptions;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
@@ -11,25 +12,18 @@ import java.util.ArrayList;
 public class ContainerFigure{
     private ArrayList<Figure> white,black;
 
-    private Cells board;
+    @Autowired
+    private Cells cells;
 
     public ContainerFigure() {
     }
 
-    public void setWhite(ArrayList<Figure> white) {
-        this.white = white;
-    }
-
-    public void setBlack(ArrayList<Figure> black) {
-        this.black = black;
-    }
-
     public Figure getWhiteFigureForMove(MovingDescription description){
-        return getFigureForMove(white,description);
+        return getFigureForMove(cells.getWhiteFigures(),description);
     }
 
     public Figure getBlackFigureForMove(MovingDescription description){
-        return getFigureForMove(black,description);
+        return getFigureForMove(cells.getBlackFigures(),description);
     }
 
     public void removeWhiteFigure(Position pos){
@@ -41,7 +35,7 @@ public class ContainerFigure{
     }
 
     private void removeFigure(Position pos, ArrayList<Figure> fromList){
-        Cell c = board.getCellByPosition(pos);
+        Cell c = cells.getCellByPosition(pos);
         Figure f = c.getFigure();
         c.reset();
         System.err.println("\tRemoved " + f);
@@ -137,9 +131,9 @@ public class ContainerFigure{
             }
             for(int i = begin; i <= end; i++){
                 Position p = new Position(to.getX(),i);
-                Cell c = board.getCellByPosition(p);
+                Cell c = cells.getCellByPosition(p);
                 if (!c.isEmpty()){
-                    if (c == board.getCellByPosition(to)){
+                    if (c == cells.getCellByPosition(to)){
                         if(rook.isWhite() == c.getFigure().isWhite()){
                             return false;
                         }
@@ -164,9 +158,9 @@ public class ContainerFigure{
 
                 for(char i = begin; i <= end; i++){
                     Position p = new Position(i,to.getY());
-                    Cell c = board.getCellByPosition(p);
+                    Cell c = cells.getCellByPosition(p);
                     if (!c.isEmpty()){
-                        if (c == board.getCellByPosition(to)){
+                        if (c == cells.getCellByPosition(to)){
                             if(rook.isWhite() == c.getFigure().isWhite()){
                                 return false;
                             }
@@ -183,7 +177,4 @@ public class ContainerFigure{
         return true;
     }
 
-    public void setCells(Cells cells) {
-        this.board = cells;
-    }
 }

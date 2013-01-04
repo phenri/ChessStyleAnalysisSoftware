@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="ua.edu.vntu"/>
 
     <bean id="form" class="ua.edu.vntu.gui.Form">
         <property name="field" ref="field"/>
         <property name="mover" ref="mover"/>
     </bean>
 
-    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure">
-        <property name="cells" ref="cells"/>
-    </bean>
-
-
-    <bean id="cells" class="ua.edu.vntu.chessboard.Cells">
-        <property name="containerFigures" ref="figures"/>
-    </bean>
+    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure"/>
 
     <bean id="board" class="ua.edu.vntu.chessboard.Chessboard">
         <property name="cells" ref="cells"/>
@@ -26,14 +25,8 @@
     </bean>
 
     <bean class="ua.edu.vntu.moving.Mover" id="mover">
-        <property name="cells" ref="cells"/>
         <property name="movingInterface" ref="movingInterface"/>
         <property name="figures" ref="figures"/>
     </bean>
-
-    <bean id="movingInterface" class="ua.edu.vntu.moving.Moving">
-        <property name="cells" ref="cells"/>
-    </bean>
-
 
 </beans>

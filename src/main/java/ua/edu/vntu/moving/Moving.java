@@ -1,5 +1,7 @@
 package ua.edu.vntu.moving;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
@@ -7,7 +9,10 @@ import ua.edu.vntu.descriptions.Castling;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Position;
 
+@Repository ("movingInterface")
 public class Moving implements MoveFigure{
+
+    @Autowired
     private Cells cells;
 
     public Moving(){
@@ -24,10 +29,6 @@ public class Moving implements MoveFigure{
         cell.addFigure(figure);
         return true;
 
-    }
-
-    public void setCells(Cells cells){
-        this.cells = cells;
     }
 
     @Override
