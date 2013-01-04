@@ -32,8 +32,8 @@ public class Mover implements Runnable {
     public void startParty(File f) {
         cells.restart();
         Parser parser = new Parser(f);
-        blackMoves = parser.getBlackMoves();
-        whiteMoves = parser.getWhiteMoves();
+//        blackMoves = parser.getBlackMoves();
+//        whiteMoves = parser.getWhiteMoves();
         new Thread(this).start();
     }
 

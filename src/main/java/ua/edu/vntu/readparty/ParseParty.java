@@ -11,22 +11,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ParsePgnToParty implements Runnable{
+public class ParseParty implements Runnable{
 
     private Map<String,String> tags = new TreeMap<String, String>();
 
     ArrayList<MovingDescription> whiteMoves, blackMoves;
 
-    public ParsePgnToParty() {
+    List<String> party;
+
+    public ParseParty(List<String> party) {
+        this.party = party;
         new Thread(this).start();
+
     }
 
     @Override
     public void run() {
-
+        readCodeAndTags(party);
     }
 
+    /**
+     * Читання тегів та коду партії
+     * @param list список рядків з яких буде проводитись читання
+     * @return повертає список рядків, в яких міститься код партії, теги записуються в поля класу зміння tags
+     */
     public ArrayList<String> readCodeAndTags(List<String> list){
+        System.err.println(Thread.currentThread());
 
         ArrayList<String> code = new ArrayList<>();
 
