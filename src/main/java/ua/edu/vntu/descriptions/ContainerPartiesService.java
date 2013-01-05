@@ -6,9 +6,7 @@ import java.util.List;
 public class ContainerPartiesService implements ContainerParties {
 
     private final static ContainerParties INSTANCE = new ContainerPartiesService();
-
     private List<Party> parties = new ArrayList<>();
-
     private ContainerPartiesService(){}
 
     public static ContainerParties getInstance() {

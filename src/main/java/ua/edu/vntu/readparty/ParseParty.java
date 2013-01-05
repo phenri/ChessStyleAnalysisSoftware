@@ -12,9 +12,9 @@ public class ParseParty implements Runnable,Tags{
 
     private Map<String,String> tags = new TreeMap<>();
 
-    List<MovingDescription> whiteMoves, blackMoves;
+    private List<MovingDescription> whiteMoves, blackMoves;
 
-    List<String> party;
+    private List<String> party;
 
     private int id;
 
@@ -85,9 +85,9 @@ public class ParseParty implements Runnable,Tags{
         }
     }
 
-    private ArrayList<String> parseCode(ArrayList<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
+    private List<String> parseCode(List<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
         int count = 0;
-        ArrayList<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for(String s:code){
             if(s.indexOf('.')==-1){
                 continue;
@@ -128,7 +128,7 @@ public class ParseParty implements Runnable,Tags{
         return tags;
     }
 
-    private void readMoves(ArrayList<String> strings){
+    private void readMoves(List<String> strings){
         String[] white = new String[strings.size()],
                 black = new String[strings.size()];
         int i = 0;

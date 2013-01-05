@@ -5,17 +5,15 @@ import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.descriptions.Castling;
-import ua.edu.vntu.descriptions.MovingDescription;
-import ua.edu.vntu.descriptions.Position;
+import ua.edu.vntu.descriptions.*;
 
 @Repository ("movingInterface")
-public class Moving implements MoveFigure{
+public class MovingService implements MoveFigure{
 
     @Autowired
     private Cells cells;
 
-    public Moving(){
+    public MovingService(){
 
     }
 
