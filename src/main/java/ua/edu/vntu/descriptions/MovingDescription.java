@@ -7,9 +7,38 @@ public class MovingDescription {
     private Position position;
     private FigureName figure;
     private boolean isBeat;
+    private Castling castling;
+    private char fromVertical = '0';
+    private int fromHorizontal = 0;
+    private boolean pawnToEnd = false;
+    private FigureName newFigureName = null;
 
     public MovingDescription(EndParty endParty) {
         this.endParty = endParty;
+    }
+
+    public MovingDescription(Position position, FigureName figureToMove, boolean pawnToEnd, FigureName newFigureName) {
+        this.position = position;
+        this.figure = figureToMove;
+        this.pawnToEnd = pawnToEnd;
+        this.newFigureName = newFigureName;
+    }
+
+    public MovingDescription(Position position, FigureName figure){
+        this.position = position;
+        this.figure = figure;
+    }
+
+    public MovingDescription(Castling castling){
+        this.castling = castling;
+    }
+
+    public FigureName getNewFigureName() {
+        return newFigureName;
+    }
+
+    public boolean isPawnToEnd() {
+        return pawnToEnd;
     }
 
     public EndParty getEndParty() {
@@ -27,28 +56,12 @@ public class MovingDescription {
         return castling;
     }
 
-    private Castling castling;
-
-    private char fromVertical = '0';
-
     public int getFromHorizontal() {
         return fromHorizontal;
     }
 
     public void setFromHorizontal(int fromHorizontal) {
         this.fromHorizontal = fromHorizontal;
-    }
-
-    private int fromHorizontal = 0;
-
-    public MovingDescription(Position position, FigureName figure){
-
-        this.position = position;
-        this.figure = figure;
-    }
-
-    public MovingDescription(Castling castling){
-        this.castling = castling;
     }
 
     public boolean isCastling(){
@@ -84,7 +97,8 @@ public class MovingDescription {
     @Override
     public String toString(){
         String res = isBeat ? " x:" : "";
-        return isCastling() ? "Рокіровка" : "Переміщення фігури: " + figure + ":" + res + position;
+        String res2 = isPawnToEnd() ? ", пишка дійшла до кінця дошки перетворившись в " + getNewFigureName() : "";
+        return isCastling() ? "Рокіровка" : "Переміщення фігури: " + figure + ":" + res + position + res2;
     }
 
 

@@ -13,8 +13,6 @@ import java.util.TreeMap;
 
 public class ParseParty implements Runnable{
 
-    static int id = 0;
-
     private Map<String,String> tags = new TreeMap<String, String>();
 
     ArrayList<MovingDescription> whiteMoves, blackMoves;
@@ -168,7 +166,6 @@ public class ParseParty implements Runnable{
     }
 
     private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
-        int i = 0;
         ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
         MovingDescription description;
         for(String s:move){
@@ -179,39 +176,37 @@ public class ParseParty implements Runnable{
             if (chars.length == 0){
                 continue;
             }
-            switch (chars[0]){
-                case 'N':
-                    figure = FigureName.KNIGHT;
-                    break;
-                case 'B':
-                    figure = FigureName.BISHOP;
-                    break;
-                case 'R':
-                    figure = FigureName.ROOK;
-                    break;
-                case 'Q':
-                    figure = FigureName.QUEEN;
-                    break;
-                case 'K':
-                    figure = FigureName.KING;
-                    break;
-                case 'O':
-                    figure = null;
-                    break;
-                case '1':
-                    figure = null;
-                    break;
-                case ' ':
-                    continue;
-                case 'P':
-                    figure = FigureName.PAWN;
-                    break;
-                default:
-                    figure = FigureName.PAWN;
-            }
+
+            if (chars[0] == ' ')
+                continue;
+
+            figure = getFigureNameByChar(chars[0]);
 
             int index = chars.length - 1;
             int length = chars.length;
+
+            /**
+             * Якщо пишка доходить до кінця її заміняє фігура що стоїть після '='
+             */
+            if (s.contains("=")){
+                index = s.indexOf("=");
+                figure = getFigureNameByChar(chars[index+1]);
+                char h = chars[index - 1];
+                char v = chars[index - 2];
+
+                Position pos = new Position(v,h);
+
+                description = new MovingDescription(pos,FigureName.PAWN,true,figure);
+
+//                System.out.println(pos);
+//
+//                System.out.println(v+" " + h);
+//                System.out.println(s + " - " + index+", " + figure);
+//
+//                System.out.println(description);
+                descriptions.add(description);
+                continue;
+            }
 
             if (s.contains("+")||s.contains("?")||s.contains("!")){
                 index--;
@@ -253,10 +248,43 @@ public class ParseParty implements Runnable{
                 }
             }
             descriptions.add(description);
-            i++;
 
         }
         return descriptions;
 
+    }
+
+    private FigureName getFigureNameByChar(char c){
+        FigureName figure;
+
+        switch (c){
+            case 'N':
+                figure = FigureName.KNIGHT;
+                break;
+            case 'B':
+                figure = FigureName.BISHOP;
+                break;
+            case 'R':
+                figure = FigureName.ROOK;
+                break;
+            case 'Q':
+                figure = FigureName.QUEEN;
+                break;
+            case 'K':
+                figure = FigureName.KING;
+                break;
+            case 'O':
+                figure = null;
+                break;
+            case '1':
+                figure = null;
+                break;
+            case 'P':
+                figure = FigureName.PAWN;
+                break;
+            default:
+                figure = FigureName.PAWN;
+        }
+        return figure;
     }
 }
