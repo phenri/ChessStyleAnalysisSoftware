@@ -8,16 +8,6 @@ import java.util.List;
 
 public class Parser  {
 
-//    ArrayList<MovingDescription> whiteMoves, blackMoves;
-
-//    public ArrayList<MovingDescription> getBlackMoves() {
-//        return blackMoves;
-//    }
-//
-//    public ArrayList<MovingDescription> getWhiteMoves() {
-//        return whiteMoves;
-//    }
-
     public Parser(File file){
         String pgn = readPGN(file);
         List<List<String>> parties = readPartiesFromPGN(pgn);
@@ -78,7 +68,7 @@ public class Parser  {
 
                 party = new ArrayList<>();
             }
-            party.add(s);
+            party.add(s.trim());
         }
         parties.add(party);
 

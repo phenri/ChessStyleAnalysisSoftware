@@ -13,6 +13,8 @@ import java.util.TreeMap;
 
 public class ParseParty implements Runnable{
 
+    static int id = 0;
+
     private Map<String,String> tags = new TreeMap<String, String>();
 
     ArrayList<MovingDescription> whiteMoves, blackMoves;
@@ -139,6 +141,10 @@ public class ParseParty implements Runnable{
 
             black[i] = words[2];
             i++;
+
+            if (s.contains("  ")){
+                String m =  s.replace("  ", " ");
+            }
             for (String st:words){
                 if(st.contains("1-0")){
                     end = EndParty.WHITE_WIN;
@@ -170,6 +176,9 @@ public class ParseParty implements Runnable{
             char[] chars = s.toCharArray();
 
             FigureName figure;
+            if (chars.length == 0){
+                continue;
+            }
             switch (chars[0]){
                 case 'N':
                     figure = FigureName.KNIGHT;
