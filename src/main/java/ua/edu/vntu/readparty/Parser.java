@@ -11,8 +11,10 @@ public class Parser  {
     public Parser(File file){
         String pgn = readPGN(file);
         List<List<String>> parties = readPartiesFromPGN(pgn);
+        int i = 0;
         for (List<String> list: parties){
-            new ParseParty(list);
+            new ParseParty(list,i);
+            i++;
         }
 
     }

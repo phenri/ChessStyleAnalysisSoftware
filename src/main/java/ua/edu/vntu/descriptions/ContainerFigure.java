@@ -7,15 +7,22 @@ import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.chessboard.figurs.Rook;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ContainerFigure{
-    private ArrayList<Figure> white,black;
+    private List<Figure> whiteFigures, blackFigures;
+
+    private List<MovingDescription> whiteMoves, blackMoves;
 
     @Autowired
     private Cells cells;
 
     public ContainerFigure() {
+    }
+
+    public ContainerFigure(List<MovingDescription> whiteMoves, List<MovingDescription> blackMoves) {
+        this.whiteMoves = whiteMoves;
+        this.blackMoves = blackMoves;
     }
 
     public Figure getWhiteFigureForMove(MovingDescription description){
@@ -27,14 +34,14 @@ public class ContainerFigure{
     }
 
     public void removeWhiteFigure(Position pos){
-        removeFigure(pos,white);
+        removeFigure(pos, whiteFigures);
     }
 
     public void removeBlackFigure(Position pos){
-        removeFigure(pos,black);
+        removeFigure(pos, blackFigures);
     }
 
-    private void removeFigure(Position pos, ArrayList<Figure> fromList){
+    private void removeFigure(Position pos, List<Figure> fromList){
         Cell c = cells.getCellByPosition(pos);
         Figure f = c.getFigure();
         c.reset();
@@ -42,7 +49,7 @@ public class ContainerFigure{
         fromList.remove(f);
     }
 
-    private Figure getFigureForMove(ArrayList<Figure> figures, MovingDescription description){
+    private Figure getFigureForMove(List<Figure> figures, MovingDescription description){
 
         FigureName name = description.getFigureName();
         for (Figure f: figures){
@@ -177,4 +184,13 @@ public class ContainerFigure{
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "ContainerFigure{" +
+                "blackMoves=" + blackMoves +
+                ", whiteMoves=" + whiteMoves +
+                ", blackFigures=" + blackFigures +
+                ", whiteFigures=" + whiteFigures +
+                '}';
+    }
 }

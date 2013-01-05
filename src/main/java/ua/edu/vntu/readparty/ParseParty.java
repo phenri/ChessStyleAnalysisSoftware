@@ -1,26 +1,26 @@
 package ua.edu.vntu.readparty;
 
 import ua.edu.vntu.chessboard.FigureName;
-import ua.edu.vntu.descriptions.Castling;
-import ua.edu.vntu.descriptions.EndParty;
-import ua.edu.vntu.descriptions.MovingDescription;
-import ua.edu.vntu.descriptions.Position;
+import ua.edu.vntu.descriptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ParseParty implements Runnable{
+public class ParseParty implements Runnable,Tags{
 
-    private Map<String,String> tags = new TreeMap<String, String>();
+    private Map<String,String> tags = new TreeMap<>();
 
-    ArrayList<MovingDescription> whiteMoves, blackMoves;
+    List<MovingDescription> whiteMoves, blackMoves;
 
     List<String> party;
 
-    public ParseParty(List<String> party) {
+    private int id;
+
+    public ParseParty(List<String> party, int id) {
         this.party = party;
+        this.id = id;
         new Thread(this).start();
 
     }
@@ -42,25 +42,25 @@ public class ParseParty implements Runnable{
 
         for (String s: list){
             if (s.contains("[Event")){
-                tags.put("Event",getTagContent(s));
+                tags.put(EVENT,getTagContent(s));
             }  else
             if (s.contains("[Site")){
-                tags.put("Site",getTagContent(s));
+                tags.put(SITE,getTagContent(s));
             }  else
             if (s.contains("[Date")){
-                tags.put("Date",getTagContent(s));
+                tags.put(DATE,getTagContent(s));
             }  else
             if (s.contains("[Round")){
-                tags.put("Round",getTagContent(s));
+                tags.put(ROUND,getTagContent(s));
             }  else
             if (s.contains("[White")){
-                tags.put("White",getTagContent(s));
+                tags.put(WHITE,getTagContent(s));
             }  else
             if (s.contains("[Black")){
-                tags.put("Black",getTagContent(s));
+                tags.put(BLACK,getTagContent(s));
             }  else
             if (s.contains("[Result")){
-                tags.put("Result",getTagContent(s));
+                tags.put(RESULT,getTagContent(s));
             }  else
             if (!(s.contains("[") || s.contains("]"))){
                 code.add(s);
@@ -124,7 +124,7 @@ public class ParseParty implements Runnable{
     /**
      * @return Повертає теги шо описують партію
      */
-    public Map getTags(){
+    public Map<String,String> getTags(){
         return tags;
     }
 
@@ -163,10 +163,14 @@ public class ParseParty implements Runnable{
         blackMoves = parseToMovingDescription(black);
         blackMoves.add(endParty);
 
+        ContainerFigure figures = new ContainerFigure(whiteMoves,blackMoves);
+        Party party = new Party(getTags(),figures,id);
+        ContainerPartiesService.getInstance().addParty(party);
+
     }
 
     private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
-        ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
+        ArrayList<MovingDescription> descriptions = new ArrayList<>();
         MovingDescription description;
         for(String s:move){
 
