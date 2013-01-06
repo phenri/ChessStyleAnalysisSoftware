@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Party {
     private Map<String,String> tags;
-    private ContainerFigure containerFigure;
     private int id;
     private List<MovingDescription> whiteMoves, blackMoves;
 
-    public Party(Map<String, String> tags, ContainerFigure containerFigure, int id) {
+    public Party(Map<String, String> tags, int id, List<MovingDescription> whiteMoves, List<MovingDescription> blackMoves) {
         this.tags = tags;
-        this.containerFigure = containerFigure;
         this.id = id;
+        this.whiteMoves = whiteMoves;
+        this.blackMoves = blackMoves;
     }
 
     public List<MovingDescription> getWhiteMoves() {
@@ -31,15 +31,10 @@ public class Party {
         return tags;
     }
 
-    public ContainerFigure getContainerFigure() {
-        return containerFigure;
-    }
-
     @Override
     public String toString() {
         return "Party{" +
                 "tags=" + tags +
-                ", containerFigure=" + containerFigure +
                 ", id=" + id +
                 '}';
     }

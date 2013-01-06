@@ -10,6 +10,7 @@ public class MyMenu extends JMenuBar {
 
         JMenu file = new JMenu("File");
         JMenuItem open = new OpenFile();
+        JMenuItem start = new Start();
         JMenuItem exit = new JMenuItem("Exit");
 
         JMenu game = new JMenu("Game");
@@ -19,6 +20,7 @@ public class MyMenu extends JMenuBar {
         JMenu about = new JMenu("About");
 
         file.add(open);
+        file.add(start);
         file.add(new JSeparator());
         file.add(exit);
 
