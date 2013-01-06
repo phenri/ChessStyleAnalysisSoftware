@@ -44,15 +44,12 @@ public class Mover implements Runnable {
     public void exec(){
         MovingDescription md;
         Figure figure;
-
         int len = whiteMoves.size() > blackMoves.size() ? whiteMoves.size() : blackMoves.size();
 
         try{
             for (int i = 0; i < len ;i++){
-                Thread.sleep(TIMEOUT);
-//                System.out.println("\nПочаток ходу " + (i+1));
+//                Thread.sleep(TIMEOUT);
 
-//                System.out.println("Хід білих");
                 md = whiteMoves.get(i);
 
                 if (md.isEndParty()){
@@ -75,32 +72,22 @@ public class Mover implements Runnable {
                 }
                 else {
 
-//                    System.out.println(md);
-
                     figure = logic.getWhiteFigureForMove(md);
-
-//                    System.out.println("\tБіла фігура для ходу: "+ figure);
 
                     if(figure != null)
                         moving.move(figure,md);
                     else
                         throw new NullPointerException("figure cannot be null");
 
-//                    System.out.println("\tФігура після ходу:" + figure);
-
-//                    System.out.println("Кінець ходу білих " + (i+1));
-
                     cells.repaint();
                 }
 
-
-                Thread.sleep(TIMEOUT);
+//                Thread.sleep(TIMEOUT);
 
 
                 /**
                  * Переміщення чорних фігур
                  */
-//                System.out.println("\nХід чорних" + (i+1));
                 md = blackMoves.get(i);
 
                 if (md.isEndParty()){
@@ -122,30 +109,22 @@ public class Mover implements Runnable {
                     moving.doCastling(md.getCastling(),false);
                 }
                 else {
-//                    System.out.println(md);
                     figure = logic.getBlackFigureForMove(md);
 
-//                    System.out.println("\tЧорна фігура для ходу " +figure);
                     if(figure != null)
                         moving.move(figure,md);
                     else
                     throw new NullPointerException("figure cannot be null");
-//                    System.out.println("\tФігура після ходу:" + figure);
                 }
 
                 cells.repaint();
-//                System.out.println("Кінець ходу чорних\nКінець ходу "+ (i+1));
             }
 
-        }   catch (InterruptedException | NullPointerException e){
+        }   catch (/*InterruptedException |*/ NullPointerException e){
             e.printStackTrace();
         }
 
 
-    }
-
-    public void setCells(Cells cells) {
-        this.cells = cells;
     }
 
     public void setMovingInterface(MoveFigure movingInterface) {

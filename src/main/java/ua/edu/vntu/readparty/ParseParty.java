@@ -163,8 +163,7 @@ public class ParseParty implements Runnable,Tags{
         blackMoves = parseToMovingDescription(black);
         blackMoves.add(endParty);
 
-        Logic figures = new Logic();
-        Party party = new Party(getTags(),figures,id,whiteMoves,blackMoves);
+        Party party = new Party(getTags(),id,whiteMoves,blackMoves);
         ContainerPartiesService.getInstance().addParty(party);
 
     }

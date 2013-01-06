@@ -1,9 +1,7 @@
 package ua.edu.vntu.chessboard;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.figurs.*;
-import ua.edu.vntu.descriptions.ContainerFigure;
 import ua.edu.vntu.descriptions.Position;
 import ua.edu.vntu.gui.Constants;
 
@@ -14,9 +12,6 @@ import java.util.ArrayList;
 public class Cells extends JPanel implements Constants {
 
     private Cell[][] cells = new Cell[8][8];
-
-    @Autowired
-    private ContainerFigure figures;
 
     public ArrayList<Figure> getWhiteFigures() {
         return whiteFigures;

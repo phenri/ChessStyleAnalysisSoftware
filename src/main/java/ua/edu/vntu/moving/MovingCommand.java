@@ -1,9 +1,9 @@
 package ua.edu.vntu.moving;
 
 public interface MovingCommand {
-    public void start();
-    public void pause();
-    public void stop();
-    public void next();
-    public void back();
+    public void start(int partyId);
+    public void pause(int partyId);
+    public void stop(int partyId);
+    public void next(int partyId);
+    public void back(int partyId);
 }
