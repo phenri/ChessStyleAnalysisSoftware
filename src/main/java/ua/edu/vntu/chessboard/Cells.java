@@ -7,22 +7,12 @@ import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository("cells")
 public class Cells extends JPanel implements Constants {
 
     private Cell[][] cells = new Cell[8][8];
-
-    public ArrayList<Figure> getWhiteFigures() {
-        return whiteFigures;
-    }
-
-    public ArrayList<Figure> getBlackFigures() {
-        return blackFigures;
-    }
-
-    private ArrayList<Figure> blackFigures = new ArrayList<Figure>(),
-                                whiteFigures = new ArrayList<Figure>();
 
     public Cells(){
         super();
@@ -79,10 +69,10 @@ public class Cells extends JPanel implements Constants {
         initFigures();
     }
 
-    private void initFigures(){
+    public Figures initFigures(){
         Figure f;
-        blackFigures.removeAll(blackFigures);
-        whiteFigures.removeAll(whiteFigures);
+        List<Figure> blackFigures = new ArrayList<>(),
+                     whiteFigures = new ArrayList<>();
         /**
          * black figures
          */
@@ -164,7 +154,7 @@ public class Cells extends JPanel implements Constants {
             cells[1][i].addFigure(f);
             blackFigures.add(f);
         }
-
+        return new Figures(blackFigures,whiteFigures);
     }
 
     public Cell getCellByPosition(Position p){

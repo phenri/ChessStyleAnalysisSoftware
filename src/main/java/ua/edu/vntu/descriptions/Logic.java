@@ -18,20 +18,20 @@ public class Logic {
     }
 
 
-    public Figure getWhiteFigureForMove(MovingDescription description){
-        return getFigureForMove(cells.getWhiteFigures(),description);
+    public Figure getWhiteFigureForMove(List<Figure> figures, MovingDescription description){
+        return getFigureForMove(figures,description);
     }
 
-    public Figure getBlackFigureForMove(MovingDescription description){
-        return getFigureForMove(cells.getBlackFigures(),description);
+    public Figure getBlackFigureForMove(List<Figure> figures, MovingDescription description){
+        return getFigureForMove(figures,description);
     }
 
-    public void removeWhiteFigure(Position pos){
-        removeFigure(pos, cells.getWhiteFigures());
+    public void removeWhiteFigure(List<Figure> figures, Position pos){
+        removeFigure(pos, figures);
     }
 
-    public void removeBlackFigure(Position pos){
-        removeFigure(pos, cells.getBlackFigures());
+    public void removeBlackFigure(List<Figure> figures, Position pos){
+        removeFigure(pos,figures);
     }
 
     private void removeFigure(Position pos, List<Figure> fromList){

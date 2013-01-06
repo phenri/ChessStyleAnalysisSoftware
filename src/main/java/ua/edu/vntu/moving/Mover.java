@@ -35,13 +35,15 @@ public class Mover implements Runnable {
 
     @Override
     public void run() {
-        Party party = ContainerPartiesService.getInstance().getPartyById(partyId);
-        whiteMoves = party.getWhiteMoves();
-        blackMoves = party.getBlackMoves();
+
         exec();
     }
 
     public void exec(){
+        Party party = ContainerPartiesService.getInstance().getPartyById(partyId);
+        whiteMoves = party.getWhiteMoves();
+        blackMoves = party.getBlackMoves();
+
         MovingDescription md;
         Figure figure;
         int len = whiteMoves.size() > blackMoves.size() ? whiteMoves.size() : blackMoves.size();
@@ -72,7 +74,7 @@ public class Mover implements Runnable {
                 }
                 else {
 
-                    figure = logic.getWhiteFigureForMove(md);
+                    figure = logic.getWhiteFigureForMove(party.getFigures().getWhiteFigures(), md);
 
                     if(figure != null)
                         moving.move(figure,md);
@@ -109,7 +111,7 @@ public class Mover implements Runnable {
                     moving.doCastling(md.getCastling(),false);
                 }
                 else {
-                    figure = logic.getBlackFigureForMove(md);
+                    figure = logic.getBlackFigureForMove(party.getFigures().getBlackFigures(), md);
 
                     if(figure != null)
                         moving.move(figure,md);
