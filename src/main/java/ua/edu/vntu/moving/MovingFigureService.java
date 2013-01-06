@@ -20,13 +20,9 @@ public class MovingFigureService implements MoveFigure{
     @Override
     public boolean move(Figure figure, MovingDescription description) {
 
-        Position pos = description.getPosition();
-        Cell cell = cells.getCellByPosition(pos);
+        cells.paintFigure(figure,description.getPosition());
 
-        figure.getParent().reset();
-        cell.addFigure(figure);
         return true;
-
     }
 
     @Override
@@ -71,21 +67,16 @@ public class MovingFigureService implements MoveFigure{
     private void replacement(Position pos[]){
 
         Figure king, rook;
-        Cell cellRook,newCellRook,cellKing,newCellKing;
+        Cell cellRook,cellKing ;
 
         cellKing = cells.getCellByPosition(pos[0]);
         cellRook = cells.getCellByPosition(pos[1]);
-        newCellKing = cells.getCellByPosition(pos[2]);
-        newCellRook = cells.getCellByPosition(pos[3]);
 
         king = cellKing.getFigure();
         rook = cellRook.getFigure();
 
-        cellKing.reset();
-        cellRook.reset();
-        newCellKing.addFigure(king);
-        newCellRook.addFigure(rook);
+        cells.paintFigure(king,pos[2]);
+        cells.paintFigure(rook,pos[3]);
 
-        cells.repaint();
     }
 }
