@@ -3,14 +3,10 @@ package ua.edu.vntu.moving;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.descriptions.ContainerFigure;
-import ua.edu.vntu.descriptions.EndParty;
-import ua.edu.vntu.descriptions.MovingDescription;
-import ua.edu.vntu.readparty.Parser;
+import ua.edu.vntu.descriptions.*;
 
 import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Mover implements Runnable {
 
@@ -21,24 +17,27 @@ public class Mover implements Runnable {
 
     public static final long TIMEOUT = 500;
 
-    private ArrayList<MovingDescription> blackMoves, whiteMoves;
+    private List<MovingDescription> blackMoves, whiteMoves;
 
-    private ContainerFigure containerFigure;
+    private Logic logic;
+
+    private int partyId;
 
     public Mover(){
 
     }
 
-    public void startParty(File f) {
+    public void startParty(int partyId) {
         cells.restart();
-        Parser parser = new Parser(f);
-//        blackMoves = parser.getBlackMoves();
-//        whiteMoves = parser.getWhiteMoves();
+        this.partyId = partyId;
         new Thread(this).start();
     }
 
     @Override
     public void run() {
+        Party party = ContainerPartiesService.getInstance().getPartyById(partyId);
+        whiteMoves = party.getWhiteMoves();
+        blackMoves = party.getBlackMoves();
         exec();
     }
 
@@ -78,7 +77,7 @@ public class Mover implements Runnable {
 
 //                    System.out.println(md);
 
-                    figure = containerFigure.getWhiteFigureForMove(md);
+                    figure = logic.getWhiteFigureForMove(md);
 
 //                    System.out.println("\tБіла фігура для ходу: "+ figure);
 
@@ -124,7 +123,7 @@ public class Mover implements Runnable {
                 }
                 else {
 //                    System.out.println(md);
-                    figure = containerFigure.getBlackFigureForMove(md);
+                    figure = logic.getBlackFigureForMove(md);
 
 //                    System.out.println("\tЧорна фігура для ходу " +figure);
                     if(figure != null)
@@ -153,7 +152,7 @@ public class Mover implements Runnable {
         this.moving = movingInterface;
     }
 
-    public void setFigures(ContainerFigure figures) {
-        this.containerFigure = figures;
+    public void setFigures(Logic figures) {
+        this.logic = figures;
     }
 }

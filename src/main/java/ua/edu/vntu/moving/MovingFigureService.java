@@ -8,12 +8,12 @@ import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.*;
 
 @Repository ("movingInterface")
-public class MovingService implements MoveFigure{
+public class MovingFigureService implements MoveFigure{
 
     @Autowired
     private Cells cells;
 
-    public MovingService(){
+    public MovingFigureService(){
 
     }
 

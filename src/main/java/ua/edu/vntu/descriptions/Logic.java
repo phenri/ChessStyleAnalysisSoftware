@@ -9,21 +9,14 @@ import ua.edu.vntu.chessboard.figurs.Rook;
 
 import java.util.List;
 
-public class ContainerFigure{
-    private List<Figure> whiteFigures, blackFigures;
-
-    private List<MovingDescription> whiteMoves, blackMoves;
+public class Logic {
 
     @Autowired
     private Cells cells;
 
-    public ContainerFigure() {
+    public Logic() {
     }
 
-    public ContainerFigure(List<MovingDescription> whiteMoves, List<MovingDescription> blackMoves) {
-        this.whiteMoves = whiteMoves;
-        this.blackMoves = blackMoves;
-    }
 
     public Figure getWhiteFigureForMove(MovingDescription description){
         return getFigureForMove(cells.getWhiteFigures(),description);
@@ -34,11 +27,11 @@ public class ContainerFigure{
     }
 
     public void removeWhiteFigure(Position pos){
-        removeFigure(pos, whiteFigures);
+        removeFigure(pos, cells.getWhiteFigures());
     }
 
     public void removeBlackFigure(Position pos){
-        removeFigure(pos, blackFigures);
+        removeFigure(pos, cells.getBlackFigures());
     }
 
     private void removeFigure(Position pos, List<Figure> fromList){
@@ -186,11 +179,8 @@ public class ContainerFigure{
 
     @Override
     public String toString() {
-        return "ContainerFigure{" +
-                "blackMoves=" + blackMoves +
-                ", whiteMoves=" + whiteMoves +
-                ", blackFigures=" + blackFigures +
-                ", whiteFigures=" + whiteFigures +
+        return "Logic{" +
+                "cells=" + cells +
                 '}';
     }
 }

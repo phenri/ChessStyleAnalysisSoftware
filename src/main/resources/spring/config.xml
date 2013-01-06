@@ -14,7 +14,7 @@
         <property name="mover" ref="mover"/>
     </bean>
 
-    <bean id="figures" class="ua.edu.vntu.descriptions.ContainerFigure"/>
+    <bean id="figures" class="ua.edu.vntu.descriptions.Logic"/>
 
     <bean id="board" class="ua.edu.vntu.chessboard.Chessboard">
         <property name="cells" ref="cells"/>
