@@ -14,13 +14,18 @@ public class Cells extends JPanel implements Constants {
 
     private Cell[][] cells = new Cell[8][8];
 
+    private Figures figures;
+
     public Cells(){
         super();
         setLayout(null);
         initCells();
-        initFigures();
         setBounds(30, 30, CELL_SIZE * 8, CELL_SIZE * 8);
 
+    }
+
+    public Figures getFigures() {
+        return figures;
     }
 
     private void initCells(){
@@ -154,7 +159,8 @@ public class Cells extends JPanel implements Constants {
             cells[1][i].addFigure(f);
             blackFigures.add(f);
         }
-        return new Figures(blackFigures,whiteFigures);
+        figures = new Figures(blackFigures,whiteFigures);
+        return figures;
     }
 
     public Cell getCellByPosition(Position p){

@@ -3,6 +3,7 @@ package ua.edu.vntu.moving;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.descriptions.*;
 
 import javax.swing.*;
@@ -50,7 +51,7 @@ public class Mover implements Runnable {
 
         try{
             for (int i = 0; i < len ;i++){
-//                Thread.sleep(TIMEOUT);
+                Thread.sleep(TIMEOUT);
 
                 md = whiteMoves.get(i);
 
@@ -74,17 +75,19 @@ public class Mover implements Runnable {
                 }
                 else {
 
-                    figure = logic.getWhiteFigureForMove(party.getFigures().getWhiteFigures(), md);
+                    figure = logic.getWhiteFigureForMove(md);
 
                     if(figure != null)
                         moving.move(figure,md);
-                    else
+                    else{
+                        System.out.println(md);
                         throw new NullPointerException("figure cannot be null");
+                    }
 
                     cells.repaint();
                 }
 
-//                Thread.sleep(TIMEOUT);
+                Thread.sleep(TIMEOUT);
 
 
                 /**
@@ -111,7 +114,7 @@ public class Mover implements Runnable {
                     moving.doCastling(md.getCastling(),false);
                 }
                 else {
-                    figure = logic.getBlackFigureForMove(party.getFigures().getBlackFigures(), md);
+                    figure = logic.getBlackFigureForMove(md);
 
                     if(figure != null)
                         moving.move(figure,md);
@@ -122,7 +125,7 @@ public class Mover implements Runnable {
                 cells.repaint();
             }
 
-        }   catch (/*InterruptedException |*/ NullPointerException e){
+        }   catch (InterruptedException | NullPointerException e){
             e.printStackTrace();
         }
 

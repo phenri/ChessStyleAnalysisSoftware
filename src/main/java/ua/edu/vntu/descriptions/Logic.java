@@ -18,12 +18,12 @@ public class Logic {
     }
 
 
-    public Figure getWhiteFigureForMove(List<Figure> figures, MovingDescription description){
-        return getFigureForMove(figures,description);
+    public Figure getWhiteFigureForMove(MovingDescription description){
+        return getFigureForMove(cells.getFigures().getWhiteFigures(),description);
     }
 
-    public Figure getBlackFigureForMove(List<Figure> figures, MovingDescription description){
-        return getFigureForMove(figures,description);
+    public Figure getBlackFigureForMove(MovingDescription description){
+        return getFigureForMove(cells.getFigures().getBlackFigures(),description);
     }
 
     public void removeWhiteFigure(List<Figure> figures, Position pos){
