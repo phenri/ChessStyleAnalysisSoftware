@@ -39,7 +39,6 @@ public class Mover implements Runnable {
 
     @Override
     public void run() {
-
         exec();
     }
 
@@ -55,89 +54,66 @@ public class Mover implements Runnable {
         try{
             for (int i = 0; i < len ;i++){
                 Thread.sleep(TIMEOUT);
-
                 md = whiteMoves.get(i);
-
-                if (md.isEndParty()){
-                    String res = "";
-                    if (md.getEndParty() == EndParty.WHITE_WIN)
-                        res = "Виграли білі";
-                    else
-                    if (md.getEndParty() == EndParty.BLACK_WIN)
-                        res = "Виграли  чорні";
-                    else
-                    if (md.getEndParty() == EndParty.NOBODY)
-                        res = "Нічия";
-
-                    JOptionPane.showMessageDialog(null,res,"Кінець партії",JOptionPane.INFORMATION_MESSAGE);
+                if(this.idEnd(md))
                     break;
-                }
-
-                if(md.isCastling()){
-                    moveFigure.doCastling(md.getCastling(), true);
-                }
-                else {
-
-                    figure = logic.getWhiteFigureForMove(md);
-                    if(md.isBeat()){
-                        logic.removeBlackFigure(md.getPosition());
-                    }
-
-                    if(figure != null)
-                        moveFigure.move(figure,md);
-                    else{
-                        System.out.println(md);
-                        throw new NullPointerException("figure cannot be null");
-                    }
-
-                    cells.repaint();
-                }
-
+                doMove(md,true);
                 Thread.sleep(TIMEOUT);
-
-
-                /**
-                 * Переміщення чорних фігур
-                 */
                 md = blackMoves.get(i);
-
-                if (md.isEndParty()){
-                    String res = "";
-                    if (md.getEndParty() == EndParty.WHITE_WIN)
-                        res = "Виграли білі";
-                    else
-                    if (md.getEndParty() == EndParty.BLACK_WIN)
-                        res = "Виграли  чорні";
-                    else
-                    if (md.getEndParty() == EndParty.NOBODY)
-                        res = "Нічия";
-
-                    JOptionPane.showMessageDialog(null,res,"Кінець партії",JOptionPane.INFORMATION_MESSAGE);
+                if(this.idEnd(md))
                     break;
-                }
-
-                if(md.isCastling()){
-                    moveFigure.doCastling(md.getCastling(), false);
-                }
-                else {
-                    figure = logic.getBlackFigureForMove(md);
-                    if(md.isBeat()){
-                        logic.removeWhiteFigure(md.getPosition());
-                    }
-
-                    if(figure != null)
-                        moveFigure.move(figure,md);
-                    else
-                    throw new NullPointerException("figure cannot be null");
-                }
-
-                cells.repaint();
+                doMove(md,false);
             }
 
         }   catch (InterruptedException | NullPointerException e){
             e.printStackTrace();
         }
 
+    }
+
+    public void doMove(MovingDescription md, boolean isWhite){
+        Figure figure;
+
+        if(md.isCastling()){
+            moveFigure.doCastling(md.getCastling(), isWhite);
+        }
+        else {
+            if(isWhite){
+                figure = logic.getWhiteFigureForMove(md);
+                if(md.isBeat()){
+                    logic.removeBlackFigure(md.getPosition());
+                }
+            }
+            else {
+                figure = logic.getBlackFigureForMove(md);
+                if(md.isBeat()){
+                    logic.removeWhiteFigure(md.getPosition());
+                }
+            }
+            if(figure != null)
+                moveFigure.move(figure,md);
+            else
+                throw new NullPointerException("Figure cannot be null " + md);
+        }
+
+    }
+
+    private boolean idEnd(MovingDescription md){
+        if (md.isEndParty()){
+            String res = "";
+            if (md.getEndParty() == EndParty.WHITE_WIN)
+                res = "Виграли білі";
+            else
+            if (md.getEndParty() == EndParty.BLACK_WIN)
+                res = "Виграли  чорні";
+            else
+            if (md.getEndParty() == EndParty.NOBODY)
+                res = "Нічия";
+
+            JOptionPane.showMessageDialog(null,res,"Кінець партії",JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+        return false;
     }
           
 }

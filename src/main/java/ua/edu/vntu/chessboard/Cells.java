@@ -178,6 +178,7 @@ public class Cells extends JPanel implements Constants {
     public void paintFigure(Figure figure,Position position){
         figure.getParent().reset();
         getCellByPosition(position).addFigure(figure);
+        this.repaint();
     }
 
 }
