@@ -1,6 +1,7 @@
 package ua.edu.vntu.descriptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
@@ -9,6 +10,7 @@ import ua.edu.vntu.chessboard.figurs.Rook;
 
 import java.util.List;
 
+@Repository("logic")
 public class Logic {
 
     @Autowired
@@ -26,12 +28,12 @@ public class Logic {
         return getFigureForMove(cells.getFigures().getBlackFigures(),description);
     }
 
-    public void removeWhiteFigure(List<Figure> figures, Position pos){
-        removeFigure(pos, figures);
+    public void removeWhiteFigure(Position pos){
+        removeFigure(pos, cells.getFigures().getWhiteFigures());
     }
 
-    public void removeBlackFigure(List<Figure> figures, Position pos){
-        removeFigure(pos,figures);
+    public void removeBlackFigure(Position pos){
+        removeFigure(pos,cells.getFigures().getBlackFigures());
     }
 
     private void removeFigure(Position pos, List<Figure> fromList){

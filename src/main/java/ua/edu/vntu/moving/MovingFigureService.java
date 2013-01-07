@@ -7,7 +7,7 @@ import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.*;
 
-@Repository ("movingInterface")
+@Repository ("moveFigure")
 public class MovingFigureService implements MoveFigure{
 
     @Autowired
@@ -77,6 +77,8 @@ public class MovingFigureService implements MoveFigure{
 
         cells.paintFigure(king,pos[2]);
         cells.paintFigure(rook,pos[3]);
+
+        cells.repaint();
 
     }
 }

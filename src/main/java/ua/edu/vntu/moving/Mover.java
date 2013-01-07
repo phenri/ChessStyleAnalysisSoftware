@@ -1,25 +1,28 @@
 package ua.edu.vntu.moving;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.descriptions.*;
 
 import javax.swing.*;
 import java.util.List;
 
+@Repository("mover")
 public class Mover implements Runnable {
 
     @Autowired
     private Cells cells;
 
-    private MoveFigure moving;
+    @Autowired
+    private MoveFigure moveFigure;
 
     public static final long TIMEOUT = 500;
 
     private List<MovingDescription> blackMoves, whiteMoves;
 
+    @Autowired
     private Logic logic;
 
     private int partyId;
@@ -71,14 +74,17 @@ public class Mover implements Runnable {
                 }
 
                 if(md.isCastling()){
-                    moving.doCastling(md.getCastling(),true);
+                    moveFigure.doCastling(md.getCastling(), true);
                 }
                 else {
 
                     figure = logic.getWhiteFigureForMove(md);
+                    if(md.isBeat()){
+                        logic.removeBlackFigure(md.getPosition());
+                    }
 
                     if(figure != null)
-                        moving.move(figure,md);
+                        moveFigure.move(figure,md);
                     else{
                         System.out.println(md);
                         throw new NullPointerException("figure cannot be null");
@@ -111,13 +117,16 @@ public class Mover implements Runnable {
                 }
 
                 if(md.isCastling()){
-                    moving.doCastling(md.getCastling(),false);
+                    moveFigure.doCastling(md.getCastling(), false);
                 }
                 else {
                     figure = logic.getBlackFigureForMove(md);
+                    if(md.isBeat()){
+                        logic.removeWhiteFigure(md.getPosition());
+                    }
 
                     if(figure != null)
-                        moving.move(figure,md);
+                        moveFigure.move(figure,md);
                     else
                     throw new NullPointerException("figure cannot be null");
                 }
@@ -129,14 +138,6 @@ public class Mover implements Runnable {
             e.printStackTrace();
         }
 
-
     }
-
-    public void setMovingInterface(MoveFigure movingInterface) {
-        this.moving = movingInterface;
-    }
-
-    public void setFigures(Logic figures) {
-        this.logic = figures;
-    }
+          
 }

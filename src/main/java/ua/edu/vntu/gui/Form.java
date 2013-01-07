@@ -1,6 +1,7 @@
 package ua.edu.vntu.gui;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.menu.MyMenu;
 import ua.edu.vntu.moving.Mover;
 
@@ -10,10 +11,11 @@ import java.awt.*;
 public class Form extends JFrame implements Constants {
     private MainField field;
 
-    public void setMover(Mover mover) {
-        this.mover = mover;
-    }
+//    public void setMover(Mover mover) {
+//        this.mover = mover;
+//    }
 
+    @Autowired
     private Mover mover;
 
     public Form(){
