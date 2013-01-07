@@ -19,23 +19,45 @@ public class Logic {
     public Logic() {
     }
 
-
+    /**
+     * Повертає білу фігуру для ходу
+     * @param description обєкт що описує хід
+     * @return фігура для наступного ходу
+     */
     public Figure getWhiteFigureForMove(MovingDescription description){
         return getFigureForMove(cells.getFigures().getWhiteFigures(),description);
     }
 
+    /**
+     * Повертає чорну фігуру для ходу
+     * @param description обєкт що описує хід
+     * @return фігура для наступного ходу
+     */
     public Figure getBlackFigureForMove(MovingDescription description){
         return getFigureForMove(cells.getFigures().getBlackFigures(),description);
     }
 
+    /**
+     * Метод для видалення білої фігури з поля
+     * @param pos позиція з якої потрібно видалити фігуру
+     */
     public void removeWhiteFigure(Position pos){
         removeFigure(pos, cells.getFigures().getWhiteFigures());
     }
 
+    /**
+     * Метод для видалення чорної фігури з поля
+     * @param pos позиція з якої потрібно видалити фігуру
+     */
     public void removeBlackFigure(Position pos){
         removeFigure(pos,cells.getFigures().getBlackFigures());
     }
 
+    /**
+     * Метод для видалення фігури зі списку, якщо фігура побита
+     * @param pos позиція з якої потрібно видалити фігуру
+     * @param fromList з якого списку потрбіно видалити фігуру
+     */
     private void removeFigure(Position pos, List<Figure> fromList){
         Cell c = cells.getCellByPosition(pos);
         Figure f = c.getFigure();
@@ -44,6 +66,12 @@ public class Logic {
         fromList.remove(f);
     }
 
+    /**
+     * Метод шукає фігуру для якої доступна позиція що описана в @param description, аналізує доступні позиції і повертає фігуру
+     * @param figures список фігур з якого буде братись фігура (білі або чорні)
+     * @param description обєкт що описує переміщення. Містить інформацію про хід.
+     * @return повертає фігуру для якої доступний хід
+     */
     private Figure getFigureForMove(List<Figure> figures, MovingDescription description){
 
         FigureName name = description.getFigureName();
@@ -117,15 +145,25 @@ public class Logic {
         return null;
     }
 
-    private boolean isEmptyPath(Rook rook, Position to){
-        if (!rook.isAvailablePosition(to)){
+    /**
+     * Перевіряє чи немає на шляху у фігури що має рухитись до місця призначення, якоїсь іншої фігури
+     * що може створити перешкоду
+     *
+     * Даний метод тільки для тури і ферзя
+     *
+     * @param figure Фігура що перевіряється
+     * @param to позиція на яку фігура має стати
+     * @return якщо шлях вільний повертає true інакше false
+     */
+    private boolean isEmptyPath(Figure figure, Position to){
+        if (!figure.isAvailablePosition(to)){
             return false;
         }
 
-        if(rook.getPosition().getX() == to.getX()){
-            int begin = rook.getPosition().getY() < to.getY() ? rook.getPosition().getY() : to.getY();
-            int end = rook.getPosition().getY() > to.getY() ? rook.getPosition().getY() : to.getY();
-            if (rook.getPosition().getY() > to.getY()){
+        if(figure.getPosition().getX() == to.getX()){
+            int begin = figure.getPosition().getY() < to.getY() ? figure.getPosition().getY() : to.getY();
+            int end = figure.getPosition().getY() > to.getY() ? figure.getPosition().getY() : to.getY();
+            if (figure.getPosition().getY() > to.getY()){
                 end--;
             }
             else{
@@ -136,7 +174,7 @@ public class Logic {
                 Cell c = cells.getCellByPosition(p);
                 if (!c.isEmpty()){
                     if (c == cells.getCellByPosition(to)){
-                        if(rook.isWhite() == c.getFigure().isWhite()){
+                        if(figure.isWhite() == c.getFigure().isWhite()){
                             return false;
                         }
                         else continue;
@@ -148,10 +186,10 @@ public class Logic {
 
         }
         else {
-            if(rook.getPosition().getY() == to.getY()){
-                char begin = rook.getPosition().getX() < to.getX() ? rook.getPosition().getX() : to.getX();
-                char end = rook.getPosition().getX() > to.getX() ? rook.getPosition().getX() : to.getX();
-                if (rook.getPosition().getX() > to.getX()){
+            if(figure.getPosition().getY() == to.getY()){
+                char begin = figure.getPosition().getX() < to.getX() ? figure.getPosition().getX() : to.getX();
+                char end = figure.getPosition().getX() > to.getX() ? figure.getPosition().getX() : to.getX();
+                if (figure.getPosition().getX() > to.getX()){
                     end--;
                 }
                 else{
@@ -163,7 +201,7 @@ public class Logic {
                     Cell c = cells.getCellByPosition(p);
                     if (!c.isEmpty()){
                         if (c == cells.getCellByPosition(to)){
-                            if(rook.isWhite() == c.getFigure().isWhite()){
+                            if(figure.isWhite() == c.getFigure().isWhite()){
                                 return false;
                             }
                             else continue;

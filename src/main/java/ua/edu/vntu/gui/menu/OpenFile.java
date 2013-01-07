@@ -1,9 +1,7 @@
 package ua.edu.vntu.gui.menu;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.Main;
 import ua.edu.vntu.gui.Form;
-import ua.edu.vntu.moving.Mover;
 import ua.edu.vntu.readparty.Parser;
 
 import javax.swing.*;
@@ -19,12 +17,6 @@ public class OpenFile extends JMenuItem implements ActionListener{
         addActionListener(this);
     }
 
-    public void setForm(JFrame form){
-        this.form = form;
-        repaint();
-    }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Hello");
@@ -37,11 +29,7 @@ public class OpenFile extends JMenuItem implements ActionListener{
 
         File f =  fileChooser.getSelectedFile();
 
-        Parser parser = new Parser(f);
+        new Parser(f);
 
-//        if (f != null){
-//            Mover mover = (Mover) Main.context.getBean("mover");
-//            mover.startParty(1);
-//        }
     }
 }

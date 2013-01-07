@@ -48,21 +48,21 @@ public class Mover implements Runnable {
         blackMoves = party.getBlackMoves();
 
         MovingDescription md;
-        Figure figure;
         int len = whiteMoves.size() > blackMoves.size() ? whiteMoves.size() : blackMoves.size();
 
         try{
             for (int i = 0; i < len ;i++){
                 Thread.sleep(TIMEOUT);
                 md = whiteMoves.get(i);
-                if(this.idEnd(md))
+                if(this.isEnd(md)){
                     break;
+                }
                 doMove(md,true);
                 Thread.sleep(TIMEOUT);
                 md = blackMoves.get(i);
-                if(this.idEnd(md))
+                if(this.isEnd(md))
                     break;
-                doMove(md,false);
+                doMove(md, false);
             }
 
         }   catch (InterruptedException | NullPointerException e){
@@ -98,7 +98,7 @@ public class Mover implements Runnable {
 
     }
 
-    private boolean idEnd(MovingDescription md){
+    private boolean isEnd(MovingDescription md){
         if (md.isEndParty()){
             String res = "";
             if (md.getEndParty() == EndParty.WHITE_WIN)

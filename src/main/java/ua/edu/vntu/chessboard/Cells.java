@@ -28,6 +28,10 @@ public class Cells extends JPanel implements Constants {
         return figures;
     }
 
+    /**
+     * Метод для ініціалізації клітинок
+     */
+
     private void initCells(){
 
         int start = 0;
@@ -74,6 +78,10 @@ public class Cells extends JPanel implements Constants {
         initFigures();
     }
 
+    /**
+     * Метод для ініціалізації фігур для нової партії
+     * @return поертає обєкт що містить білі і чорні фігури
+     */
     public Figures initFigures(){
         Figure f;
         List<Figure> blackFigures = new ArrayList<>(),
@@ -176,7 +184,8 @@ public class Cells extends JPanel implements Constants {
     }
 
     public void paintFigure(Figure figure,Position position){
-        figure.getParent().reset();
+        if(figure.getParent() != null)
+            figure.getParent().reset();
         getCellByPosition(position).addFigure(figure);
         this.repaint();
     }

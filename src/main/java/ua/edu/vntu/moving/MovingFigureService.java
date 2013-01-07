@@ -1,11 +1,16 @@
 package ua.edu.vntu.moving;
 
+import com.sun.swing.internal.plaf.metal.resources.metal_de;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cell;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.chessboard.figurs.Queen;
 import ua.edu.vntu.descriptions.*;
+
+import java.util.List;
 
 @Repository ("moveFigure")
 public class MovingFigureService implements MoveFigure{
@@ -20,6 +25,15 @@ public class MovingFigureService implements MoveFigure{
     @Override
     public boolean move(Figure figure, MovingDescription description) {
 
+        if (description.isPawnToEnd()){
+            List<Figure> figures = figure.isWhite() ? cells.getFigures().getWhiteFigures() : cells.getFigures().getBlackFigures();
+            figure.getParent().reset();
+            figures.remove(figure);
+            Figure f = getNewFigure(description.getNewFigureName(),figure.isWhite());
+            figures.add(f);
+            cells.paintFigure(f,description.getPosition());
+            return true;
+        }
         cells.paintFigure(figure,description.getPosition());
 
         return true;
@@ -80,5 +94,9 @@ public class MovingFigureService implements MoveFigure{
 
         cells.repaint();
 
+    }
+
+    private Figure getNewFigure(FigureName name,boolean isWhite){
+        return new Queen(isWhite);
     }
 }
