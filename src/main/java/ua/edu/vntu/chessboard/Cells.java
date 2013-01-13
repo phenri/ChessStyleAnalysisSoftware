@@ -20,6 +20,7 @@ public class Cells extends JPanel implements Constants {
         super();
         setLayout(null);
         initCells();
+        initFigures();
         setBounds(30, 30, CELL_SIZE * 8, CELL_SIZE * 8);
 
     }

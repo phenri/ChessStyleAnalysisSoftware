@@ -1,6 +1,6 @@
 package ua.edu.vntu.gui.menu;
 
-import ua.edu.vntu.Main;
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.Form;
 import ua.edu.vntu.readparty.Parser;
 
@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class OpenFile extends JMenuItem implements ActionListener{
-    private JFrame form;
+
+    @Autowired
+    private Form form;
 
     public OpenFile(){
         super("Open file...");
@@ -21,7 +23,6 @@ public class OpenFile extends JMenuItem implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         System.out.println("Hello");
 
-        form = (Form) Main.context.getBean("form");
         JFileChooser fileChooser = new JFileChooser();
         File file = new File("D:\\VNTU\\bachelor thesis\\ChessStyleAnalysisSoftware\\tmp");
         fileChooser.setCurrentDirectory(file);

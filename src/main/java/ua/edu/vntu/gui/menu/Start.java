@@ -1,6 +1,9 @@
 package ua.edu.vntu.gui.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ua.edu.vntu.Main;
 import ua.edu.vntu.moving.Mover;
 

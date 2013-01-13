@@ -11,13 +11,6 @@ import java.awt.*;
 public class Form extends JFrame implements Constants {
     private MainField field;
 
-//    public void setMover(Mover mover) {
-//        this.mover = mover;
-//    }
-
-    @Autowired
-    private Mover mover;
-
     public Form(){
         super("ChessStyleAnalysisSoftware");
 

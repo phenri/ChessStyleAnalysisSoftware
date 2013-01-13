@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.containers.SaverParty;
 import ua.edu.vntu.descriptions.*;
 
 import javax.swing.*;
@@ -20,7 +21,8 @@ public class Mover implements Runnable {
 
     public static final long TIMEOUT = 500;
 
-    private List<MovingDescription> blackMoves, whiteMoves;
+    @Autowired
+    private SaverParty saverParty;
 
     @Autowired
     private Logic logic;
@@ -44,6 +46,9 @@ public class Mover implements Runnable {
 
     public void exec(){
         Party party = ContainerPartiesService.getInstance().getPartyById(partyId);
+
+        List<MovingDescription> blackMoves, whiteMoves;
+
         whiteMoves = party.getWhiteMoves();
         blackMoves = party.getBlackMoves();
 
@@ -90,8 +95,10 @@ public class Mover implements Runnable {
                     logic.removeWhiteFigure(md.getPosition());
                 }
             }
-            if(figure != null)
+            if(figure != null){
+                saverParty.save(cells.getFigures());
                 moveFigure.move(figure,md);
+            }
             else
                 throw new NullPointerException("Figure cannot be null " + md);
         }

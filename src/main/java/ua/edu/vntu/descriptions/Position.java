@@ -8,6 +8,11 @@ public class Position {
 
     private byte number;
 
+    public Position(Position position){
+        this.letter = position.getX();
+        this.number = position.getY();
+    }
+
     public Position(char letter, int number){
 
         try{

@@ -1,6 +1,5 @@
 package ua.edu.vntu.moving;
 
-import com.sun.swing.internal.plaf.metal.resources.metal_de;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cell;
