@@ -1,4 +1,4 @@
-package ua.edu.vntu.descriptions;
+package ua.edu.vntu.moving.descriptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
