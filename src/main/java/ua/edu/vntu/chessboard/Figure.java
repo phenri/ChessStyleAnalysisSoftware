@@ -26,10 +26,11 @@ public abstract class Figure extends JPanel implements Constants{
         return true;
     }
 
-    protected void setParent(Cell cell){
+    public void setParent(Cell cell){
         parent = cell;
     }
-    public Cell getParent(){
+
+    public Cell getParentCell(){
         return parent;
     }
 

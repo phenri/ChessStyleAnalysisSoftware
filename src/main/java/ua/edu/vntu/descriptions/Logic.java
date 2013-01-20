@@ -1,11 +1,9 @@
 package ua.edu.vntu.descriptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import ua.edu.vntu.chessboard.Cell;
-import ua.edu.vntu.chessboard.Cells;
-import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.chessboard.*;
 import ua.edu.vntu.chessboard.figurs.Rook;
 
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 public class Logic {
 
     @Autowired
+    @Qualifier("virtualCells")
     private Cells cells;
 
     public Logic() {
@@ -99,6 +98,7 @@ public class Logic {
 
             if (name == FigureName.QUEEN && f.getFigureName() == FigureName.QUEEN)
                 return f;
+                //TODO: Зробити для ферзя перевірку доступного ходу як для тури по порожньому шляху для того, якщо на дошці знаходисть декілька ферзів
 
             if (name == FigureName.KING && f.getFigureName() == FigureName.KING)
                 return f;

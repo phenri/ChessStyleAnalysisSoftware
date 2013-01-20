@@ -1,6 +1,5 @@
 package ua.edu.vntu.chessboard;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ import java.awt.*;
 public class Chessboard extends JPanel implements Constants {
 
 //    @Autowired
-    private Cells cells;
+    private CellsImpl cells;
 
     public Chessboard(){
         super(true);
@@ -21,7 +20,7 @@ public class Chessboard extends JPanel implements Constants {
 
     }
 
-    public void setCells(Cells cells){
+    public void setCells(CellsImpl cells){
         this.cells = cells;
         add(this.cells);
         initBoard();

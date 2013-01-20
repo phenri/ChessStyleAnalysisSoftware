@@ -1,8 +1,10 @@
 package ua.edu.vntu.moving;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.Cells;
+import ua.edu.vntu.chessboard.CellsImpl;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.containers.SaverParty;
 import ua.edu.vntu.descriptions.*;
@@ -14,12 +16,13 @@ import java.util.List;
 public class Mover implements Runnable {
 
     @Autowired
+    @Qualifier("virtualCells")
     private Cells cells;
 
     @Autowired
     private MoveFigure moveFigure;
 
-    public static final long TIMEOUT = 500;
+    public static final long TIMEOUT = 1;
 
     @Autowired
     private SaverParty saverParty;

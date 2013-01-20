@@ -12,8 +12,6 @@ public class ReadyParty implements SaverParty,ContainerAllMoves {
 
     private List<List<FigurePosition>> moves = new ArrayList<>();
 
-    private int currentIndex;
-
     @Override
     public void save(Figures figures){
 
@@ -36,34 +34,34 @@ public class ReadyParty implements SaverParty,ContainerAllMoves {
             FigurePosition figurePosition = new FigurePosition(f.getFigureName(),new Position(f.getPosition()));
             toSave.add(figurePosition);
         }
-        System.out.println("Чорні = " + toSave);
+//        System.out.println("Чорні = " + toSave);
         moves.add(toSave);
 //        System.out.println(moves);
     }
 
     @Override
-    public Map<Figure, Position> getAction(int index) {
-        return null;
+    public List<FigurePosition> getAction(int index) {
+        return moves.get(index);
     }
 
     @Override
-    public Map<Figure, Position> getNextAction() {
-        return null;
+    public List<FigurePosition> getNextAction() {
+        return moves.listIterator().next();
     }
 
     @Override
-    public Map<Figure, Position> getPreviosAction() {
-        return null;
+    public List<FigurePosition> getPreviosAction() {
+        return moves.listIterator().previous();
     }
 
     @Override
-    public Map<Figure, Position> toBegin() {
-        return null;
+    public List<FigurePosition> toBegin() {
+        return moves.get(0);
     }
 
     @Override
-    public Map<Figure, Position> toEnd() {
-        return null;
+    public List<FigurePosition> toEnd() {
+        return moves.get(moves.size()-1);
     }
 
     @Override

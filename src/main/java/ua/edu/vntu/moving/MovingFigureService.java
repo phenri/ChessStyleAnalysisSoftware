@@ -1,11 +1,9 @@
 package ua.edu.vntu.moving;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import ua.edu.vntu.chessboard.Cell;
-import ua.edu.vntu.chessboard.Cells;
-import ua.edu.vntu.chessboard.Figure;
-import ua.edu.vntu.chessboard.FigureName;
+import ua.edu.vntu.chessboard.*;
 import ua.edu.vntu.chessboard.figurs.Queen;
 import ua.edu.vntu.descriptions.*;
 
@@ -15,6 +13,7 @@ import java.util.List;
 public class MovingFigureService implements MoveFigure{
 
     @Autowired
+    @Qualifier("virtualCells")
     private Cells cells;
 
     public MovingFigureService(){
@@ -26,7 +25,7 @@ public class MovingFigureService implements MoveFigure{
 
         if (description.isPawnToEnd()){
             List<Figure> figures = figure.isWhite() ? cells.getFigures().getWhiteFigures() : cells.getFigures().getBlackFigures();
-            figure.getParent().reset();
+            figure.getParentCell().reset();
             figures.remove(figure);
             Figure f = getNewFigure(description.getNewFigureName(),figure.isWhite());
             figures.add(f);
@@ -91,11 +90,12 @@ public class MovingFigureService implements MoveFigure{
         cells.paintFigure(king,pos[2]);
         cells.paintFigure(rook,pos[3]);
 
-        cells.repaint();
+//        cells.repaint();
 
     }
 
     private Figure getNewFigure(FigureName name,boolean isWhite){
         return new Queen(isWhite);
+        //TODO: зробити щоб повертало фігуру за вказаним іменем
     }
 }
