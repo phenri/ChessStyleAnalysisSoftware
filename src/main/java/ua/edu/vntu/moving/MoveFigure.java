@@ -1,8 +1,8 @@
 package ua.edu.vntu.moving;
 
+import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.Castling;
 import ua.edu.vntu.descriptions.MovingDescription;
-import ua.edu.vntu.chessboard.Figure;
 
 public interface MoveFigure{
 

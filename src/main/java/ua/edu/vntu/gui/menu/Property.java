@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuProperty extends JMenuItem implements ActionListener {
+public class Property extends JMenuItem implements ActionListener {
 
-    public MenuProperty() {
+    public Property() {
         super("Properties");
         addActionListener(this);
     }

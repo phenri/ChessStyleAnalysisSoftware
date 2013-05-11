@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Form extends JFrame implements Constants {
-    private MainField field;
+    private MainField field = new MainField();
 
     public Form(){
         super("ChessStyleAnalysisSoftware");
@@ -19,10 +19,13 @@ public class Form extends JFrame implements Constants {
         setVisible(true);
         setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT + 40));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        getContentPane().add(field);
+
     }
     public void setField(MainField mainField){
-        this.field = mainField;
-        getContentPane().add(field);
+//        this.field = mainField;
+//        getContentPane().add(field);
         repaint();
     }
 }

@@ -1,6 +1,5 @@
 package ua.edu.vntu.chessboard;
 
-import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.figurs.*;
 import ua.edu.vntu.descriptions.Position;
 import ua.edu.vntu.gui.Constants;
@@ -9,7 +8,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("cells")
+//@Repository("cells")
 public class CellsImpl extends JPanel implements Constants,Cells {
 
     private CellImpl[][] cells = new CellImpl[8][8];

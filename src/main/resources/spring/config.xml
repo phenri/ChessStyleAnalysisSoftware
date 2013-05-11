@@ -10,16 +10,16 @@
     <context:annotation-config />
     <context:component-scan base-package="ua.edu.vntu"/>
 
-    <bean id="form" class="ua.edu.vntu.gui.Form">
-        <property name="field" ref="field"/>
-    </bean>
-
-    <bean id="board" class="ua.edu.vntu.chessboard.Chessboard">
-        <property name="cells" ref="cells"/>
-    </bean>
-
-    <bean id="field" class="ua.edu.vntu.gui.MainField">
-        <property name="chessboard" ref="board"/>
-    </bean>
+    <!--<bean id="form" class="ua.edu.vntu.gui.Form">-->
+        <!--<property name="field" ref="field"/>-->
+    <!--</bean>-->
+<!---->
+    <!--<bean id="board" class="ua.edu.vntu.chessboard.Chessboard">-->
+        <!--<property name="cells" ref="cells"/>-->
+    <!--</bean>-->
+<!---->
+    <!--<bean id="field" class="ua.edu.vntu.gui.MainField">-->
+        <!--<property name="chessboard" ref="board"/>-->
+    <!--</bean>-->
 
 </beans>

@@ -1,7 +1,6 @@
 package ua.edu.vntu.gui;
 
 import ua.edu.vntu.gui.table.MyTable;
-import ua.edu.vntu.gui.table.Table;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,12 +11,12 @@ import java.awt.*;
  * Date: 20.01.13
  * Time: 13:03
  */
-public class CommandButtonsAndTable extends JPanel {
+public class CommandPanel extends JPanel {
 
     private final int BUTTON_X = 0;
     private final int BUTTON_Y = 150;
 
-    public CommandButtonsAndTable(){
+    public CommandPanel(){
         super();
         setLayout(null);
         setBackground(Color.red);

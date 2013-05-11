@@ -3,9 +3,14 @@ package ua.edu.vntu.reading;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import ua.edu.vntu.chessboard.*;
+import ua.edu.vntu.chessboard.Cell;
+import ua.edu.vntu.chessboard.Cells;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.FigureName;
 import ua.edu.vntu.chessboard.figurs.Queen;
-import ua.edu.vntu.descriptions.*;
+import ua.edu.vntu.descriptions.Castling;
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Position;
 import ua.edu.vntu.moving.MoveFigure;
 
 import java.util.List;

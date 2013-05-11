@@ -1,7 +1,7 @@
 package ua.edu.vntu.chessboard;
 
-import ua.edu.vntu.gui.Constants;
 import ua.edu.vntu.descriptions.Position;
+import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.awt.*;

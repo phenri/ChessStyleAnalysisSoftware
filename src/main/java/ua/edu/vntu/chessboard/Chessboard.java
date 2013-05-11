@@ -8,24 +8,27 @@ import java.awt.*;
 
 public class Chessboard extends JPanel implements Constants {
 
-//    @Autowired
-    private CellsImpl cells;
+    private CellsImpl cells = new CellsImpl();
 
     public Chessboard(){
         super(true);
         setLayout(null);
         setBackground(new Color(255,255, 255));
 
+        add(this.cells);
+        initBoard();add(this.cells);
+        initBoard();
+
         setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
 
     }
 
-    public void setCells(CellsImpl cells){
-        this.cells = cells;
-        add(this.cells);
-        initBoard();
-        repaint();
-    }
+//    public void setCells(CellsImpl cells){
+//        this.cells = cells;
+//        add(this.cells);
+//        initBoard();
+//        repaint();
+//    }
 
 
     private void initBoard(){

@@ -1,6 +1,5 @@
 package ua.edu.vntu.gui.table;
 
-import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Party;
 
 /**

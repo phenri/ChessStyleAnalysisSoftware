@@ -24,7 +24,7 @@ public class MyMenu extends JMenuBar {
         file.add(new JSeparator());
         file.add(exit);
 
-        property.add(new MenuProperty());
+        property.add(new Property());
 
         add(file);
         add(game);

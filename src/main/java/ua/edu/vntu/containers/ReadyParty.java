@@ -5,7 +5,8 @@ import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.descriptions.Position;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository("containerMovedFigures")
 public class ReadyParty implements SaverParty,ContainerAllMoves {

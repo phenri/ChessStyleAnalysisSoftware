@@ -13,8 +13,7 @@ import ua.edu.vntu.descriptions.Party;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.List;
 
 public class MyTable extends JPanel implements Table{

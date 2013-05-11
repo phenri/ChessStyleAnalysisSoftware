@@ -1,7 +1,10 @@
 package ua.edu.vntu.chessboard.virtual;
 
 import org.springframework.stereotype.Repository;
-import ua.edu.vntu.chessboard.*;
+import ua.edu.vntu.chessboard.Cell;
+import ua.edu.vntu.chessboard.Cells;
+import ua.edu.vntu.chessboard.Figure;
+import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.chessboard.figurs.*;
 import ua.edu.vntu.descriptions.Position;
 
