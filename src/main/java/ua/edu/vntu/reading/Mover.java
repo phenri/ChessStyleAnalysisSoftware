@@ -8,6 +8,8 @@ import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.containers.ContainerPartiesService;
 import ua.edu.vntu.containers.SaverParty;
 import ua.edu.vntu.descriptions.*;
+import ua.edu.vntu.gui.table.MyTable;
+import ua.edu.vntu.gui.table.Table;
 import ua.edu.vntu.moving.MoveFigure;
 
 import javax.swing.*;
@@ -50,6 +52,10 @@ public class Mover implements Runnable {
 
     public void exec(){
         Party party = ContainerPartiesService.getInstance().getPartyById(partyId);
+
+        Table table = MyTable.getInstance();
+        table.clear();
+        table.addProgress(party);
 
         List<MovingDescription> blackMoves, whiteMoves;
 

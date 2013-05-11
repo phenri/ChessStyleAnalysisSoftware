@@ -32,4 +32,8 @@ public class ContainerPartiesService implements ContainerParties {
         System.out.println(parties.size());
     }
 
+    @Override
+    public void clear() {
+        parties.clear();
+    }
 }

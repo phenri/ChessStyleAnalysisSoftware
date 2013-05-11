@@ -202,12 +202,7 @@ public class ParseParty implements Runnable,Tags{
 
                 description = new MovingDescription(pos,FigureName.PAWN,true,figure);
 
-//                System.out.println(pos);
-//
-//                System.out.println(v+" " + h);
-//                System.out.println(s + " - " + index+", " + figure);
-//
-//                System.out.println(description);
+                description.setTextNotation(s);
                 descriptions.add(description);
                 continue;
             }
@@ -220,6 +215,8 @@ public class ParseParty implements Runnable,Tags{
             if (s.contains("O")){
                 boolean b = chars.length != 3;
                 description = new MovingDescription(new Castling(b));
+
+                description.setTextNotation(s);
                 descriptions.add(description);
                 continue;
 
@@ -251,6 +248,7 @@ public class ParseParty implements Runnable,Tags{
                     description.setFromVertical(chars[1]);
                 }
             }
+            description.setTextNotation(s);
             descriptions.add(description);
 
         }

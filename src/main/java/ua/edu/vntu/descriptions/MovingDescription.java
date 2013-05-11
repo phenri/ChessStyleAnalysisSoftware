@@ -12,6 +12,7 @@ public class MovingDescription {
     private int fromHorizontal = 0;
     private boolean pawnToEnd = false;
     private FigureName newFigureName = null;
+    private String textNotation = null;
 
     public MovingDescription(EndParty endParty) {
         this.endParty = endParty;
@@ -76,7 +77,13 @@ public class MovingDescription {
         this.fromVertical = fromVertical;
     }
 
+    public String getTextNotation() {
+        return textNotation;
+    }
 
+    public void setTextNotation(String textNotation) {
+        this.textNotation = textNotation;
+    }
 
     public void setBeat(boolean b){
         isBeat = b;

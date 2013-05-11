@@ -9,4 +9,6 @@ public interface ContainerParties {
 
     void addParty(Party party);
 
+    void clear();
+
 }

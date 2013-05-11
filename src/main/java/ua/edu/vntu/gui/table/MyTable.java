@@ -8,11 +8,16 @@ package ua.edu.vntu.gui.table;
  */
 
 
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Party;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.List;
 
-public class MyTable extends JPanel {
+public class MyTable extends JPanel implements Table{
 
     private static final MyTable INSTANCE = new MyTable();
 
@@ -20,7 +25,7 @@ public class MyTable extends JPanel {
         return INSTANCE;
     }
 
-    DefaultTableModel model;
+    private DefaultTableModel model;
 
     private MyTable() {
         super(new GridLayout(1, 0));
@@ -32,6 +37,7 @@ public class MyTable extends JPanel {
 
         model = new DefaultTableModel();
 
+
         for (String s : columnNames) {
             model.addColumn(s);
         }
@@ -40,6 +46,7 @@ public class MyTable extends JPanel {
 
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
@@ -74,6 +81,27 @@ public class MyTable extends JPanel {
 //        Object[] target = {id, number, station, tTime, dTime, freePlaces, ticketPrice};
 //        model.addRow(target);
 //    }
+
+
+    @Override
+    public void addProgress(Party party) {
+        System.out.println(party);
+        List<MovingDescription> white = party.getWhiteMoves();
+        List<MovingDescription> black = party.getBlackMoves();
+
+        int length = white.size() < black.size() ? white.size() : black.size();
+
+        for (int i = 0; i < length; i++){
+            MovingDescription md1 = i < white.size() ? white.get(i): null;
+            MovingDescription md2 = i < black.size() ? black.get(i): null;
+
+            String s1 = md1 != null ? md1.getTextNotation(): "";
+            String s2 = md2 != null ? md2.getTextNotation(): "";
+
+            Object [] target = {(i + 1),s1,s2};
+            model.addRow(target);
+        }
+    }
 
     public void clear() {
         int count = model.getRowCount();
