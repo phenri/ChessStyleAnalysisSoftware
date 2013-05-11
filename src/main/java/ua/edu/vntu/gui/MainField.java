@@ -13,6 +13,7 @@ public class MainField extends JPanel implements Constants {
     public MainField(){
         super(true);
         setLayout(null);
+        add(new FieldCommand());
         setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 
     }
