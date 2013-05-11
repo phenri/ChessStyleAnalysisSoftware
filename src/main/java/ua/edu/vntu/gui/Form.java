@@ -2,17 +2,20 @@ package ua.edu.vntu.gui;
 
 
 import ua.edu.vntu.gui.menu.MyMenu;
+import ua.edu.vntu.handlers.MenuActions;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Form extends JFrame implements Constants {
     private MainField field = new MainField();
+    private MyMenu menubar;
 
     public Form(){
         super("ChessStyleAnalysisSoftware");
 
-        this.setJMenuBar(new MyMenu());
+        menubar = new MyMenu();
+        setJMenuBar(menubar);
 
         setLayout(null);
         setBounds(200,50,FRAME_WIDTH,FRAME_HEIGHT);
@@ -23,9 +26,8 @@ public class Form extends JFrame implements Constants {
         getContentPane().add(field);
 
     }
-    public void setField(MainField mainField){
-//        this.field = mainField;
-//        getContentPane().add(field);
-        repaint();
+
+    public void setActions(MenuActions actions) {
+        menubar.setMenuActions(actions);
     }
 }

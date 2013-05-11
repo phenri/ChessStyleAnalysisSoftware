@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 @Repository("movingCommand")
 public class MovingCommadService implements MovingCommand {
 
+    public MovingCommadService() {
+        System.out.println("hello");
+    }
+
     @Override
     public void start(int partyId) {
 

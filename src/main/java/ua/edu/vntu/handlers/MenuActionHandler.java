@@ -1,22 +1,26 @@
-package ua.edu.vntu.gui.menu;
+package ua.edu.vntu.handlers;
 
+import org.springframework.stereotype.Service;
+import ua.edu.vntu.Main;
 import ua.edu.vntu.containers.ContainerPartiesService;
 import ua.edu.vntu.parsing.Parser;
+import ua.edu.vntu.reading.Mover;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
-public class OpenFile extends JMenuItem implements ActionListener{
+/**
+ * Created with IntelliJ IDEA.
+ * User: Bychkovskyy
+ * Date: 11.05.13
+ * Time: 20:04
+ */
 
-    public OpenFile(){
-        super("Open file...");
-        addActionListener(this);
-    }
+@Service
+public class MenuActionHandler implements MenuActions{
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void open() {
         System.out.println("Hello");
 
         JFileChooser fileChooser = new JFileChooser();
@@ -27,6 +31,11 @@ public class OpenFile extends JMenuItem implements ActionListener{
         File f =  fileChooser.getSelectedFile();
         ContainerPartiesService.getInstance().clear();
         new Parser(f);
+    }
 
+    @Override
+    public void select() {
+        Mover mover = (Mover) Main.context.getBean("mover");
+        mover.startParty(0);
     }
 }
