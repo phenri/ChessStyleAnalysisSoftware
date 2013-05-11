@@ -1,66 +1,56 @@
-package ua.edu.vntu.readparty;
+package ua.edu.vntu.parsing;
 
 import ua.edu.vntu.chessboard.FigureName;
-import ua.edu.vntu.descriptions.*;
+import ua.edu.vntu.descriptions.Castling;
+import ua.edu.vntu.descriptions.EndParty;
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ParseParty implements Runnable,Tags{
+public class ParsePgnToParty implements Runnable{
 
-    private Map<String,String> tags = new TreeMap<>();
+    private Map<String,String> tags = new TreeMap<String, String>();
 
-    private List<MovingDescription> whiteMoves, blackMoves;
+    ArrayList<MovingDescription> whiteMoves, blackMoves;
 
-    private List<String> party;
-
-    private int id;
-
-    public ParseParty(List<String> party, int id) {
-        this.party = party;
-        this.id = id;
+    public ParsePgnToParty() {
         new Thread(this).start();
-
     }
 
     @Override
     public void run() {
-        readCodeAndTags(party);
+
     }
 
-    /**
-     * Читання тегів та коду партії
-     * @param list список рядків з яких буде проводитись читання
-     * @return повертає список рядків, в яких міститься код партії, теги записуються в поля класу зміння tags
-     */
     public ArrayList<String> readCodeAndTags(List<String> list){
-        System.err.println(Thread.currentThread());
 
         ArrayList<String> code = new ArrayList<>();
 
         for (String s: list){
             if (s.contains("[Event")){
-                tags.put(EVENT,getTagContent(s));
+                tags.put("Event",getTagContent(s));
             }  else
             if (s.contains("[Site")){
-                tags.put(SITE,getTagContent(s));
+                tags.put("Site",getTagContent(s));
             }  else
             if (s.contains("[Date")){
-                tags.put(DATE,getTagContent(s));
+                tags.put("Date",getTagContent(s));
             }  else
             if (s.contains("[Round")){
-                tags.put(ROUND,getTagContent(s));
+                tags.put("Round",getTagContent(s));
             }  else
             if (s.contains("[White")){
-                tags.put(WHITE,getTagContent(s));
+                tags.put("White",getTagContent(s));
             }  else
             if (s.contains("[Black")){
-                tags.put(BLACK,getTagContent(s));
+                tags.put("Black",getTagContent(s));
             }  else
             if (s.contains("[Result")){
-                tags.put(RESULT,getTagContent(s));
+                tags.put("Result",getTagContent(s));
             }  else
             if (!(s.contains("[") || s.contains("]"))){
                 code.add(s);
@@ -85,9 +75,9 @@ public class ParseParty implements Runnable,Tags{
         }
     }
 
-    private List<String> parseCode(List<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
+    private ArrayList<String> parseCode(ArrayList<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
         int count = 0;
-        List<String> result = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<String>();
         for(String s:code){
             if(s.indexOf('.')==-1){
                 continue;
@@ -124,11 +114,11 @@ public class ParseParty implements Runnable,Tags{
     /**
      * @return Повертає теги шо описують партію
      */
-    public Map<String,String> getTags(){
+    public Map getTags(){
         return tags;
     }
 
-    private void readMoves(List<String> strings){
+    private void readMoves(ArrayList<String> strings){
         String[] white = new String[strings.size()],
                 black = new String[strings.size()];
         int i = 0;
@@ -139,10 +129,6 @@ public class ParseParty implements Runnable,Tags{
 
             black[i] = words[2];
             i++;
-
-            if (s.contains("  ")){
-                String m =  s.replace("  ", " ");
-            }
             for (String st:words){
                 if(st.contains("1-0")){
                     end = EndParty.WHITE_WIN;
@@ -163,53 +149,50 @@ public class ParseParty implements Runnable,Tags{
         blackMoves = parseToMovingDescription(black);
         blackMoves.add(endParty);
 
-        Party party = new Party(getTags(),id,whiteMoves,blackMoves);
-        ContainerPartiesService.getInstance().addParty(party);
-
     }
 
     private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
-        ArrayList<MovingDescription> descriptions = new ArrayList<>();
+        int i = 0;
+        ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
         MovingDescription description;
         for(String s:move){
 
             char[] chars = s.toCharArray();
 
             FigureName figure;
-            if (chars.length == 0){
-                continue;
+            switch (chars[0]){
+                case 'N':
+                    figure = FigureName.KNIGHT;
+                    break;
+                case 'B':
+                    figure = FigureName.BISHOP;
+                    break;
+                case 'R':
+                    figure = FigureName.ROOK;
+                    break;
+                case 'Q':
+                    figure = FigureName.QUEEN;
+                    break;
+                case 'K':
+                    figure = FigureName.KING;
+                    break;
+                case 'O':
+                    figure = null;
+                    break;
+                case '1':
+                    figure = null;
+                    break;
+                case ' ':
+                    continue;
+                case 'P':
+                    figure = FigureName.PAWN;
+                    break;
+                default:
+                    figure = FigureName.PAWN;
             }
-
-            if (chars[0] == ' ')
-                continue;
-
-            figure = getFigureNameByChar(chars[0]);
 
             int index = chars.length - 1;
             int length = chars.length;
-
-            /**
-             * Якщо пишка доходить до кінця її заміняє фігура що стоїть після '='
-             */
-            if (s.contains("=")){
-                index = s.indexOf("=");
-                figure = getFigureNameByChar(chars[index+1]);
-                char h = chars[index - 1];
-                char v = chars[index - 2];
-
-                Position pos = new Position(v,h);
-
-                description = new MovingDescription(pos,FigureName.PAWN,true,figure);
-
-//                System.out.println(pos);
-//
-//                System.out.println(v+" " + h);
-//                System.out.println(s + " - " + index+", " + figure);
-//
-//                System.out.println(description);
-                descriptions.add(description);
-                continue;
-            }
 
             if (s.contains("+")||s.contains("?")||s.contains("!")){
                 index--;
@@ -251,43 +234,10 @@ public class ParseParty implements Runnable,Tags{
                 }
             }
             descriptions.add(description);
+            i++;
 
         }
         return descriptions;
 
-    }
-
-    private FigureName getFigureNameByChar(char c){
-        FigureName figure;
-
-        switch (c){
-            case 'N':
-                figure = FigureName.KNIGHT;
-                break;
-            case 'B':
-                figure = FigureName.BISHOP;
-                break;
-            case 'R':
-                figure = FigureName.ROOK;
-                break;
-            case 'Q':
-                figure = FigureName.QUEEN;
-                break;
-            case 'K':
-                figure = FigureName.KING;
-                break;
-            case 'O':
-                figure = null;
-                break;
-            case '1':
-                figure = null;
-                break;
-            case 'P':
-                figure = FigureName.PAWN;
-                break;
-            default:
-                figure = FigureName.PAWN;
-        }
-        return figure;
     }
 }

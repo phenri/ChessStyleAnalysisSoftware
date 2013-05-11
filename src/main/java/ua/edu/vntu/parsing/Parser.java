@@ -1,4 +1,4 @@
-package ua.edu.vntu.readparty;
+package ua.edu.vntu.parsing;
 
 import java.io.File;
 import java.io.FileInputStream;

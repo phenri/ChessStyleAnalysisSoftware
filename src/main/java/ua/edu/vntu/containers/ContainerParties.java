@@ -1,5 +1,7 @@
-package ua.edu.vntu.descriptions;
+package ua.edu.vntu.containers;
 
+
+import ua.edu.vntu.descriptions.Party;
 
 public interface ContainerParties {
 

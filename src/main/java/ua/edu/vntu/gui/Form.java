@@ -1,9 +1,7 @@
 package ua.edu.vntu.gui;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.menu.MyMenu;
-import ua.edu.vntu.moving.Mover;
 
 import javax.swing.*;
 import java.awt.*;

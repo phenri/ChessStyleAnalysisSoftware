@@ -1,10 +1,12 @@
-package ua.edu.vntu.descriptions;
+package ua.edu.vntu.reading;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.*;
 import ua.edu.vntu.chessboard.figurs.Rook;
+import ua.edu.vntu.descriptions.MovingDescription;
+import ua.edu.vntu.descriptions.Position;
 
 import java.util.List;
 

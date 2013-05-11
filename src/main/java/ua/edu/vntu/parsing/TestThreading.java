@@ -1,4 +1,4 @@
-package ua.edu.vntu.readparty;
+package ua.edu.vntu.parsing;
 
 import ua.edu.vntu.moving.MovingCommadService;
 import ua.edu.vntu.moving.MovingCommand;

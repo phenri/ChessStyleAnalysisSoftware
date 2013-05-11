@@ -1,4 +1,6 @@
-package ua.edu.vntu.descriptions;
+package ua.edu.vntu.containers;
+
+import ua.edu.vntu.descriptions.Party;
 
 import java.util.ArrayList;
 import java.util.List;

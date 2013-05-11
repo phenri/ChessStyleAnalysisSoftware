@@ -1,4 +1,4 @@
-package ua.edu.vntu.moving;
+package ua.edu.vntu.reading;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -6,11 +6,12 @@ import org.springframework.stereotype.Repository;
 import ua.edu.vntu.chessboard.*;
 import ua.edu.vntu.chessboard.figurs.Queen;
 import ua.edu.vntu.descriptions.*;
+import ua.edu.vntu.moving.MoveFigure;
 
 import java.util.List;
 
 @Repository ("moveFigure")
-public class MovingFigureService implements MoveFigure{
+public class MovingFigureService implements MoveFigure {
 
     @Autowired
     @Qualifier("virtualCells")

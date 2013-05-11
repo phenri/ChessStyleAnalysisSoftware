@@ -1,56 +1,67 @@
-package ua.edu.vntu.readparty;
+package ua.edu.vntu.parsing;
 
 import ua.edu.vntu.chessboard.FigureName;
-import ua.edu.vntu.descriptions.Castling;
-import ua.edu.vntu.descriptions.EndParty;
-import ua.edu.vntu.descriptions.MovingDescription;
-import ua.edu.vntu.descriptions.Position;
+import ua.edu.vntu.containers.ContainerPartiesService;
+import ua.edu.vntu.descriptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ParsePgnToParty implements Runnable{
+public class ParseParty implements Runnable,Tags{
 
-    private Map<String,String> tags = new TreeMap<String, String>();
+    private Map<String,String> tags = new TreeMap<>();
 
-    ArrayList<MovingDescription> whiteMoves, blackMoves;
+    private List<MovingDescription> whiteMoves, blackMoves;
 
-    public ParsePgnToParty() {
+    private List<String> party;
+
+    private int id;
+
+    public ParseParty(List<String> party, int id) {
+        this.party = party;
+        this.id = id;
         new Thread(this).start();
+
     }
 
     @Override
     public void run() {
-
+        readCodeAndTags(party);
     }
 
+    /**
+     * Читання тегів та коду партії
+     * @param list список рядків з яких буде проводитись читання
+     * @return повертає список рядків, в яких міститься код партії, теги записуються в поля класу зміння tags
+     */
     public ArrayList<String> readCodeAndTags(List<String> list){
+        System.err.println(Thread.currentThread());
 
         ArrayList<String> code = new ArrayList<>();
 
         for (String s: list){
             if (s.contains("[Event")){
-                tags.put("Event",getTagContent(s));
+                tags.put(EVENT,getTagContent(s));
             }  else
             if (s.contains("[Site")){
-                tags.put("Site",getTagContent(s));
+                tags.put(SITE,getTagContent(s));
             }  else
             if (s.contains("[Date")){
-                tags.put("Date",getTagContent(s));
+                tags.put(DATE,getTagContent(s));
             }  else
             if (s.contains("[Round")){
-                tags.put("Round",getTagContent(s));
+                tags.put(ROUND,getTagContent(s));
             }  else
             if (s.contains("[White")){
-                tags.put("White",getTagContent(s));
+                tags.put(WHITE,getTagContent(s));
             }  else
             if (s.contains("[Black")){
-                tags.put("Black",getTagContent(s));
+                tags.put(BLACK,getTagContent(s));
             }  else
             if (s.contains("[Result")){
-                tags.put("Result",getTagContent(s));
+                tags.put(RESULT,getTagContent(s));
             }  else
             if (!(s.contains("[") || s.contains("]"))){
                 code.add(s);
@@ -75,9 +86,9 @@ public class ParsePgnToParty implements Runnable{
         }
     }
 
-    private ArrayList<String> parseCode(ArrayList<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
+    private List<String> parseCode(List<String> code){     //метод для сортування ходiв. На входi колекц1я рядк1в ход1в, на виход1 колекц1я кожен х1д в окреому рядку
         int count = 0;
-        ArrayList<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for(String s:code){
             if(s.indexOf('.')==-1){
                 continue;
@@ -114,11 +125,11 @@ public class ParsePgnToParty implements Runnable{
     /**
      * @return Повертає теги шо описують партію
      */
-    public Map getTags(){
+    public Map<String,String> getTags(){
         return tags;
     }
 
-    private void readMoves(ArrayList<String> strings){
+    private void readMoves(List<String> strings){
         String[] white = new String[strings.size()],
                 black = new String[strings.size()];
         int i = 0;
@@ -129,6 +140,10 @@ public class ParsePgnToParty implements Runnable{
 
             black[i] = words[2];
             i++;
+
+            if (s.contains("  ")){
+                String m =  s.replace("  ", " ");
+            }
             for (String st:words){
                 if(st.contains("1-0")){
                     end = EndParty.WHITE_WIN;
@@ -149,50 +164,53 @@ public class ParsePgnToParty implements Runnable{
         blackMoves = parseToMovingDescription(black);
         blackMoves.add(endParty);
 
+        Party party = new Party(getTags(),id,whiteMoves,blackMoves);
+        ContainerPartiesService.getInstance().addParty(party);
+
     }
 
     private  ArrayList<MovingDescription> parseToMovingDescription(String[] move){
-        int i = 0;
-        ArrayList<MovingDescription> descriptions = new ArrayList<MovingDescription>();
+        ArrayList<MovingDescription> descriptions = new ArrayList<>();
         MovingDescription description;
         for(String s:move){
 
             char[] chars = s.toCharArray();
 
             FigureName figure;
-            switch (chars[0]){
-                case 'N':
-                    figure = FigureName.KNIGHT;
-                    break;
-                case 'B':
-                    figure = FigureName.BISHOP;
-                    break;
-                case 'R':
-                    figure = FigureName.ROOK;
-                    break;
-                case 'Q':
-                    figure = FigureName.QUEEN;
-                    break;
-                case 'K':
-                    figure = FigureName.KING;
-                    break;
-                case 'O':
-                    figure = null;
-                    break;
-                case '1':
-                    figure = null;
-                    break;
-                case ' ':
-                    continue;
-                case 'P':
-                    figure = FigureName.PAWN;
-                    break;
-                default:
-                    figure = FigureName.PAWN;
+            if (chars.length == 0){
+                continue;
             }
+
+            if (chars[0] == ' ')
+                continue;
+
+            figure = getFigureNameByChar(chars[0]);
 
             int index = chars.length - 1;
             int length = chars.length;
+
+            /**
+             * Якщо пишка доходить до кінця її заміняє фігура що стоїть після '='
+             */
+            if (s.contains("=")){
+                index = s.indexOf("=");
+                figure = getFigureNameByChar(chars[index+1]);
+                char h = chars[index - 1];
+                char v = chars[index - 2];
+
+                Position pos = new Position(v,h);
+
+                description = new MovingDescription(pos,FigureName.PAWN,true,figure);
+
+//                System.out.println(pos);
+//
+//                System.out.println(v+" " + h);
+//                System.out.println(s + " - " + index+", " + figure);
+//
+//                System.out.println(description);
+                descriptions.add(description);
+                continue;
+            }
 
             if (s.contains("+")||s.contains("?")||s.contains("!")){
                 index--;
@@ -234,10 +252,43 @@ public class ParsePgnToParty implements Runnable{
                 }
             }
             descriptions.add(description);
-            i++;
 
         }
         return descriptions;
 
+    }
+
+    private FigureName getFigureNameByChar(char c){
+        FigureName figure;
+
+        switch (c){
+            case 'N':
+                figure = FigureName.KNIGHT;
+                break;
+            case 'B':
+                figure = FigureName.BISHOP;
+                break;
+            case 'R':
+                figure = FigureName.ROOK;
+                break;
+            case 'Q':
+                figure = FigureName.QUEEN;
+                break;
+            case 'K':
+                figure = FigureName.KING;
+                break;
+            case 'O':
+                figure = null;
+                break;
+            case '1':
+                figure = null;
+                break;
+            case 'P':
+                figure = FigureName.PAWN;
+                break;
+            default:
+                figure = FigureName.PAWN;
+        }
+        return figure;
     }
 }

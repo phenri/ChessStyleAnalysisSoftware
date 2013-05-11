@@ -2,7 +2,7 @@ package ua.edu.vntu.gui.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.edu.vntu.gui.Form;
-import ua.edu.vntu.readparty.Parser;
+import ua.edu.vntu.parsing.Parser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
 package ua.edu.vntu;
 
-import ua.edu.vntu.readparty.Parser;
+import ua.edu.vntu.parsing.Parser;
 
 import java.io.File;
 
