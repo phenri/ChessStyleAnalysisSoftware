@@ -14,6 +14,9 @@ import ua.edu.vntu.descriptions.Party;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.List;
 
 public class MyTable extends JPanel implements Table{
@@ -47,9 +50,17 @@ public class MyTable extends JPanel implements Table{
         table.setFillsViewportHeight(true);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        table.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                System.out.println("Focus");
+                System.out.println(table.getSelectedRow());
+            }
+        });
         //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
-        table.setEnabled(false);
+//        table.setEnabled(false);
         //Add the scroll pane to this panel.
         add(scrollPane);
     }

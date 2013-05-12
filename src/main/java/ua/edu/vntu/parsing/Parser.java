@@ -6,9 +6,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parser  {
+public class Parser implements Runnable {
+
+    private File file;
 
     public Parser(File file){
+        this.file = file;
+        new Thread(this).start();
+
+    }
+
+    @Override
+    public void run() {
         String pgn = readPGN(file);
         List<List<String>> parties = readPartiesFromPGN(pgn);
         int i = 0;
@@ -16,7 +25,6 @@ public class Parser  {
             new ParseParty(list,i);
             i++;
         }
-
     }
 
     /**

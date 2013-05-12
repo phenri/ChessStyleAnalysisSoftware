@@ -2,6 +2,7 @@ package ua.edu.vntu;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 import ua.edu.vntu.gui.Form;
+import ua.edu.vntu.handlers.CommandActions;
 import ua.edu.vntu.handlers.MenuActions;
 
 /**
@@ -21,5 +22,6 @@ public class Application {
         MenuActions menuActions = ctx.getBean(MenuActions.class);
 
         form.setActions(menuActions);
+        form.setCommandActions(ctx.getBean(CommandActions.class));
     }
 }

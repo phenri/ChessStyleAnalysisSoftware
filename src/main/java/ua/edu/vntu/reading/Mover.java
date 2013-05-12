@@ -12,7 +12,6 @@ import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Party;
 import ua.edu.vntu.gui.table.MyTable;
 import ua.edu.vntu.gui.table.Table;
-import ua.edu.vntu.moving.MoveFigure;
 
 import javax.swing.*;
 import java.util.List;

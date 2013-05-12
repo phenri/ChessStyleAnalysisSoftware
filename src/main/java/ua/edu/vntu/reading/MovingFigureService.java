@@ -11,7 +11,6 @@ import ua.edu.vntu.chessboard.figurs.Queen;
 import ua.edu.vntu.descriptions.Castling;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Position;
-import ua.edu.vntu.moving.MoveFigure;
 
 import java.util.List;
 

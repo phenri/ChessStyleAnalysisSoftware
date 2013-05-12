@@ -1,4 +1,4 @@
-package ua.edu.vntu.moving;
+package ua.edu.vntu.reading;
 
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.descriptions.Castling;
