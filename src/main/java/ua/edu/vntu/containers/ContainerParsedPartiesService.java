@@ -5,11 +5,13 @@ import ua.edu.vntu.descriptions.Party;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContainerPartiesService implements ContainerParties {
+public class ContainerParsedPartiesService implements ContainerParties {
 
-    private final static ContainerParties INSTANCE = new ContainerPartiesService();
+    private final static ContainerParties INSTANCE = new ContainerParsedPartiesService();
     private List<Party> parties = new ArrayList<>();
-    private ContainerPartiesService(){}
+
+    private ContainerParsedPartiesService() {
+    }
 
     public static ContainerParties getInstance() {
         return INSTANCE;
@@ -19,7 +21,7 @@ public class ContainerPartiesService implements ContainerParties {
     public synchronized Party getPartyById(int id) {
         if (id > parties.size())
             return null;
-        for(Party p: parties){
+        for (Party p : parties) {
             if (id == p.getId())
                 return p;
         }

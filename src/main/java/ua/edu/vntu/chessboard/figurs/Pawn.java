@@ -7,37 +7,36 @@ import ua.edu.vntu.descriptions.Position;
 import java.awt.*;
 
 public class Pawn extends Figure {
-    public Pawn(boolean isWhite){
+    public Pawn(boolean isWhite) {
         super();
         setLayout(null);
 
         this.isWhite = isWhite;
         name = FigureName.PAWN;
 
-        if (isWhite){
+        if (isWhite) {
             image = getToolkit().getImage("icons\\white\\pawn.png");
-        }
-        else{
+        } else {
             image = getToolkit().getImage("icons\\black\\pawn.png");
         }
     }
-    public void paint(Graphics g){
-        g.drawImage(image,5,5,this);
+
+    public void paint(Graphics g) {
+        g.drawImage(image, 5, 5, this);
     }
 
     @Override
     public boolean isAvailablePosition(Position pos, boolean isBeat) {
-        if (!isBeat){
+        if (!isBeat) {
             return isAvailablePosition(pos);
         }
 
         int x = Math.abs(pos.getX() - getPosition().getX());
         int y = pos.getY() - getPosition().getY();
 
-        if(isWhite){
+        if (isWhite) {
             return (x == 1) && (y == 1);
-        }
-        else {
+        } else {
             return (x == 1) && (y == -1);
         }
     }
@@ -45,21 +44,20 @@ public class Pawn extends Figure {
     @Override
     public boolean isAvailablePosition(Position pos) {
 
-        if(isWhite()){
+        if (isWhite()) {
             boolean b1;
-            if(getPosition().getY() == 2)  {
+            if (getPosition().getY() == 2) {
                 b1 = (pos.getY() - getPosition().getY() == 2) || (pos.getY() - getPosition().getY() == 1);
-            }else{
+            } else {
                 b1 = (pos.getY() - getPosition().getY() == 1);
             }
             boolean b2 = (pos.getX() - getPosition().getX() == 0);
             return b1 && b2;
-        }
-        else {
+        } else {
             boolean b1;
-            if(getPosition().getY() == 7)  {
+            if (getPosition().getY() == 7) {
                 b1 = (pos.getY() - getPosition().getY() == -2) || (pos.getY() - getPosition().getY() == -1);
-            }else{
+            } else {
                 b1 = (pos.getY() - getPosition().getY() == -1);
             }
             boolean b2 = (pos.getX() - getPosition().getX() == 0);
@@ -67,4 +65,10 @@ public class Pawn extends Figure {
         }
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Pawn pawn = new Pawn(isWhite);
+        pawn.setPosition(this.getPosition());
+        return pawn;
+    }
 }

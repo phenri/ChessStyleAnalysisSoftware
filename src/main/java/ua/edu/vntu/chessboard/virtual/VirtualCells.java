@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Repository("virtualCells")
-public class VirtualCells implements Cells{
+public class VirtualCells implements Cells {
 
     private Cell cells[][] = new VirtualCell[8][8];
 
@@ -25,13 +25,13 @@ public class VirtualCells implements Cells{
 
     }
 
-    private void initCells(){
+    private void initCells() {
         byte cellNumber = 8;
         char cellLetter = 'a';
 
-        for (int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                cells[i][j] = new VirtualCell(new Position(cellLetter,cellNumber));
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                cells[i][j] = new VirtualCell(new Position(cellLetter, cellNumber));
                 cellLetter++;
             }
             cellNumber--;
@@ -46,8 +46,8 @@ public class VirtualCells implements Cells{
 
     @Override
     public void restart() {
-        for (Cell[] c: cells)
-            for (Cell c1: c){
+        for (Cell[] c : cells)
+            for (Cell c1 : c) {
                 c1.reset();
             }
         initFigures();
@@ -130,7 +130,7 @@ public class VirtualCells implements Cells{
         whiteFigures.add(f);
 
 
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             f = new Pawn(true);
             cells[6][i].addFigure(f);
             whiteFigures.add(f);
@@ -139,15 +139,15 @@ public class VirtualCells implements Cells{
             cells[1][i].addFigure(f);
             blackFigures.add(f);
         }
-        figures = new Figures(blackFigures,whiteFigures);
+        figures = new Figures(blackFigures, whiteFigures);
         return figures;
     }
 
     @Override
     public Cell getCellByPosition(Position p) {
-        for(int i = 0;i < 8;i++){
-            for(int j = 0;j < 8;j++){
-                if(cells[i][j].getPosition().equals(p)){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (cells[i][j].getPosition().equals(p)) {
                     return cells[i][j];
                 }
             }
@@ -156,12 +156,11 @@ public class VirtualCells implements Cells{
         return null;
     }
 
-    public void paintFigure(Figure figure,Position position){
-        if(figure.getParentCell() != null)
+    public void paintFigure(Figure figure, Position position) {
+        if (figure.getParentCell() != null)
             figure.getParentCell().reset();
         getCellByPosition(position).addFigure(figure);
     }
-
 
 
     class VirtualCell implements Cell {
@@ -176,14 +175,14 @@ public class VirtualCells implements Cells{
             this.position = position;
         }
 
-        public void reset(){
+        public void reset() {
             empty = true;
             if (figure != null)
                 figure = null;
         }
 
-        public void addFigure(Figure figure){
-            if(!empty)
+        public void addFigure(Figure figure) {
+            if (!empty)
                 this.figure = null;
             figure.setParent(this);
             this.figure = figure;

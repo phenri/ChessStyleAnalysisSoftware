@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Party {
-    private Map<String,String> tags;
+    private Map<String, String> tags;
     private int id;
     private List<MovingDescription> whiteMoves, blackMoves;
     private Figures figures;

@@ -2,7 +2,7 @@ package ua.edu.vntu.handlers;
 
 import org.springframework.stereotype.Service;
 import ua.edu.vntu.Main;
-import ua.edu.vntu.containers.ContainerPartiesService;
+import ua.edu.vntu.containers.ContainerParsedPartiesService;
 import ua.edu.vntu.parsing.Parser;
 import ua.edu.vntu.reading.Mover;
 
@@ -17,7 +17,7 @@ import java.io.File;
  */
 
 @Service
-public class MenuActionHandler implements MenuActions{
+public class MenuActionHandler implements MenuActions {
 
     @Override
     public void open() {
@@ -28,8 +28,8 @@ public class MenuActionHandler implements MenuActions{
         fileChooser.setCurrentDirectory(file);
         fileChooser.showOpenDialog(null);
 
-        File f =  fileChooser.getSelectedFile();
-        ContainerPartiesService.getInstance().clear();
+        File f = fileChooser.getSelectedFile();
+        ContainerParsedPartiesService.getInstance().clear();
         new Parser(f);
     }
 

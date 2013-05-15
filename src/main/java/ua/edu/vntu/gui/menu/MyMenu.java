@@ -10,7 +10,7 @@ public class MyMenu extends JMenuBar {
 
     private MenuActions menuActions;
 
-    public MyMenu(){
+    public MyMenu() {
         super();
 
         JMenu file = new JMenu("File");
@@ -47,6 +47,7 @@ public class MyMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuActions.open();
+                menuActions.select();
             }
         });
 

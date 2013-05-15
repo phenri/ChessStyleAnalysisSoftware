@@ -12,16 +12,14 @@ public class Form extends JFrame implements Constants {
     private MainField field = new MainField();
     private MyMenu menubar;
 
-    private CommandActions commandActions;
-
-    public Form(){
+    public Form() {
         super("ChessStyleAnalysisSoftware");
 
         menubar = new MyMenu();
         setJMenuBar(menubar);
 
         setLayout(null);
-        setBounds(200,50,FRAME_WIDTH,FRAME_HEIGHT);
+        setBounds(200, 50, FRAME_WIDTH, FRAME_HEIGHT);
         setVisible(true);
         setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT + 40));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

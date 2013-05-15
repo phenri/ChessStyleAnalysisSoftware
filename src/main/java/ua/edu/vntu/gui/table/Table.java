@@ -11,8 +11,10 @@ import ua.edu.vntu.descriptions.Party;
 public interface Table {
     /**
      * Метод що записує в таблицю у графічному інтерфейсі нотацію партії
+     *
      * @param party
      */
     public void addProgress(Party party);
+
     public void clear();
 }

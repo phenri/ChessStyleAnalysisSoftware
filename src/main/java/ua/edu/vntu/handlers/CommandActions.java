@@ -8,9 +8,14 @@ package ua.edu.vntu.handlers;
  */
 public interface CommandActions {
     void toEnd();
+
     void previous();
+
     void play();
+
     void pause();
+
     void next();
+
     void toBegin();
 }

@@ -14,18 +14,20 @@ import ua.edu.vntu.descriptions.Party;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.List;
 
-public class MyTable extends JPanel implements Table{
+public class MyTable extends JPanel implements Table {
 
     private static final MyTable INSTANCE = new MyTable();
+
+    public static JTable table;
 
     public static MyTable getInstance() {
         return INSTANCE;
     }
+
 
     private DefaultTableModel model;
 
@@ -44,12 +46,13 @@ public class MyTable extends JPanel implements Table{
             model.addColumn(s);
         }
 
-        final JTable table = new JTable(model);
+        table = new JTable(model);
 
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+//        table.changeSelection(0,0, false, false);
         table.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -101,16 +104,19 @@ public class MyTable extends JPanel implements Table{
 
         int length = white.size() < black.size() ? white.size() : black.size();
 
-        for (int i = 0; i < length; i++){
-            MovingDescription md1 = i < white.size() ? white.get(i): null;
-            MovingDescription md2 = i < black.size() ? black.get(i): null;
+        for (int i = 0; i < length; i++) {
+            MovingDescription md1 = i < white.size() ? white.get(i) : null;
+            MovingDescription md2 = i < black.size() ? black.get(i) : null;
 
-            String s1 = md1 != null ? md1.getTextNotation(): "";
-            String s2 = md2 != null ? md2.getTextNotation(): "";
+            String s1 = md1 != null ? md1.getTextNotation() : "";
+            String s2 = md2 != null ? md2.getTextNotation() : "";
 
-            Object [] target = {(i + 1),s1,s2};
+            Object[] target = {(i + 1), s1, s2};
             model.addRow(target);
         }
+
+        table.changeSelection(0, 0, false, false);
+
     }
 
     public void clear() {

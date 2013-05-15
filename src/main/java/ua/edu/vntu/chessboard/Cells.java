@@ -2,7 +2,7 @@ package ua.edu.vntu.chessboard;
 
 import ua.edu.vntu.descriptions.Position;
 
-public interface Cells  {
+public interface Cells {
 
     public Figures getFigures();
 
@@ -12,6 +12,6 @@ public interface Cells  {
 
     public Cell getCellByPosition(Position position);
 
-    public void paintFigure(Figure figure,Position position);
+    public void paintFigure(Figure figure, Position position);
 
 }

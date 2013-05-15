@@ -8,5 +8,6 @@ package ua.edu.vntu.handlers;
  */
 public interface MenuActions {
     void open();
+
     void select();
 }

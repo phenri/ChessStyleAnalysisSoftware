@@ -9,7 +9,7 @@ import java.util.List;
 public class Figures {
 
     private List<Figure> blackFigures = new ArrayList<>(),
-                         whiteFigures = new ArrayList<>();
+            whiteFigures = new ArrayList<>();
 
     public Figures(List<Figure> blackFigures, List<Figure> whiteFigures) {
         this.blackFigures = blackFigures;
@@ -22,5 +22,30 @@ public class Figures {
 
     public List<Figure> getWhiteFigures() {
         return whiteFigures;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        List<Figure> white = new ArrayList<>();
+
+        for (Figure f : whiteFigures) {
+            white.add((Figure) f.clone());
+        }
+
+        List<Figure> black = new ArrayList<>();
+        for (Figure f : blackFigures) {
+            black.add((Figure) f.clone());
+        }
+        return new Figures(white, black);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Figure)) {
+            return false;
+        }
+        Figures f = (Figures) obj;
+
+        return f.getBlackFigures().equals(blackFigures) && f.getWhiteFigures().equals(whiteFigures);
     }
 }

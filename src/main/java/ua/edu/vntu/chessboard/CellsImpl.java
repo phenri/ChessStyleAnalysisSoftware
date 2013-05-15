@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Repository("cells")
-public class CellsImpl extends JPanel implements Constants,Cells {
+public class CellsImpl extends JPanel implements Constants, Cells {
 
     private CellImpl[][] cells = new CellImpl[8][8];
 
     private Figures figures;
 
-    public CellsImpl(){
+    public CellsImpl() {
         super();
         setLayout(null);
         initCells();
@@ -32,7 +32,7 @@ public class CellsImpl extends JPanel implements Constants,Cells {
      * Метод для ініціалізації клітинок
      */
 
-    private void initCells(){
+    private void initCells() {
 
         int start = 0;
 
@@ -40,26 +40,25 @@ public class CellsImpl extends JPanel implements Constants,Cells {
         byte cellNumber = 8;
         char cellLetter = 'a';
 
-        for (int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                cells[i][j] = new CellImpl(new Position(cellLetter,cellNumber));
-                if (c % 2 == 0){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                cells[i][j] = new CellImpl(new Position(cellLetter, cellNumber));
+                if (c % 2 == 0) {
                     cells[i][j].setBackground(LIGHT);
-                }
-                else {
+                } else {
                     cells[i][j].setBackground(DARK);
                 }
-                cells[i][j].setBounds(x,y,CELL_SIZE,CELL_SIZE);
+                cells[i][j].setBounds(x, y, CELL_SIZE, CELL_SIZE);
                 add(cells[i][j]);
-                x +=CELL_SIZE;
+                x += CELL_SIZE;
                 c++;
                 cellLetter++;
             }
-            y+=CELL_SIZE;
+            y += CELL_SIZE;
             x = start;
-            if (i%2 == 1 ){
+            if (i % 2 == 1) {
                 c = 0;
-            }else {
+            } else {
                 c = 1;
 
             }
@@ -70,22 +69,28 @@ public class CellsImpl extends JPanel implements Constants,Cells {
 
     }
 
-    public void restart(){
-        for (Cell[] c: cells)
-            for (Cell c1: c){
+    public void clear() {
+        for (Cell[] c : cells) {
+            for (Cell c1 : c) {
                 c1.reset();
             }
+        }
+    }
+
+    public void restart() {
+        clear();
         initFigures();
     }
 
     /**
      * Метод для ініціалізації фігур для нової партії
+     *
      * @return поертає обєкт що містить білі і чорні фігури
      */
-    public Figures initFigures(){
+    public Figures initFigures() {
         Figure f;
         List<Figure> blackFigures = new ArrayList<>(),
-                     whiteFigures = new ArrayList<>();
+                whiteFigures = new ArrayList<>();
         /**
          * black figures
          */
@@ -158,7 +163,7 @@ public class CellsImpl extends JPanel implements Constants,Cells {
         whiteFigures.add(f);
 
 
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             f = new Pawn(true);
             cells[6][i].addFigure(f);
             whiteFigures.add(f);
@@ -167,14 +172,14 @@ public class CellsImpl extends JPanel implements Constants,Cells {
             cells[1][i].addFigure(f);
             blackFigures.add(f);
         }
-        figures = new Figures(blackFigures,whiteFigures);
+        figures = new Figures(blackFigures, whiteFigures);
         return figures;
     }
 
-    public Cell getCellByPosition(Position p){
-        for(int i = 0;i < 8;i++){
-            for(int j = 0;j < 8;j++){
-                if(cells[i][j].getPosition().equals(p)){
+    public Cell getCellByPosition(Position p) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (cells[i][j].getPosition().equals(p)) {
                     return cells[i][j];
                 }
             }
@@ -183,8 +188,8 @@ public class CellsImpl extends JPanel implements Constants,Cells {
         return null;
     }
 
-    public void paintFigure(Figure figure,Position position){
-        if(figure.getParentCell() != null)
+    public void paintFigure(Figure figure, Position position) {
+        if (figure.getParentCell() != null)
             figure.getParentCell().reset();
         getCellByPosition(position).addFigure(figure);
         this.repaint();

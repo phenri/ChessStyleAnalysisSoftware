@@ -25,12 +25,12 @@ public class MovingDescription {
         this.newFigureName = newFigureName;
     }
 
-    public MovingDescription(Position position, FigureName figure){
+    public MovingDescription(Position position, FigureName figure) {
         this.position = position;
         this.figure = figure;
     }
 
-    public MovingDescription(Castling castling){
+    public MovingDescription(Castling castling) {
         this.castling = castling;
     }
 
@@ -46,7 +46,7 @@ public class MovingDescription {
         return endParty;
     }
 
-    public boolean isEndParty(){
+    public boolean isEndParty() {
         return endParty != null;
     }
 
@@ -65,7 +65,7 @@ public class MovingDescription {
         this.fromHorizontal = fromHorizontal;
     }
 
-    public boolean isCastling(){
+    public boolean isCastling() {
         return castling != null;
     }
 
@@ -85,24 +85,24 @@ public class MovingDescription {
         this.textNotation = textNotation;
     }
 
-    public void setBeat(boolean b){
+    public void setBeat(boolean b) {
         isBeat = b;
     }
 
-    public boolean isBeat(){
+    public boolean isBeat() {
         return isBeat;
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         return position;
     }
 
-    public FigureName getFigureName(){
+    public FigureName getFigureName() {
         return figure;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String res = isBeat ? " x:" : "";
         String res2 = isPawnToEnd() ? ", пишка дійшла до кінця дошки перетворившись в " + getNewFigureName() : "";
         return isCastling() ? "Рокіровка" : "Переміщення фігури: " + figure + ":" + res + position + res2;

@@ -1,6 +1,6 @@
 package ua.edu.vntu.containers;
 
-import java.util.List;
+import ua.edu.vntu.chessboard.Figures;
 
 /**
  * Інтерфейс для доступу збережених позицій фігур
@@ -8,16 +8,17 @@ import java.util.List;
 public interface ContainerAllMoves {
     /**
      * Метод для доступу до фігур що на дошці за індексом
+     *
      * @param index індекс потрібного ходу
      * @return
      */
-    List<FigurePosition> getAction(int index);
+    Figures getAction(int index);
 
-    List<FigurePosition> getNextAction();
+    Figures getNextAction();
 
-    List<FigurePosition> getPreviosAction();
+    Figures getPreviosAction();
 
-    List<FigurePosition> toBegin();
+    Figures toBegin();
 
-    List<FigurePosition> toEnd();
+    Figures toEnd();
 }

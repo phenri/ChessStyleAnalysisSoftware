@@ -4,22 +4,40 @@ import ua.edu.vntu.gui.Constants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 
 public class Chessboard extends JPanel implements Constants {
 
     private CellsImpl cells = new CellsImpl();
 
-    public Chessboard(){
+    public Chessboard() {
         super(true);
         setLayout(null);
-        setBackground(new Color(255,255, 255));
+        setBackground(new Color(255, 255, 255));
 
         add(this.cells);
-        initBoard();add(this.cells);
+        initBoard();
+        add(this.cells);
         initBoard();
 
-        setBounds(30, 30, CELL_SIZE*8+60, CELL_SIZE*8+60);
+        setBounds(30, 30, CELL_SIZE * 8 + 60, CELL_SIZE * 8 + 60);
+
+    }
+
+    public void paintFigures(Figures figures) {
+        cells.clear();
+
+        List<Figure> white = figures.getWhiteFigures();
+        List<Figure> black = figures.getBlackFigures();
+
+        for (Figure f : white) {
+            cells.paintFigure(f, f.getPosition());
+        }
+
+        for (Figure f : black) {
+            cells.paintFigure(f, f.getPosition());
+        }
 
     }
 
@@ -31,25 +49,25 @@ public class Chessboard extends JPanel implements Constants {
 //    }
 
 
-    private void initBoard(){
+    private void initBoard() {
         int x = 30,
-            y = x + 15,
-            x2 = 50;
+                y = x + 15,
+                x2 = 50;
 
         int i = 8;
         char c = 'A';
 
-        while (i > 0){
-            JLabel leftVertical = new JLabel(i+"");
-            JLabel rightVertical = new JLabel(i+"");
+        while (i > 0) {
+            JLabel leftVertical = new JLabel(i + "");
+            JLabel rightVertical = new JLabel(i + "");
             leftVertical.setBounds(10, y, 20, 20);
             rightVertical.setBounds(520, y, 20, 20);
             add(leftVertical);
             add(rightVertical);
             y += CELL_SIZE;
 
-            JLabel downLetter = new JLabel(c+"");
-            JLabel upLetter = new JLabel(c+"");
+            JLabel downLetter = new JLabel(c + "");
+            JLabel upLetter = new JLabel(c + "");
             upLetter.setBounds(x2, 10, 20, 20);
             downLetter.setBounds(x2, 510, 20, 20);
             add(upLetter);

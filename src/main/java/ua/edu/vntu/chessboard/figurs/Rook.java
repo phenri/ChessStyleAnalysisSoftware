@@ -8,23 +8,22 @@ import java.awt.*;
 
 public class Rook extends Figure {
 
-    public Rook(boolean isWhite){
+    public Rook(boolean isWhite) {
         super();
         setLayout(null);
 
         this.isWhite = isWhite;
         name = FigureName.ROOK;
 
-        if (isWhite){
+        if (isWhite) {
             image = getToolkit().getImage("icons\\white\\rook.png");
-        }
-        else{
+        } else {
             image = getToolkit().getImage("icons\\black\\rook.png");
         }
     }
 
-    public void paint(Graphics g){
-        g.drawImage(image,5,5,this);
+    public void paint(Graphics g) {
+        g.drawImage(image, 5, 5, this);
     }
 
     @Override
@@ -34,10 +33,9 @@ public class Rook extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        if(this.getPosition().getX() == pos.getX() && getPosition().getY() != pos.getY()){
+        if (this.getPosition().getX() == pos.getX() && getPosition().getY() != pos.getY()) {
             return true;
-        } else
-        if(this.getPosition().getX() != pos.getX() && getPosition().getY() == pos.getY()){
+        } else if (this.getPosition().getX() != pos.getX() && getPosition().getY() == pos.getY()) {
             return true;
         }
         return false;

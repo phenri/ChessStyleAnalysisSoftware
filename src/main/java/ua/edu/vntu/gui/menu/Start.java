@@ -13,10 +13,11 @@ public class Start extends JMenuItem implements ActionListener {
     @Autowired
     Mover mover;
 
-    public Start(){
+    public Start() {
         super("Start party");
         addActionListener(this);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Mover mover = (Mover) Main.context.getBean("mover");

@@ -1,7 +1,7 @@
 package ua.edu.vntu.exceptions;
 
 public class InvalidPositionException extends Exception {
-    public InvalidPositionException(){
+    public InvalidPositionException() {
         super("Координати не повинні покидати межі поля");
     }
 

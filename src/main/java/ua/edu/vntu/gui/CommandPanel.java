@@ -4,7 +4,6 @@ import ua.edu.vntu.gui.table.MyTable;
 import ua.edu.vntu.handlers.CommandActions;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,19 +18,19 @@ public class CommandPanel extends JPanel {
     private boolean isPlay = true;
     private CommandActions commandActions;
 
-    public CommandPanel(){
+    public CommandPanel() {
         super();
         setLayout(null);
         MyTable content = MyTable.getInstance();
 
-        content.setBounds(0,0,150,500);
+        content.setBounds(0, 0, 150, 500);
 
-        int x = 0, y =  510;
+        int x = 0, y = 510;
 
-        final JButton [] jButtons = new JButton[5];
-        for(int i = 0; i < jButtons.length; i++){
+        final JButton[] jButtons = new JButton[5];
+        for (int i = 0; i < jButtons.length; i++) {
             jButtons[i] = new JButton();
-            jButtons[i].setBounds(x,y,30,30);
+            jButtons[i].setBounds(x, y, 30, 30);
             add(jButtons[i]);
             x += 30;
         }
@@ -41,7 +40,7 @@ public class CommandPanel extends JPanel {
         jButtons[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                commandActions.toEnd();
+                commandActions.toBegin();
             }
         });
 
@@ -64,7 +63,7 @@ public class CommandPanel extends JPanel {
                     jButtons[2].setIcon(icon);
                     isPlay = false;
                     commandActions.play();
-                }else{
+                } else {
                     Icon icon = new ImageIcon("icons/buttons/play.png");
                     jButtons[2].setIcon(icon);
                     isPlay = true;
@@ -88,12 +87,12 @@ public class CommandPanel extends JPanel {
         jButtons[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                commandActions.toBegin();
+                commandActions.toEnd();
             }
         });
 
         add(content);
-        setBounds(600,30,150,540);
+        setBounds(600, 30, 150, 540);
     }
 
     public void setCommandActions(CommandActions commandActions) {

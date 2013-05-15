@@ -7,23 +7,22 @@ import ua.edu.vntu.descriptions.Position;
 import java.awt.*;
 
 public class Bishop extends Figure {
-    public Bishop(boolean isWhite){
+    public Bishop(boolean isWhite) {
         super();
         setLayout(null);
 
         this.isWhite = isWhite;
         name = FigureName.BISHOP;
 
-        if (isWhite){
+        if (isWhite) {
             image = getToolkit().getImage("icons\\white\\bishop.png");
-        }
-        else{
+        } else {
             image = getToolkit().getImage("icons\\black\\bishop.png");
         }
     }
 
-    public void paint(Graphics g){
-        g.drawImage(image,5,5,this);
+    public void paint(Graphics g) {
+        g.drawImage(image, 5, 5, this);
     }
 
     @Override
@@ -33,11 +32,18 @@ public class Bishop extends Figure {
 
     @Override
     public boolean isAvailablePosition(Position pos) {
-        int k = Math.abs(getPosition().getX() -(int)pos.getX());
+        int k = Math.abs(getPosition().getX() - (int) pos.getX());
         int n = Math.abs(getPosition().getY() - pos.getY());
-        if (k == n){
+        if (k == n) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Bishop bishop = new Bishop(isWhite);
+        bishop.setPosition(this.getPosition());
+        return bishop;
     }
 }

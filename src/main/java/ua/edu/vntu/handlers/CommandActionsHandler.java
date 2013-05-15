@@ -1,6 +1,13 @@
 package ua.edu.vntu.handlers;
 
 import org.springframework.stereotype.Service;
+import ua.edu.vntu.chessboard.Chessboard;
+import ua.edu.vntu.chessboard.Figures;
+import ua.edu.vntu.containers.ReadedParty;
+import ua.edu.vntu.gui.MainField;
+import ua.edu.vntu.gui.table.MyTable;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,33 +17,66 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CommandActionsHandler implements CommandActions {
-    @Override
-    public void toEnd() {
-        System.out.println("ToEnd");
+
+    private Chessboard chessboard = MainField.getChessboard();
+
+    private List<Figures> states = ReadedParty.states;
+
+    private int currentIndex = 0;
+
+    int selected = 0;
+
+    public synchronized void toEnd() {
+        currentIndex = states.size() - 1;
+        select(currentIndex);
     }
 
     @Override
-    public void previous() {
-        System.out.println("Previous");
+    public synchronized void previous() {
+        if (currentIndex > -1) {
+            select(--currentIndex);
+        }
     }
 
     @Override
-    public void play() {
+    public synchronized void play() {
         System.out.println("Play");
     }
 
     @Override
-    public void pause() {
+    public synchronized void pause() {
         System.out.println("Pause");
     }
 
     @Override
-    public void next() {
-        System.out.println("Next");
+    public synchronized void next() {
+        if (currentIndex < states.size() - 1) {
+            select(++currentIndex);
+        }
+
+    }
+
+    private void select(int index) {
+        if (index == 0) {
+            MyTable.table.changeSelection(0, 0, false, false);
+            chessboard.paintFigures(states.get(index));
+            return;
+        }
+        int selected = index / 2;
+
+        System.out.println(selected);
+
+        if ((index % 2 == 1)) {
+            MyTable.table.changeSelection(selected, 0, false, false);
+        }
+
+        chessboard.paintFigures(states.get(index));
     }
 
     @Override
-    public void toBegin() {
-        System.out.println("toBegin");
+    public synchronized void toBegin() {
+        currentIndex = 0;
+        select(currentIndex);
     }
+
 }

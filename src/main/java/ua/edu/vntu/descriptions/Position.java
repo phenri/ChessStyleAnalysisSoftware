@@ -8,14 +8,14 @@ public class Position {
 
     private byte number;
 
-    public Position(Position position){
+    public Position(Position position) {
         this.letter = position.getX();
         this.number = position.getY();
     }
 
-    public Position(char letter, int number){
+    public Position(char letter, int number) {
 
-        try{
+        try {
             if (letter < 'a' || letter > 'h')
                 throw new InvalidPositionException();
 
@@ -23,17 +23,17 @@ public class Position {
                 throw new InvalidPositionException();
 
             this.letter = letter;
-            this.number = (byte)number;
+            this.number = (byte) number;
 
-        }catch (InvalidPositionException e){
+        } catch (InvalidPositionException e) {
             e.printStackTrace();
         }
     }
 
-    public Position(char letter, char num){
+    public Position(char letter, char num) {
         int number = Integer.parseInt(Character.toString(num));
 
-        try{
+        try {
             if (letter < 'a' || letter > 'h')
                 throw new InvalidPositionException();
 
@@ -41,24 +41,24 @@ public class Position {
                 throw new InvalidPositionException();
 
             this.letter = letter;
-            this.number = (byte)number;
+            this.number = (byte) number;
 
-        }catch (InvalidPositionException e){
+        } catch (InvalidPositionException e) {
             e.printStackTrace();
         }
     }
 
-    public char getX(){
+    public char getX() {
         return letter;
     }
 
-    public byte getY(){
+    public byte getY() {
         return number;
     }
 
     @Override
     public String toString() {
-        return ""+letter+number;
+        return "" + letter + number;
     }
 
     @Override
@@ -67,17 +67,15 @@ public class Position {
             return true;
         if (obj.getClass() != this.getClass())
             return false;
-        try{
+        try {
             Position position = (Position) obj;
 
-            if ((position.getX() == this.getX())&&(position.getY() == this.getY())){
+            if ((position.getX() == this.getX()) && (position.getY() == this.getY())) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        catch (Throwable e){
+        } catch (Throwable e) {
             return false;
         }
     }

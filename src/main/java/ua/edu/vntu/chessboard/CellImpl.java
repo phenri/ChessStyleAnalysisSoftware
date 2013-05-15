@@ -10,33 +10,33 @@ public class CellImpl extends JPanel implements Cell {
     private boolean empty = true;
     private Figure figure;
 
-    public CellImpl(Position position){
+    public CellImpl(Position position) {
         super(true);
         setLayout(null);
         this.position = position;
 
     }
 
-    public void reset(){
+    public void reset() {
         empty = true;
         if (figure != null)
             this.remove(figure);
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         return position;
     }
 
-    public Figure getFigure(){
+    public Figure getFigure() {
         return figure;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return empty;
     }
 
-    public void addFigure(Figure figure){
-        if(!empty)
+    public void addFigure(Figure figure) {
+        if (!empty)
             remove(this.figure);
         add(figure);
         figure.setParent(this);
@@ -47,7 +47,7 @@ public class CellImpl extends JPanel implements Cell {
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Cell: " + position.toString();
     }
 
