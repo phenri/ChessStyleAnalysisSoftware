@@ -3,6 +3,7 @@ package ua.edu.vntu.reading;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import ua.edu.vntu.analysis.Analysible;
 import ua.edu.vntu.chessboard.Cells;
 import ua.edu.vntu.chessboard.Figure;
 import ua.edu.vntu.containers.ContainerParsedPartiesService;
@@ -25,6 +26,9 @@ public class Mover implements Runnable {
 
     @Autowired
     private MoveFigure moveFigure;
+
+    @Autowired
+    private Analysible analysis;
 
     public static final long TIMEOUT = 1;
 
@@ -58,6 +62,8 @@ public class Mover implements Runnable {
     private void exec() {
         Party party = ContainerParsedPartiesService.getInstance().getPartyById(partyId);
 
+        analysis.analyze(party);
+
         Table table = MyTable.getInstance();
         table.clear();
         table.addProgress(party);
@@ -72,25 +78,17 @@ public class Mover implements Runnable {
 
         saverParty.save(cells.getFigures());
 
-        try {
-            for (int i = 0; i < len; i++) {
-                Thread.sleep(TIMEOUT);
-                md = whiteMoves.get(i);
-                if (this.isEnd(md)) {
-                    break;
-                }
-                doMove(md, true);
-                Thread.sleep(TIMEOUT);
-                md = blackMoves.get(i);
-                if (this.isEnd(md))
-                    break;
-                doMove(md, false);
+        for (int i = 0; i < len; i++) {
+            md = whiteMoves.get(i);
+            if (this.isEnd(md)) {
+                break;
             }
-
-        } catch (InterruptedException | NullPointerException e) {
-            e.printStackTrace();
+            doMove(md, true);
+            md = blackMoves.get(i);
+            if (this.isEnd(md))
+                break;
+            doMove(md, false);
         }
-
     }
 
     public void doMove(MovingDescription md, boolean isWhite) {
@@ -130,7 +128,7 @@ public class Mover implements Runnable {
             else if (md.getEndParty() == EndParty.NOBODY)
                 res = "Нічия";
 
-            JOptionPane.showMessageDialog(null, res, "Кінець партії", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null, res, "Кінець партії", JOptionPane.INFORMATION_MESSAGE);
             return true;
         }
         return false;

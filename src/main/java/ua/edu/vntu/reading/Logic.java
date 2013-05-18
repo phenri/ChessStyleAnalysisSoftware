@@ -71,7 +71,7 @@ public class Logic {
         Cell c = cells.getCellByPosition(pos);
         Figure f = c.getFigure();
         c.reset();
-        System.err.println("\tRemoved " + f);
+//        System.err.println("\tRemoved " + f);
         fromList.remove(f);
     }
 

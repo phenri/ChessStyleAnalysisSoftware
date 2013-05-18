@@ -23,5 +23,7 @@ public class Application {
 
         form.setActions(menuActions);
         form.setCommandActions(ctx.getBean(CommandActions.class));
+        menuActions.open();
+        menuActions.select();
     }
 }

@@ -24,8 +24,6 @@ public class CommandActionsHandler implements CommandActions {
 
     private int currentIndex = 0;
 
-    int selected = 0;
-
     public synchronized void toEnd() {
         currentIndex = states.size() - 1;
         select(currentIndex);
