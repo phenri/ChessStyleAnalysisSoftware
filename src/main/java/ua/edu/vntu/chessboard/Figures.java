@@ -36,7 +36,7 @@ public class Figures {
         for (Figure f : blackFigures) {
             black.add((Figure) f.clone());
         }
-        return new Figures(white, black);
+        return new Figures(black, white);
     }
 
     @Override
