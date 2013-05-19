@@ -14,7 +14,6 @@ import ua.edu.vntu.descriptions.Party;
 import ua.edu.vntu.gui.table.MyTable;
 import ua.edu.vntu.gui.table.Table;
 
-import javax.swing.*;
 import java.util.List;
 
 @Repository("mover")
@@ -62,7 +61,6 @@ public class Mover implements Runnable {
     private void exec() {
         Party party = ContainerParsedPartiesService.getInstance().getPartyById(partyId);
 
-        analysis.analyze(party);
 
         Table table = MyTable.getInstance();
         table.clear();
@@ -89,6 +87,9 @@ public class Mover implements Runnable {
                 break;
             doMove(md, false);
         }
+
+        analysis.analyze(party, ReadedParty.states);
+
     }
 
     public void doMove(MovingDescription md, boolean isWhite) {
