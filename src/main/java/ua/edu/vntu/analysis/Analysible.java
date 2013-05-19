@@ -1,6 +1,9 @@
 package ua.edu.vntu.analysis;
 
+import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.descriptions.Party;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,5 +21,5 @@ public interface Analysible {
     int ROOK = 6;
     int QUEEN = 10;
 
-    public void analyze(Party party);
+    public void analyze(Party party, List<Figures> figures) ;
 }

@@ -57,7 +57,7 @@ public class MainAnalisysTest {
 
 
         Analysible analysible = new MainAnalysis();
-        analysible.analyze(new Party(null,0,null,null));
+        analysible.analyze(new Party(null,0,null,null), null);
 
         Assert.assertTrue(true);
     }

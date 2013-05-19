@@ -1,6 +1,7 @@
 package ua.edu.vntu.analysis;
 
 import org.springframework.stereotype.Component;
+import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.descriptions.MovingDescription;
 import ua.edu.vntu.descriptions.Party;
 
@@ -16,10 +17,12 @@ import java.util.List;
 @Component
 public class MainAnalysis implements Analysible, Runnable {
     private Party party;
+    private List<Figures> figures;
 
     @Override
-    public void analyze(Party party) {
+    public void analyze(Party party, List<Figures> figures) {
         this.party = party;
+        this.figures = figures;
         Thread t = new Thread(this);
         t.start();
     }
@@ -27,15 +30,33 @@ public class MainAnalysis implements Analysible, Runnable {
     @Override
     public void run() {
         List<RatingMove> ratingMoves = ratingAnalysis(party.getWhiteMoves(), party.getBlackMoves());
+        List<RatingMove> analyzedPositionsWhite = analyzeFiguresPosition(figures, true);
+        List<RatingMove> alalyzedPositionsBlack = analyzeFiguresPosition(figures, false);
 
     }
 
 
+    private List<RatingMove> analyzeFiguresPosition(List<Figures> figuresList, boolean isWhite) {
+//        for (Figures i : figuresList) {
+//            analyzePosition(i, isWhite);
+//        }
+        analyzePosition(figuresList.get(0),isWhite);
+        return null;
+    }
+
+    private void analyzePosition(Figures positions, boolean isWhite) {
+        buildMatrix(positions, isWhite);
+    }
+
+    private int[][] buildMatrix(Figures figures, boolean isWhite) {
+        return null;
+    }
 
     /**
      * Метод для підрахунку сили ходу. Сила ходу визначається різницею у силі між фігурами якими здійснено хід
-     * @param white    білі фігури
-     * @param black     чорні фігури
+     *
+     * @param white білі фігури
+     * @param black чорні фігури
      * @return
      */
     private List<RatingMove> ratingAnalysis(List<MovingDescription> white, List<MovingDescription> black) {
@@ -98,7 +119,7 @@ public class MainAnalysis implements Analysible, Runnable {
                 break;
         }
 
-        if (description.isBeat()){
+        if (description.isBeat()) {
             result++;
         }
 
