@@ -23,12 +23,13 @@ public class MenuActionHandler implements MenuActions {
     public void open() {
         System.out.println("Hello");
 
-        JFileChooser fileChooser = new JFileChooser();
-        File file = new File("D:\\VNTU\\bachelor thesis\\ChessStyleAnalysisSoftware\\tmp");
-        fileChooser.setCurrentDirectory(file);
-        fileChooser.showOpenDialog(null);
+//        JFileChooser fileChooser = new JFileChooser();
+//        File file = new File("D:\\VNTU\\bachelor thesis\\ChessStyleAnalysisSoftware\\tmp");
+//        fileChooser.setCurrentDirectory(file);
+//        fileChooser.showOpenDialog(null);
 
-        File f = fileChooser.getSelectedFile();
+//        File f = fileChooser.getSelectedFile();
+        File f = new File("D:\\VNTU\\bachelor thesis\\ChessStyleAnalysisSoftware\\tmp\\file.pgn");
         ContainerParsedPartiesService.getInstance().clear();
         new Parser(f);
     }
