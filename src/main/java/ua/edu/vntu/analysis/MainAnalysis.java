@@ -29,27 +29,12 @@ public class MainAnalysis implements Analysible, Runnable {
 
     @Override
     public void run() {
+        AnalysisMatrixBuilder anb = new AnalysisMatrixBuilder();
+
         List<RatingMove> ratingMoves = ratingAnalysis(party.getWhiteMoves(), party.getBlackMoves());
-        List<RatingMove> analyzedPositionsWhite = analyzeFiguresPosition(figures, true);
-        List<RatingMove> alalyzedPositionsBlack = analyzeFiguresPosition(figures, false);
+        List<RatingMove> analyzedPositionsWhite = anb.analyzeFiguresPosition(figures, true);
+        List<RatingMove> alalyzedPositionsBlack = anb.analyzeFiguresPosition(figures, false);
 
-    }
-
-
-    private List<RatingMove> analyzeFiguresPosition(List<Figures> figuresList, boolean isWhite) {
-//        for (Figures i : figuresList) {
-//            analyzePosition(i, isWhite);
-//        }
-        analyzePosition(figuresList.get(0),isWhite);
-        return null;
-    }
-
-    private void analyzePosition(Figures positions, boolean isWhite) {
-        buildMatrix(positions, isWhite);
-    }
-
-    private int[][] buildMatrix(Figures figures, boolean isWhite) {
-        return null;
     }
 
     /**
