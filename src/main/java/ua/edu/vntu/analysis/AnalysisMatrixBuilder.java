@@ -33,74 +33,115 @@ public class AnalysisMatrixBuilder {
     }
 
     public List<RatingMove> analyzeFiguresPosition(List<Figures> figuresList, boolean isWhite) {
-//        for (Figures i : figuresList) {
-//            analyzePosition(i, isWhite);
-//        }
-        analyzePosition(figuresList.get(0), isWhite);
-        return null;
-    }
+        List<RatingMove> ratingMoves = new ArrayList<>();
 
-    private void analyzePosition(Figures positions, boolean isWhite) {
-        buildMatrix(positions, isWhite);
+        for (Figures i : figuresList) {
+            int power = getStatePower(i, isWhite);
+            System.out.println("Power " + (isWhite ? "white: " : "black: ") + power);
+        }
+        return null;
     }
 
     /**
-     * Для побудови матриці
+     * Метод підраховує суму очків, за фігури що містяться на дошці за відповідними матрицями.
+     * Очки підраховуються з заданих константних матриць для білих, для чорних є метод для конвертації цих матриць
      *
-     * @param inFigures
-     * @param isWhite
-     * @return
+     * @param figures положення всіх фігур на дошці
+     * @param isWhite які матриці очків використовувати, якщо true для білих, якщо false для чорних
+     * @return повертає суму очків для всіх фігур
      */
-    private int[][] buildMatrix(Figures inFigures, boolean isWhite) {
+    private int getStatePower(Figures figures, boolean isWhite) {
+        int result = 0;
 
-        int[][] result = new int[8][8];
+        List<Figure> target = isWhite ? figures.getWhiteFigures() : figures.getBlackFigures();
 
-        List<Figure> target;
-
-        /**
-         * Вибір для якого кольору будувати матрицю
-         */
-
-        if (isWhite) {
-            target = inFigures.getWhiteFigures();
-
-            for (int i = 0; i < 8; i++) {
-                result[0][i] += 8;
-                result[1][i] += 7;
-                result[2][i] += 4;
-                result[3][i] += 4;
-                result[4][i] += 3;
-                result[5][i] += 3;
-                result[6][i] += 1;
-                result[7][i] += 1;
-
-            }
-
-        } else {
-            target = inFigures.getBlackFigures();
-
-            for (int i = 0; i < 8; i++) {
-                result[7][i] += 7;
-            }
-        }
-
-        Figure king = null;
-
+        boolean beginForKing = true;
+        int i = 0;
         for (Figure f : target) {
-            if (f.getFigureName() == FigureName.KING) {
-                king = f;
-                break;
+            if (i > target.size() / 3) {
+                beginForKing = false;
             }
+
+            switch (f.getFigureName()) {
+                case KING:
+                    result += beginForKing ?
+                            getPositionPower(f.getPosition(), isWhite ? matrixForKingBegin : convertMatrixForBlack(matrixForKingBegin)) :
+                            getPositionPower(f.getPosition(), isWhite ? matrixForKingEnd : convertMatrixForBlack(matrixForKingEnd));
+                    break;
+
+                case ROOK:
+                    result += getBonusForRook(figures, f);
+                    break;
+                // Бонус для ферзя 1.5 бонуса тури, плюс третина бонуса слона
+                case QUEEN:
+                    result += 1.5 * getBonusForRook(figures, f) + getPositionPower(f.getPosition(), (isWhite ? matrixForBishop : convertMatrixForBlack(matrixForBishop))) / 3;
+                    break;
+                default:
+                    result += getFigurePower(f);
+            }
+
+            i++;
         }
 
-        System.out.println(king);
-        incValue(10, king.getPosition(), result);
-
-        print(result);
-
-        return null;
+        return result;
     }
 
+    /**
+     * Обчислення очків за положення фігури фігури
+     * Значення береться з відповідних константних матриць, відповідно до положення фігури
+     * @param f фігура для якої потрібно обчислити очки
+     * @return набраних кількість очків
+     */
+    private int getFigurePower(Figure f) {
+
+        switch (f.getFigureName()) {
+            case PAWN:
+                return getPositionPower(f.getPosition(), f.isWhite() ? matrixFoPawn : convertMatrixForBlack(matrixFoPawn));
+            case BISHOP:
+                return getPositionPower(f.getPosition(), f.isWhite() ? matrixForBishop : convertMatrixForBlack(matrixForBishop));
+            case KNIGHT:
+                return getPositionPower(f.getPosition(), f.isWhite() ? matrixFoKnight : convertMatrixForBlack(matrixFoKnight));
+            default:
+                return Integer.MIN_VALUE;
+        }
+    }
+
+    /**
+     * Метод ставить у відповідність положення фігури на дошці у індекси матриці
+     * @param p положення для якого потрібно визначити кількість очок
+     * @param matrix матриця з якої брати значення
+     * @return повертає кількість очків з матриці відповідно до положення фігури на дошці
+     */
+    public int getPositionPower(Position p, int[][] matrix) {
+        int i = 7 - p.getY() + 1;
+        int j = indexAccordance.get(p.getX());
+
+        return matrix[i][j];
+    }
+
+    /**
+     * Метод для конвертації матриці очок для чорних фігур. Для білих значення задані константами, для чорних будуть
+     * ті самі значення тільки рядки потрібно поміняти місцями
+     * @param input вхідна матриця
+     * @return повертає конвертовані рядки матриці
+     */
+    private int[][] convertMatrixForBlack(int[][] input) {
+        int[][] output = new int[8][8];
+
+        for (int i = 0, j = input.length - 1; i < input.length; i++, j--) {
+            output[j] = input[i];
+        }
+
+        return output;
+    }
+
+    /**
+     * Метод для визначення бонусу для тури, оскільки для тури немає заданих константної матриці.
+     * Якщо тура займає пустий рядок або стовпць бонус більший, якщо є своя пишка в ряді бонус менший
+     * @param figures положення всіх фігур
+     * @param rook тура для якої потрібно порахувати бонус
+     * @return кількість набраних очків для тури.
+     */
     private int getBonusForRook(Figures figures, Figure rook) {
 
         boolean isWhite = rook.isWhite();
@@ -146,6 +187,13 @@ public class AnalysisMatrixBuilder {
         return bonus;
     }
 
+    /**
+     * Метод перевіряє чи містить вказана горизонталь фігуру зі своєї команди
+     * Використовується для підрахунку бонусу для тури і ферзя
+     * @param p позиція для якої потрібно вирахувати
+     * @param figures положення всіх фігур
+     * @return true якщо є фігури зі своєї команди у вертикалі або горизонталі, інакше false
+     */
     private boolean positionContainsOwnFigures(Position p, List<Figure> figures) {
         for (Figure f : figures) {
             boolean vertical = p.getX() == f.getX();
@@ -158,6 +206,12 @@ public class AnalysisMatrixBuilder {
         return false;
     }
 
+    /**
+     * Перевіряє наявність власної пишки у вертикалі
+     * @param p положення для якого потрібно вирахувати
+     * @param figures положення всіх фігур
+     * @return true якщо є власна пишка, інакше false
+     */
     private boolean isPawnInVertical(Position p, List<Figure> figures) {
         for (Figure f : figures) {
             if (f.getPosition().getX() == p.getX() && f.getFigureName() == FigureName.PAWN) {
@@ -226,7 +280,7 @@ public class AnalysisMatrixBuilder {
         target[p.getY() - 1][indexAccordance.get(p.getX())] += value;
     }
 
-    private void print(int[][] data) {
+    public void print(int[][] data) {
         System.out.println("__________________________________");
         for (int[] i : data) {
             for (int j : i) {
