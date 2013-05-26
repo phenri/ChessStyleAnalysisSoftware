@@ -3,18 +3,23 @@ package ua.edu.vntu.containers;
 import ua.edu.vntu.descriptions.Party;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ContainerParsedPartiesService implements ContainerParties {
 
     private final static ContainerParties INSTANCE = new ContainerParsedPartiesService();
-    private List<Party> parties = new ArrayList<>();
+    private List<Party> parties = Collections.synchronizedList(new ArrayList<Party>());
 
     private ContainerParsedPartiesService() {
     }
 
     public static ContainerParties getInstance() {
         return INSTANCE;
+    }
+
+    public List<Party> getParties() {
+        return parties;
     }
 
     @Override

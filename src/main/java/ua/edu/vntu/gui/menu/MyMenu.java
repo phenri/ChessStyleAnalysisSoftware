@@ -47,7 +47,7 @@ public class MyMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuActions.open();
-                menuActions.select();
+//                menuActions.select();
             }
         });
 

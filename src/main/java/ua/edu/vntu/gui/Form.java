@@ -30,9 +30,14 @@ public class Form extends JFrame implements Constants {
 
     public void setActions(MenuActions actions) {
         menubar.setMenuActions(actions);
+//        DefaultComboBoxModel model = new DefaultComboBoxModel();
+//        model.get
+//        comboBox.setModel(model);
     }
 
     public void setCommandActions(CommandActions commandActions) {
         field.setCommandActions(commandActions);
     }
+
+    JComboBox comboBox = new JComboBox();
 }
