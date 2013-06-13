@@ -15,12 +15,12 @@ public class MyMenu extends JMenuBar {
 
         JMenu file = new JMenu("File");
         JMenuItem open = new JMenuItem("Open file...");
-        JMenuItem start = new JMenuItem("Select first");
+        JMenuItem start = new JMenuItem("Select party");
         JMenuItem exit = new JMenuItem("Exit");
 
-        JMenu game = new JMenu("Game");
+//        JMenu game = new JMenu("Game");
 
-        JMenu property = new JMenu("Options");
+//        JMenu property = new JMenu("Options");
 
         JMenu about = new JMenu("About");
 
@@ -29,11 +29,11 @@ public class MyMenu extends JMenuBar {
         file.add(new JSeparator());
         file.add(exit);
 
-        property.add(new Property());
+//        property.add(new Property());
 
         add(file);
-        add(game);
-        add(property);
+//        add(game);
+//        add(property);
         add(about);
 
         exit.addActionListener(new ActionListener() {

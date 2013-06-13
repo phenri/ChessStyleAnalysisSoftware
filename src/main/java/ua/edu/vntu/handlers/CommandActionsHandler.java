@@ -5,8 +5,10 @@ import ua.edu.vntu.chessboard.Chessboard;
 import ua.edu.vntu.chessboard.Figures;
 import ua.edu.vntu.containers.ReadedParty;
 import ua.edu.vntu.gui.MainField;
+import ua.edu.vntu.gui.Result;
 import ua.edu.vntu.gui.table.MyTable;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -38,6 +40,9 @@ public class CommandActionsHandler implements CommandActions {
 
     @Override
     public synchronized void play() {
+        JDialog result =  new Result();
+        result.setLocationRelativeTo(null);
+        result.setVisible(true);
         System.out.println("Play");
     }
 

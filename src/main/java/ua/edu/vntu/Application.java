@@ -12,10 +12,13 @@ import ua.edu.vntu.handlers.MenuActions;
  * Time: 17:19
  */
 public class Application {
+
+    public static GenericXmlApplicationContext ctx;
+
     public static void main(String[] args) {
         Form form = new Form();
 
-        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+        ctx = new GenericXmlApplicationContext();
         ctx.load("spring/config.xml");
         ctx.refresh();
 
@@ -23,7 +26,13 @@ public class Application {
 
         form.setActions(menuActions);
         form.setCommandActions(ctx.getBean(CommandActions.class));
-        menuActions.open();
-        menuActions.select();
+//        menuActions.open();
+//        menuActions.select();
     }
+
+    //TODO: 1. Зробити діалогове вікно, якщо у відкритому файлі більше ніж одна партія
+    //TODO: 2. Зробити кнопки плей і стоп, щоб автоматично переключало хід
+    //TODO: 3. ДОРОБИТИ АНАЛІЗ
+    //TODO: 4. Зробити кнопку показати результат і виведення резульату
+
 }

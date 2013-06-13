@@ -69,17 +69,7 @@ public class SelectParty extends JDialog {
 
         jLabel6.setText("Результат:");
 
-        event.setText("1");
-
-        location.setText("2");
-
-        date.setText("3");
-
-        white.setText("4");
-
-        black.setText("5");
-
-        result.setText("6");
+        onChangeSelect();
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel13.setText("Оберіть партію з файлу");

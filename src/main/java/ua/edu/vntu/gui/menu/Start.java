@@ -20,7 +20,7 @@ public class Start extends JMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Mover mover = (Mover) Main.context.getBean("mover");
+//        Mover mover = (Mover) Main.context.getBean("mover");
         mover.startParty(0);
     }
 }
